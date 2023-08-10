@@ -43,6 +43,9 @@ public class CafeController extends HttpServlet {
 		case "login":
 			login(request,response);
 			break;
+		case "logout":
+			logout(request,response);
+			break;
 		}
 		
 		if(StringUtils.isNotEmpty(view)) {
@@ -71,6 +74,7 @@ public class CafeController extends HttpServlet {
 	void login(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String nickName = request.getParameter("nickName");
 		
 		CustomerDAO customerDao = new CustomerDAO();
 		int loginResult = customerDao.login(email, password);
@@ -78,7 +82,9 @@ public class CafeController extends HttpServlet {
 		if(loginResult == 1) {
 			request.setAttribute("loginResult", loginResult);
 			HttpSession session = request.getSession();
-			session.setAttribute("sesstionEMAIL", email);
+			HttpSession session1 = request.getSession();
+			session.setAttribute("sessionEMAIL", email);
+			session1.setAttribute("sessionnickName", nickName);
 			RequestDispatcher rd = request.getRequestDispatcher("/cafe/index.jsp");
 			rd.forward(request, response);
 			
@@ -90,6 +96,14 @@ public class CafeController extends HttpServlet {
 		}
 	}
 	
+	void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/cafe/login.jsp");
+		rd.forward(request, response);
+		
+	}
 	
 
 }

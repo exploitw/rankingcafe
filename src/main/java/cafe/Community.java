@@ -37,4 +37,14 @@ public class Community {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Community [id=").append(id).append(", ").append("title=")
+				.append(title).append(",content=").append(content).append(", ")
+				.append(", ").append(", customerId=").append(customerId).append("]");
+		return builder.toString();
+	}
+	
 }

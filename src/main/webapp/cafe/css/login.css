@@ -1,0 +1,158 @@
+div#login_wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section#loginBox {
+  width: 95%;
+  max-width: 430px;
+  padding: 20px 0;
+}
+section#loginBox h2 {
+  font-family: "Hind Guntur", sans-serif;
+  text-align: center;
+  font-size: 4em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-bottom: 60px;
+}
+section#loginBox form#loginForm {
+  font-size: 12 px;
+}
+section#loginBox form#loginForm p {
+  width: 100%;
+  margin: 11px 0;
+}
+section#loginBox form#loginForm p:nth-child(4) {
+  padding: 13px;
+  box-sizing: border-box;
+}
+section#loginBox form#loginForm p:nth-child(4) input {
+  margin-right: 3px;
+}
+section#loginBox form#loginForm p:nth-child(4) span {
+  margin-right: 10px;
+}
+section#loginBox form#loginForm p:nth-child(4) > a {
+  float: right;
+}
+section#loginBox form#loginForm p input[type=email],
+section#loginBox form#loginForm p input[type=password] {
+  width: 100%;
+  height: 45px;
+  padding: 13px;
+  background-color: #f5f5f5;
+  border: 1px solid #f5f5f5;
+  border-radius: 7px;
+}
+section#loginBox form#loginForm p input[type=email]::-moz-placeholder, section#loginBox form#loginForm p input[type=password]::-moz-placeholder {
+  color: #b9b9b9;
+  font-size: 1.15em;
+}
+section#loginBox form#loginForm p input[type=email]::placeholder,
+section#loginBox form#loginForm p input[type=password]::placeholder {
+  color: #b9b9b9;
+  font-size: 1.15em;
+}
+section#loginBox form#loginForm p input#loginBtn,
+section#loginBox form#loginForm p a#signup {
+  display: block;
+  width: 100%;
+  height: 45px;
+  text-align: center;
+  border-radius: 7px !important;
+  letter-spacing: 3px;
+  font-size: 1.2em;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+section#loginBox form#loginForm p input#loginBtn {
+  display: inline-block;
+  padding: 13px 13px;
+  background-color: #dab799;
+  border: 1px solid #dab799;
+  border-radius: 2px;
+  color: white;
+  transition: all 0.3s;
+}
+section#loginBox form#loginForm p input#loginBtn:hover {
+  background-color: white;
+  border: 1px solid #dab799;
+  color: #dab799;
+}
+section#loginBox form#loginForm p a#signup {
+  display: inline-block;
+  padding: 13px 13px;
+  background-color: #fff;
+  border: 1px solid #dab799;
+  border-radius: 2px;
+  color: #dab799;
+  transition: all 0.3s;
+  margin-top: 11px;
+}
+section#loginBox form#loginForm p a#signup:hover {
+  background-color: #dab799;
+  border: 1px solid #dab799;
+  color: #fff;
+}
+section#loginBox form#loginForm p:last-child {
+  margin-top: 15px;
+  margin-bottom: 100px;
+}
+section#loginBox form#loginForm p:last-child input {
+  padding: 13px 0 !important;
+  text-align: center;
+  border-radius: 7px !important;
+  float: left;
+  display: block;
+  width: 32%;
+  margin-left: 2%;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+section#loginBox form#loginForm p:last-child input.btn_kakao {
+  display: inline-block;
+  padding: 3px 12px;
+  background-color: #fbe330;
+  border: 1px solid #fbe330;
+  border-radius: 2px;
+  color: #666;
+  transition: all 0.3s;
+  margin-left: 0;
+}
+section#loginBox form#loginForm p:last-child input.btn_kakao:hover {
+  background-color: white;
+  border: 1px solid #fbe330;
+  color: #fbe330;
+}
+section#loginBox form#loginForm p:last-child input.btn_naver {
+  display: inline-block;
+  padding: 3px 12px;
+  background-color: #00c73c;
+  border: 1px solid #00c73c;
+  border-radius: 2px;
+  color: white;
+  transition: all 0.3s;
+}
+section#loginBox form#loginForm p:last-child input.btn_naver:hover {
+  background-color: white;
+  border: 1px solid #00c73c;
+  color: #00c73c;
+}
+section#loginBox form#loginForm p:last-child input.btn_google {
+  display: inline-block;
+  padding: 3px 12px;
+  background-color: #4285f4;
+  border: 1px solid #4285f4;
+  border-radius: 2px;
+  color: white;
+  transition: all 0.3s;
+}
+section#loginBox form#loginForm p:last-child input.btn_google:hover {
+  background-color: white;
+  border: 1px solid #4285f4;
+  color: #4285f4;
+}/*# sourceMappingURL=login.css.map */

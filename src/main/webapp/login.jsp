@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,16 +24,16 @@
       rel="stylesheet"
     />
     <!-- en -->
-    <link href="<c:url value="/cafe/css/reset.css"/>" rel="stylesheet" />
-    <link href="<c:url value="/cafe/css/login.css"/>" rel="stylesheet" />
+    <link href="./css/login.css" rel="stylesheet" />
+    <link href="./css/reset.css" rel="stylesheet" />
   </head>
   <body>
     <div id="login_wrap">
       <section id="loginBox">
         <h2>login</h2>
-        <form id="loginForm" action="<c:url value="/cafe"/>?action=login"  method="post">
+        <form id="loginForm" action="">
           <p>
-            <label class="hidden" for="email">이메일 입력</label>
+            <label class="hidden" for="id">아이디 입력</label>
             <input id="email" name="email" type="email" placeholder="Email" />
           </p>
           <p>
@@ -46,8 +46,8 @@
             />
           </p>
           <p>
-            <input type="submit" id="loginBtn" value="로그인" class="login" />
-            <a href="<c:url value="/cafe/signUp.jsp"/>" id="signup">회원가입</a>
+            <input type="submit" id="loginBtn" value="로그인" />
+            <a href="#" id="register">회원가입</a>
           </p>
           <p>
             <label class="hidden" for="check1">아이디 저장시 체크</label>
