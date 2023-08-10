@@ -110,32 +110,6 @@ input {
         }
 </script> -->
 <script type="text/javascript">
-function emailOverlap() {
-	console.log("emailOverlap 호출")
-	console.log("이메일 입력 값 : "+joinForm.email.value)
-	$.ajax({
-		type :"post",/* 전송 방식 */
-		url :"emailOverlap", /* 컨트롤러 사용할 때. 내가 보낼 데이터의 주소. */
-		data : {"email" : joinForm.email.value},
-		/* JSON형식 안에 JSON 형식으로 표현한 데이터. 
-    	"파라미터 이름" : 폼태그에 적은 NAME 값.ID입력창의 NAME값.value 여러 개도 가능
-		data :{	"id" : joinForm.id.value, 
-		"id1" : joinForm.password.value}, 이렇게도 사용 가능.					
-		*/
-		dataType : "text",	/* text, xml, html, script, json, jsonp 가능 */
-    	//정상적인 통신을 했다면 function은 백엔드 단에서 데이터를 처리.
-		success : function(data){	
-			if(data=="1"){
-				alert("이 이메일은 사용 가능합니다.");
-			}else{	//ajax가 제대로 안됐을 때 .
-				alert("이 이메일은 사용  불가능합니다.");
-			}
-		},
-		error : function(){
-			alert("이메일 중복 확인 ajax 실행 실패");
-		}
-	});
-}
 function pass() {
 	var password = document.getElementById('password').value;
 	var SC = ["!","@","#","$","%"];
@@ -189,8 +163,12 @@ function passConfirm() {
 		<br />
 		<form action="<c:url value="/cafe"/>?action=join" method="post">
 			<input type="text" placeholder="이름" name="name" required style="height: 30px; width: 495px" /><br /><br />
+			<c:if test="${ joinResult == 0}">
+				<script>
+					alert("아이디가 중복됩니다.");
+				</script>
+			</c:if>
 			<input type="email" placeholder="이메일 주소" name="email" required style="height: 30px; width: 495px" />
-			<input type="button" onclick="emailOverlap()" value="중복확인"/><br /><br />
 			<input type="password" placeholder="비밀번호" id="password" name="password" required style="height: 30px; width: 495px" onchange="pass()">
 			<input type="password" placeholder="비밀번호 확인" id="passwordConfirm" name="passwordConfirm" required style="height: 30px; width: 495px" onchange="passConfirm()"/><span id ="confirmMsg"></span><!-- &nbsp;<span id="check"></span> --><br /><br /> 
 			<input type="text" placeholder="닉네임" name="nickName" required style="height: 30px; width: 495px" /><br /><br />

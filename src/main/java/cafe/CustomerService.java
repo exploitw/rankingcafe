@@ -1,7 +1,5 @@
 package cafe;
 
-import javax.servlet.http.HttpServletResponse;
-
 public class CustomerService {
 		CustomerDAO customerDao;
 		
