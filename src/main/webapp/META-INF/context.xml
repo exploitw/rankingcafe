@@ -2,16 +2,15 @@
 
 <Context path="/rankingcafe">
 	<Resource
-		name="jdbc/jwbookdb"
+		name="jdbc/cafedb"
 		type="javax.sql.DataSource"
 		driverClassName="org.h2.Driver"
-		url="jdbc:h2:tcp://localhost/C:/JAVA/H2/data/jwbookdb"
+		url="jdbc:h2:tcp://localhost/C:/Java/H2/data/cafedb"
 		auth="Container"
-		username="sa"
-		password="sa"
+		username="cafe"
+		password="123"
 		maxTotal="20"
 		maxIdle="10"
 		maxWaitMillis="10000"
-		/>
-		
+	/>
 </Context>

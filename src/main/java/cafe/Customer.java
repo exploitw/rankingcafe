@@ -1,4 +1,4 @@
-package rankingcafe;
+package cafe;
 
 public class Customer {
 	private long id;

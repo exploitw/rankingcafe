@@ -1,10 +1,9 @@
-package rankingcafe;
+package cafe;
 
-public class Community {
+public class Comment {
 	private long id;
 	private long customerId;
-	private String title;
-	private String img;
+	private long communityId;
 	private String content;
 	
 	public long getId() {
@@ -19,17 +18,11 @@ public class Community {
 	public void setCustomerId(long customerId) {
 		this.customerId = customerId;
 	}
-	public String getTitle() {
-		return title;
+	public long getCommunityId() {
+		return communityId;
 	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
-		this.img = img;
+	public void setCommunityId(long communityId) {
+		this.communityId = communityId;
 	}
 	public String getContent() {
 		return content;

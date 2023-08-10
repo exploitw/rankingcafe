@@ -1,9 +1,11 @@
-package rankingcafe;
+package cafe;
 
-public class Type {
+public class Menu {
 	private long id;
 	private long cafeId;
 	private String name;
+	private int price;
+	private String content;
 	
 	public long getId() {
 		return id;
@@ -22,5 +24,17 @@ public class Type {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

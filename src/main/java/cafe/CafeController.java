@@ -1,4 +1,4 @@
-package rankingcafe;
+package cafe;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
