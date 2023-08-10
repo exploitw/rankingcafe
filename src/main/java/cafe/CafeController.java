@@ -18,12 +18,10 @@ public class CafeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	CustomerService customerService;
-       
    
     public CafeController() {
        customerService = new CustomerService();
     }
-
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -37,6 +35,9 @@ public class CafeController extends HttpServlet {
 			break;
 		case "join" :
 			join(request,response);
+			break;
+		case "emailOverlap":
+			emailOverlap(request,response);
 			break;
 		}
 		
@@ -61,6 +62,11 @@ public class CafeController extends HttpServlet {
 			e.printStackTrace();
 		}
 		response.sendRedirect("cafe");
+	}
+
+    // 아이디 중복화인 처리
+	void emailOverlap(HttpServletResponse response, @RequestParam("email") String email) throws IOException {
+		customerService.emailOverlap(email,response);	//서비스에 있는 idOverlap 호출.
 	}
 	
 	

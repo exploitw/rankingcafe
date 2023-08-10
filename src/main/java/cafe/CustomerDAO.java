@@ -12,6 +12,10 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.QueryLoader;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+
+import p3.Book;
 
 public class CustomerDAO {
 	final static String QUERY_PATH = "/cafe/cafe_queries.properties";
@@ -55,6 +59,21 @@ public class CustomerDAO {
 		}catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
+	}
+	
+	public void emailOverlap(Customer customer) {
+		Customer rtn = null;
+
+		try {
+			QueryRunner qr = new QueryRunner(dataSource);
+			ResultSetHandler<Customer> h = new BeanHandler<>(Book.class);
+			Object[] p = { id };
+			rtn = qr.query(QM.get("selectBookById"), h, p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+
+		return rtn;
 	}
 	
 	
