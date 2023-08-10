@@ -1,4 +1,4 @@
-package rankingcafe;
+package cafe;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -33,7 +33,7 @@ public class CustomerDAO {
 		 try {
 	            Context initialContext = new InitialContext();
 	            Context envContext = (Context) initialContext.lookup("java:/comp/env");
-	            dataSource = (DataSource) envContext.lookup("jdbc/jwbookdb");
+	            dataSource = (DataSource) envContext.lookup("jdbc/cafedb");
 	        } catch (NamingException ne) {
 	            ne.printStackTrace();
 	        }

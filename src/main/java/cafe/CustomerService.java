@@ -1,4 +1,4 @@
-package rankingcafe;
+package cafe;
 
 public class CustomerService {
 		CustomerDAO customerDao;

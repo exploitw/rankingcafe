@@ -1,4 +1,4 @@
-package rankingcafe;
+package cafe;
 
 public class Cafe {
 	private long id;
