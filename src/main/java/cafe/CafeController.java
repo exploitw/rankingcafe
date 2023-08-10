@@ -3,11 +3,13 @@ package cafe;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -18,10 +20,12 @@ public class CafeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	CustomerService customerService;
+       
    
     public CafeController() {
        customerService = new CustomerService();
     }
+
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -36,8 +40,8 @@ public class CafeController extends HttpServlet {
 		case "join" :
 			join(request,response);
 			break;
-		case "emailOverlap":
-			emailOverlap(request,response);
+		case "login":
+			login(request,response);
 			break;
 		}
 		
@@ -48,7 +52,7 @@ public class CafeController extends HttpServlet {
 	}
 	
 	String cafe(HttpServletRequest request, HttpServletResponse response) {
-		return "/cafe/signUp.jsp";
+		return "/cafe/login.jsp";
 						
 	}
 	
@@ -61,12 +65,29 @@ public class CafeController extends HttpServlet {
 		}catch(IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect("cafe");
+		response.sendRedirect("/rankingcafe/cafe/login.jsp");
 	}
+	
+	void login(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		CustomerDAO customerDao = new CustomerDAO();
+		int loginResult = customerDao.login(email, password);
+		
+		if(loginResult == 1) {
+			request.setAttribute("loginResult", loginResult);
+			HttpSession session = request.getSession();
+			session.setAttribute("sesstionEMAIL", email);
+			RequestDispatcher rd = request.getRequestDispatcher("/cafe/index.jsp");
+			rd.forward(request, response);
+			
+		}else {
+			request.setAttribute("loginResult", loginResult);
+			RequestDispatcher rd = request.getRequestDispatcher("/cafe/signUp.jsp");
+			rd.forward(request, response);
 
-    // 아이디 중복화인 처리
-	void emailOverlap(HttpServletResponse response, @RequestParam("email") String email) throws IOException {
-		customerService.emailOverlap(email,response);	//서비스에 있는 idOverlap 호출.
+		}
 	}
 	
 	

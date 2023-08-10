@@ -2,6 +2,8 @@ package cafe;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
 
@@ -14,8 +16,6 @@ import org.apache.commons.dbutils.QueryLoader;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
-
-import p3.Book;
 
 public class CustomerDAO {
 	final static String QUERY_PATH = "/cafe/cafe_queries.properties";
@@ -60,22 +60,24 @@ public class CustomerDAO {
 			sqle.printStackTrace();
 		}
 	}
-	
-	public void emailOverlap(Customer customer) {
-		Customer rtn = null;
-
-		try {
-			QueryRunner qr = new QueryRunner(dataSource);
-			ResultSetHandler<Customer> h = new BeanHandler<>(Book.class);
-			Object[] p = { id };
-			rtn = qr.query(QM.get("selectBookById"), h, p);
-		} catch (SQLException sqle) {
-			sqle.printStackTrace();
-		}
-
-		return rtn;
+public int login(String email, String password) {
+		
+		
+		try(Connection c =dataSource.getConnection();
+				PreparedStatement ps = c.prepareStatement(QM.get("loginCustomer"));
+				){
+			ps.setString(1, email);
+			try(ResultSet rs = ps.executeQuery();){
+				if(rs.next()) if(rs.getString("password").equals(password)) {
+					return 1;
+				} else {
+					return 0;
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return -1;
 	}
-	
-	
-	
 }
