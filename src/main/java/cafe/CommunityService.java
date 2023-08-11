@@ -3,29 +3,24 @@ package cafe;
 import java.util.List;
 
 public class CommunityService {
-	CommunityDAO dao;
+	CommunityDAO communityDao;
 
 	public CommunityService() {
-		dao = new CommunityDAO();
+		communityDao = new CommunityDAO();
 	}
 	
 	public List<Community> getCommunity() {
-		return dao.selectCommunity();
+		return communityDao.selectCommunity();
+	}
+	public List<Object[]> getCustomer(){
+		return communityDao.getCustomer();
 	}
 	
-//	public Community getCommunityOrBlank(int id) {
-//		Community rtn = null;
-//
-//		rtn = dao.selectCommunityById(id);
-//
-//		if (rtn == null) {
-//			rtn = new Community();
-//			rtn.setId(-1);
-//			rtn.setCustomerId(0);
-//			rtn.setTitle("");
-//			rtn.setImg("");
-//			rtn.setContent("");
-//		}
-//		return rtn;
-//	}
+	  public void nextval() { communityDao.nextval(); }
+	 
+	public void write(Community community) {
+		
+		
+		communityDao.write(community);
+	}
 }

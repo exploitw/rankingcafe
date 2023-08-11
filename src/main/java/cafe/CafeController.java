@@ -55,6 +55,12 @@ public class CafeController extends HttpServlet {
 		case"community":
 			view = community(request,response);
 			break;
+		case "write":
+			write(request,response);
+			break;
+		case "read":
+			read(request,response);
+			break;
 		}
 		
 		if(StringUtils.isNotEmpty(view)) {
@@ -95,36 +101,10 @@ public class CafeController extends HttpServlet {
 		response.sendRedirect("cafe");
 	}
 	
-//	void join(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-//		Customer customer = new Customer();
-//		CustomerDAO customerDao = CustomerDAO.getInstance();
-//		String email = request.getParameter("email");
-//
-//		/*
-//		 * try { BeanUtils.populate(customer, request.getParameterMap());
-//		 * customerService.join(customer); } catch (IllegalAccessException |
-//		 * InvocationTargetException e) { e.printStackTrace(); }
-//		 */
-//
-//		int joinResult = customerDao.join(customer);
-//
-//		if (joinResult == 1) {
-//			request.setAttribute("joinResult", joinResult);
-//			HttpSession session = request.getSession();
-//			session.setAttribute("sessionEMAIL", email);
-//			RequestDispatcher rd = request.getRequestDispatcher("/cafe/index.jsp");
-//			rd.forward(request, response);
-//		} else {
-//			request.setAttribute("joinResult", 0);
-//			RequestDispatcher rd = request.getRequestDispatcher("/cafe/signUp.jsp");
-//			rd.forward(request, response);
-//		}
-//	}
-	
 	void login(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String nickName = request.getParameter("nickName");
+		
 		
 		CustomerDAO customerDao = new CustomerDAO();
 		int loginResult = customerDao.login(email, password);
@@ -132,9 +112,13 @@ public class CafeController extends HttpServlet {
 		if(loginResult == 1) {
 			request.setAttribute("loginResult", loginResult);
 			HttpSession session = request.getSession();
-			HttpSession session1 = request.getSession();
+			
 			session.setAttribute("sessionEMAIL", email);
-			session1.setAttribute("sessionnickName", nickName);
+			
+			Customer customer = customerDao.getCustomerByEmail(email);
+			session.setAttribute("customerId", customer.getId());
+			
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/cafe/index.jsp");
 			rd.forward(request, response);
 			
@@ -153,6 +137,60 @@ public class CafeController extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/cafe/login.jsp");
 		rd.forward(request, response);
 		
+	}
+	
+	String read(HttpServletRequest request, HttpServletResponse response){
+		List<Object[]> customerList = communityService.getCustomer();
+		 
+		 request.setAttribute("customerList", customerList);
+		System.out.println(customerList);
+		
+		return "/rankingcafe/cafe/index.jsp";
+	}
+	
+	
+	String write (HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
+		
+		  HttpSession session = request.getSession();
+		  String sessionEMAIL = (String)  session.getAttribute("sessionEMAIL");
+		  Long customerId = (Long) session.getAttribute("customerId");
+		  
+		  if (sessionEMAIL == null) { sessionEMAIL = "비회원"; }
+		  
+		  
+		  Community community = new Community();
+		  
+		  try {
+			  BeanUtils.populate(community, request.getParameterMap());
+			  community.setCustomerId(customerId);
+		  communityService.write(community); 
+		  }catch(IllegalAccessException |
+		  InvocationTargetException e) { e.printStackTrace(); }
+		 
+		
+		/*
+		 * HttpSession session = request.getSession(); Customer customer = (Customer)
+		 * request.getSession().getAttribute("CUSTOMER"); int sessionCustomerId =
+		 * (Integer) session.getAttribute("sessionCustomerId"); //if (sessionCustomerId
+		 * == null) { sessionCustomerId = "비회원"; }
+		 * 
+		 * 
+		 * String title = request.getParameter("title"); String content =
+		 * request.getParameter("content");
+		 * 
+		 * 
+		 * Community community = new Community();
+		 * 
+		 * community.setCustomerId(sessionCustomerId); community.setTitle(title);
+		 * community.setContent(content);
+		 */
+		
+
+		//communityService.write(community);
+		return "/rankingcafe/cafe/index.jsp";
+		 
+		
+		 
 	}
 	
 

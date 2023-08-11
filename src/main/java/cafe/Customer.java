@@ -9,7 +9,7 @@ public class Customer {
 	private String address;
 	private String phone;
 	
-	Customer(){
+	 public Customer(){
 		
 	}
 	

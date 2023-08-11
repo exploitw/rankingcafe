@@ -1,6 +1,7 @@
 package cafe;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 public class Community {
 	private long id;
@@ -9,7 +10,27 @@ public class Community {
 	private String img;
 	private String content;
 	private Date date;
+	Customer customer;
 	
+public Community() {
+		
+	}
+	
+	public Community (long customerId, String title, String img, String content) {
+		
+		
+		this.customerId = customerId;
+		this.title = title;
+		this.img = img;
+		this.content = content;
+	}
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	public long getId() {
 		return id;
 	}

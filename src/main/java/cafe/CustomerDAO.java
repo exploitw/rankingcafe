@@ -14,6 +14,8 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.QueryLoader;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 
 public class CustomerDAO {
 	final static String QUERY_PATH = "/cafe/cafe_queries.properties";
@@ -22,17 +24,17 @@ public class CustomerDAO {
 
 	private DataSource dataSource;
 //	private int result;
-	
+
 	static {
 		try {
 			QM = QueryLoader.instance().load(QUERY_PATH);
-		}catch (IOException ioe) {
+		} catch (IOException ioe) {
 			ioe.printStackTrace();
-			
+
 			throw new ExceptionInInitializerError(ioe);
 		}
 	}
-	
+
 	public static synchronized CustomerDAO getInstance() {
 		if (customerDao == null) {
 			customerDao = new CustomerDAO();
@@ -49,56 +51,51 @@ public class CustomerDAO {
 			ne.printStackTrace();
 		}
 	}
-	
+
 	public void join(Customer customer) {
-		try( Connection c = dataSource.getConnection();) {
-			 QueryRunner qr = new QueryRunner();
-			 Object[] p = {
-					 customer.getName(),
-					 customer.getEmail(),
-					 customer.getPassword(),
-					 customer.getNickName(),
-					 customer.getAddress(),
-					 customer.getPhone()};
-			 qr.execute(c, QM.get("insertCustomer"),p);
-			
-			
-		}catch(SQLException sqle) {
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			Object[] p = { customer.getName(), customer.getEmail(), customer.getPassword(), customer.getNickName(),
+					customer.getAddress(), customer.getPhone() };
+			qr.execute(c, QM.get("insertCustomer"), p);
+
+		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 	}
 
-//	public int join(Customer customer) {
-//		try (Connection c = dataSource.getConnection();) {
-//			QueryRunner qr = new QueryRunner();
-//			Object[] p = { customer.getName(), customer.getEmail(), customer.getPassword(), customer.getNickName(),
-//					customer.getAddress(), customer.getPhone() };
-//			result = qr.execute(c, QM.get("insertCustomer"), p);
-//		} catch (SQLException sqle) {
-//			sqle.printStackTrace();
-//		}
-//		return result;
-//	}
-	
-	
-public int login(String email, String password) {
-		
-		
-		try(Connection c =dataSource.getConnection();
-				PreparedStatement ps = c.prepareStatement(QM.get("loginCustomer"));
-				){
+	public int login(String email, String password) {
+
+		try (Connection c = dataSource.getConnection();
+				PreparedStatement ps = c.prepareStatement(QM.get("loginCustomer"));) {
 			ps.setString(1, email);
-			try(ResultSet rs = ps.executeQuery();){
-				if(rs.next()) if(rs.getString("password").equals(password)) {
-					return 1;
-				} else {
-					return 0;
-				}
+			try (ResultSet rs = ps.executeQuery();) {
+				if (rs.next())
+					if (rs.getString("password").equals(password)) {
+						return 1;
+					} else {
+						return 0;
+					}
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		return -1;
+	}
+
+	public Customer getCustomerByEmail(String email) {
+		Customer rtn = null;
+
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			ResultSetHandler<Customer> h = new BeanHandler<>(Customer.class);
+			Object[] p = { email };
+			rtn = qr.query(c, QM.get("getCustomerByEmail"), h, p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+
+		return rtn;
 	}
 }
