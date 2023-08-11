@@ -163,12 +163,12 @@ function passConfirm() {
 		<br />
 		<form action="<c:url value="/cafe"/>?action=join" method="post">
 			<input type="text" placeholder="이름" name="name" required style="height: 30px; width: 495px" /><br /><br />
-			<c:if test="${ joinResult == 0}">
+			<%-- <c:if test="${ joinResult == 0}">
 				<script>
 					alert("아이디가 중복됩니다.");
 				</script>
-			</c:if>
-			<input type="email" placeholder="이메일 주소" name="email" required style="height: 30px; width: 495px" />
+			</c:if> --%>
+			<input type="email" placeholder="이메일 주소" name="email" required style="height: 30px; width: 495px" /><br /><br />
 			<input type="password" placeholder="비밀번호" id="password" name="password" required style="height: 30px; width: 495px" onchange="pass()">
 			<input type="password" placeholder="비밀번호 확인" id="passwordConfirm" name="passwordConfirm" required style="height: 30px; width: 495px" onchange="passConfirm()"/><span id ="confirmMsg"></span><!-- &nbsp;<span id="check"></span> --><br /><br /> 
 			<input type="text" placeholder="닉네임" name="nickName" required style="height: 30px; width: 495px" /><br /><br />

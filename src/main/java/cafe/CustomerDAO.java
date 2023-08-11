@@ -21,7 +21,7 @@ public class CustomerDAO {
 	private static CustomerDAO customerDao;
 
 	private DataSource dataSource;
-	private int result;
+//	private int result;
 	
 	static {
 		try {
@@ -49,18 +49,36 @@ public class CustomerDAO {
 			ne.printStackTrace();
 		}
 	}
-
-	public int join(Customer customer) {
-		try (Connection c = dataSource.getConnection();) {
-			QueryRunner qr = new QueryRunner();
-			Object[] p = { customer.getName(), customer.getEmail(), customer.getPassword(), customer.getNickName(),
-					customer.getAddress(), customer.getPhone() };
-			result = qr.execute(c, QM.get("insertCustomer"), p);
-		} catch (SQLException sqle) {
+	
+	public void join(Customer customer) {
+		try( Connection c = dataSource.getConnection();) {
+			 QueryRunner qr = new QueryRunner();
+			 Object[] p = {
+					 customer.getName(),
+					 customer.getEmail(),
+					 customer.getPassword(),
+					 customer.getNickName(),
+					 customer.getAddress(),
+					 customer.getPhone()};
+			 qr.execute(c, QM.get("insertCustomer"),p);
+			
+			
+		}catch(SQLException sqle) {
 			sqle.printStackTrace();
 		}
-		return result;
 	}
+
+//	public int join(Customer customer) {
+//		try (Connection c = dataSource.getConnection();) {
+//			QueryRunner qr = new QueryRunner();
+//			Object[] p = { customer.getName(), customer.getEmail(), customer.getPassword(), customer.getNickName(),
+//					customer.getAddress(), customer.getPhone() };
+//			result = qr.execute(c, QM.get("insertCustomer"), p);
+//		} catch (SQLException sqle) {
+//			sqle.printStackTrace();
+//		}
+//		return result;
+//	}
 	
 	
 public int login(String email, String password) {

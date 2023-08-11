@@ -1,6 +1,7 @@
 package cafe;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -57,33 +59,43 @@ public class CafeController extends HttpServlet {
 						
 	}
 	
-	void join(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	void join(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		Customer customer = new Customer();
-		CustomerDAO customerDao = CustomerDAO.getInstance();
-		String email = request.getParameter("email");
-
-		/*
-		 * try { BeanUtils.populate(customer, request.getParameterMap());
-		 * customerService.join(customer); } catch (IllegalAccessException |
-		 * InvocationTargetException e) { e.printStackTrace(); }
-		 */
-
-		int joinResult = customerDao.join(customer);
-
-		if (joinResult == 1) {
-			request.setAttribute("joinResult", joinResult);
-			HttpSession session = request.getSession();
-			session.setAttribute("sessionEMAIL", email);
-			RequestDispatcher rd = request.getRequestDispatcher("/cafe/index.jsp");
-			rd.forward(request, response);
-		} else {
-			request.setAttribute("joinResult", 0);
-			RequestDispatcher rd = request.getRequestDispatcher("/cafe/signUp.jsp");
-			rd.forward(request, response);
-		}
 		
-		response.sendRedirect("/rankingcafe/cafe/login.jsp");
+		try {
+			BeanUtils.populate(customer, request.getParameterMap());
+			customerService.join(customer);
+		}catch(IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		response.sendRedirect("cafe");
 	}
+	
+//	void join(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+//		Customer customer = new Customer();
+//		CustomerDAO customerDao = CustomerDAO.getInstance();
+//		String email = request.getParameter("email");
+//
+//		/*
+//		 * try { BeanUtils.populate(customer, request.getParameterMap());
+//		 * customerService.join(customer); } catch (IllegalAccessException |
+//		 * InvocationTargetException e) { e.printStackTrace(); }
+//		 */
+//
+//		int joinResult = customerDao.join(customer);
+//
+//		if (joinResult == 1) {
+//			request.setAttribute("joinResult", joinResult);
+//			HttpSession session = request.getSession();
+//			session.setAttribute("sessionEMAIL", email);
+//			RequestDispatcher rd = request.getRequestDispatcher("/cafe/index.jsp");
+//			rd.forward(request, response);
+//		} else {
+//			request.setAttribute("joinResult", 0);
+//			RequestDispatcher rd = request.getRequestDispatcher("/cafe/signUp.jsp");
+//			rd.forward(request, response);
+//		}
+//	}
 	
 	void login(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
 		String email = request.getParameter("email");
