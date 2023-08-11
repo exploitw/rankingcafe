@@ -2,6 +2,7 @@ package cafe;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,10 +21,12 @@ public class CafeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	CustomerService customerService;
+	CommunityService communityService;
        
    
     public CafeController() {
        customerService = new CustomerService();
+       communityService = new CommunityService();
     }
 
 	
@@ -40,11 +43,17 @@ public class CafeController extends HttpServlet {
 		case "join" :
 			join(request,response);
 			break;
+		case "rs" :
+			view = rs(request,response);
+			break;
 		case "login":
 			login(request,response);
 			break;
 		case "logout":
 			logout(request,response);
+			break;
+		case"community":
+			view = community(request,response);
 			break;
 		}
 		
@@ -54,9 +63,24 @@ public class CafeController extends HttpServlet {
 		
 	}
 	
+	String community(HttpServletRequest request, HttpServletResponse response) {
+		boolean hasOrdering = Boolean
+				.parseBoolean(StringUtils.defaultIfEmpty(request.getParameter("hasOrdering"), "false"));
+		List<Community> communityList = communityService.getCommunity();
+
+		request.setAttribute("hasOrdering", hasOrdering);
+		request.setAttribute("communityList", communityList);
+
+		return "/cafe/community.jsp";
+	}
+	
 	String cafe(HttpServletRequest request, HttpServletResponse response) {
 		return "/cafe/login.jsp";
 						
+	}
+	String rs(HttpServletRequest request, HttpServletResponse response) {
+		return "/cafe/signUp.jsp";
+		
 	}
 	
 	void join(HttpServletRequest request, HttpServletResponse response) throws IOException{

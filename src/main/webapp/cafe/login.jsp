@@ -28,6 +28,8 @@
     <link href="<c:url value="/cafe/css/login.css"/>" rel="stylesheet" />
   </head>
   <body>
+  <input type="submit" id="loginBtn" value="커뮤니티" class="community" />
+            <a href="<c:url value="/cafe?action=community"/>" id="community">커뮤니티</a>
     <div id="login_wrap">
       <section id="loginBox">
         <h2>login</h2>
@@ -47,7 +49,7 @@
           </p>
           <p>
             <input type="submit" id="loginBtn" value="로그인" class="login" />
-            <a href="<c:url value="/cafe/signUp.jsp"/>" id="signup">회원가입</a>
+            <a href="<c:url value="/cafe?action=rs"/>" id="signup">회원가입</a>
           </p>
           <p>
             <label class="hidden" for="check1">아이디 저장시 체크</label>

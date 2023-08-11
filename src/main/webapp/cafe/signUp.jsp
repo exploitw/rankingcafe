@@ -77,39 +77,10 @@ input {
 	border-radius: 3px;
 }
 </style>
-<!-- <script>
-        function check_pw(){
- 
-            var pw = document.getElementById('pw').value;
-            var SC = ["!","@","#","$","%"];
-            var check_SC = 0;
- 
-            if(pw.length < 6 || pw.length>16){
-                window.alert('비밀번호는 6글자 이상, 16글자 이하만 이용 가능합니다.');
-                document.getElementById('pw').value='';
-            }
-            for(var i=0;i<SC.length;i++){
-                if(pw.indexOf(SC[i]) != -1){
-                    check_SC = 1;
-                }
-            }
-            if(check_SC == 0){
-                window.alert('!,@,#,$,% 의 특수문자가 들어가 있지 않습니다.')
-                document.getElementById('pw').value='';
-            }
-            if(document.getElementById('pw').value !='' && document.getElementById('pw2').value!=''){
-                if(document.getElementById('pw').value==document.getElementById('pw2').value){
-                    document.getElementById('check').innerHTML='비밀번호가 일치합니다.'
-                    document.getElementById('check').style.color='blue';
-                }
-                else{
-                    document.getElementById('check').innerHTML='비밀번호가 일치하지 않습니다.';
-                    document.getElementById('check').style.color='red';
-                }
-            }
-        }
-</script> -->
 <script type="text/javascript">
+function emailCheck(){
+	window.open("/cafe/emailCheck.jsp","_blank","width=300px height=100px");
+}
 function pass() {
 	var password = document.getElementById('password').value;
 	var SC = ["!","@","#","$","%"];
@@ -162,20 +133,35 @@ function passConfirm() {
 		<hr />
 		<br />
 		<form action="<c:url value="/cafe"/>?action=join" method="post">
-			<input type="text" placeholder="이름" name="name" required style="height: 30px; width: 495px" /><br /><br />
-			<%-- <c:if test="${ joinResult == 0}">
-				<script>
-					alert("아이디가 중복됩니다.");
-				</script>
-			</c:if> --%>
-			<input type="email" placeholder="이메일 주소" name="email" required style="height: 30px; width: 495px" /><br /><br />
-			<input type="password" placeholder="비밀번호" id="password" name="password" required style="height: 30px; width: 495px" onchange="pass()">
-			<input type="password" placeholder="비밀번호 확인" id="passwordConfirm" name="passwordConfirm" required style="height: 30px; width: 495px" onchange="passConfirm()"/><span id ="confirmMsg"></span><!-- &nbsp;<span id="check"></span> --><br /><br /> 
-			<input type="text" placeholder="닉네임" name="nickName" required style="height: 30px; width: 495px" /><br /><br />
-			<input type="text" placeholder="주소" name="address" required style="height: 30px; width: 495px" /> <br /><br />
-			<input type="text" placeholder="핸드폰번호" name="phone" required style="height: 30px; width: 495px" /><br /><br />
+			<table>
+				<tr>
+					<td><input type="text" placeholder="이름" name="name" required style="height: 30px; width: 495px" /></td>
+				</tr>
+				<tr>
+					<td>
+						<input type="email" placeholder="이메일 주소" name="email" required style="height: 30px; width: 495px">
+						<input type="button" onclick="emailCheck();" value="EMAIL 중복확인">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="password" placeholder="비밀번호" id="password" name="password" required style="height: 30px; width: 495px" onchange="pass()">
+						<input type="password" placeholder="비밀번호 확인" id="passwordConfirm" name="passwordConfirm" required style="height: 30px; width: 495px" onchange="passConfirm()"/><span id ="confirmMsg"></span>&nbsp;<span id="check"></span> 
+					</td>
+				</tr>
+				<tr>
+					<td><input type="text" placeholder="닉네임" name="nickName" required style="height: 30px; width: 495px" /></td>
+				</tr>
+				<tr>
+					<td><input type="text" placeholder="주소" name="address" required style="height: 30px; width: 495px" /></td>
+				</tr>
+				<tr>
+					<td><input type="text" placeholder="핸드폰번호" name="phone" required style="height: 30px; width: 495px" /></td>
+				</tr>
+			</table>
+			<br>
 			<p>
-				<input type="submit" value="가입하기" id="signup" /><br /> <br />
+				<input type="submit" value="가입하기" id="signup" />
 			</p>
 		</form>
 		<hr />

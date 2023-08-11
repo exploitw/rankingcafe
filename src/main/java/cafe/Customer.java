@@ -6,13 +6,22 @@ public class Customer {
 	private String email;
 	private String password;
 	private String nickName;
-	private String phone;
 	private String address;
+	private String phone;
 	
 	Customer(){
 		
 	}
 	
+	public Customer(String name, String email, String password, String nickName, String address, String phone) {
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.nickName = nickName;
+		this.address = address;
+		this.phone = phone;
+	}
+
 	public long getId() {
 		return id;
 	}

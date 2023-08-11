@@ -1,11 +1,14 @@
 package cafe;
 
+import java.sql.Date;
+
 public class Community {
 	private long id;
 	private long customerId;
 	private String title;
 	private String img;
 	private String content;
+	private Date date;
 	
 	public long getId() {
 		return id;
@@ -38,6 +41,12 @@ public class Community {
 		this.content = content;
 	}
 	
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
