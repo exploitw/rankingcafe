@@ -5,20 +5,27 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 
+
+
+
+
 @WebServlet("/cafe")
 public class CafeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ServletContext ctx;
 	
 	CustomerService customerService;
 	CommunityService communityService;
@@ -61,6 +68,15 @@ public class CafeController extends HttpServlet {
 		case "read":
 			read(request,response);
 			break;
+		case "mypage":
+			view = mypage(request,response);
+			break;
+		case "updateCustomer":
+			updateCustomer(request,response);
+			break;
+		case "deleteCustomer":
+			deleteCustomer(request,response);
+			break;
 		}
 		
 		if(StringUtils.isNotEmpty(view)) {
@@ -68,6 +84,50 @@ public class CafeController extends HttpServlet {
 		}
 		
 	}
+		private String getFilename(Part part) {
+		String fileName = null;
+		
+		String header = part.getHeader("content-disposition");
+		System.out.println("Header => "+header);
+		
+		int start = header.indexOf("filename=");
+		fileName = header.substring(start+10,header.length()-1);
+		ctx.log("파일명:"+fileName);
+		return fileName;
+	}
+	String mypage(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		
+		Customer customer = customerService.getCustomerById(id);
+		request.setAttribute("customer", customer);
+		
+		
+		return "/cafe/mypage.jsp";
+	}
+	
+	void deleteCustomer(HttpServletRequest request, HttpServletResponse response)throws IOException {
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		 
+			  customerService.remove(id);
+		  response.sendRedirect("cafe"); 
+		
+		
+	}
+	
+	void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		Customer customer = new Customer();
+		
+		try {
+			BeanUtils.populate(customer, request.getParameterMap());
+			 
+			customerService.set(customer);
+			response.sendRedirect("cafe?action=mypage");
+		}catch(IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	String community(HttpServletRequest request, HttpServletResponse response) {
 		boolean hasOrdering = Boolean
@@ -104,7 +164,11 @@ public class CafeController extends HttpServlet {
 	void login(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		Customer customer1 = customerService.getCustomerById(id);
 		
+		request.setAttribute("customer1", customer1);
 		
 		CustomerDAO customerDao = new CustomerDAO();
 		int loginResult = customerDao.login(email, password);
@@ -161,12 +225,19 @@ public class CafeController extends HttpServlet {
 		  Community community = new Community();
 		  
 		  try {
+			  Part part = request.getPart("file");
+			  String fileName = getFilename(part);
+			  if(fileName != null && !fileName.isEmpty()) {
+				  part.write(fileName);
+			  }
 			  BeanUtils.populate(community, request.getParameterMap());
 			  community.setCustomerId(customerId);
+			  community.setImg("/img/"+fileName);
 		  communityService.write(community); 
 		  }catch(IllegalAccessException |
 		  InvocationTargetException e) { e.printStackTrace(); }
-		 
+				
+		return "/rankingcafe/cafe/index.jsp";
 		
 		/*
 		 * HttpSession session = request.getSession(); Customer customer = (Customer)
@@ -187,8 +258,6 @@ public class CafeController extends HttpServlet {
 		
 
 		//communityService.write(community);
-		return "/rankingcafe/cafe/index.jsp";
-		 
 		
 		 
 	}
