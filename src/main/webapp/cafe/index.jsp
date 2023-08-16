@@ -15,6 +15,7 @@
 		${sessionCustomerId }로그인 중<br />
 		<a href="<c:url value="/cafe"/>?action=logout"><button>로그아웃</button></a>
 		<a href="<c:url value="/cafe"/>?action=community"><button>커뮤니티</button></a>
+		<a href="<c:url value="/cafe"/>?action=mypage&id=${customerId}" data-id="${customerId}"><button>마이페이지</button></a>
 	</c:if>
 </body>
 </html>

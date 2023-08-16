@@ -33,8 +33,7 @@
  	<form id="customer_form" action="<c:url value="cafe"/>" method="post">
 	<input type="hidden" name="action" value="${customer.id}" id="customer_form_action"/>
 	 			<div class="row">
-	 				<label class="cell-2">고객번호</label>
-                    <div class="cell-10"><input type="number" data-role="input" name="id" value="${customer.id}" id="id" readonly /></div>
+                    <div class="cell-10"><input type="hidden" data-role="input" name="id" value="${customer.id}" id="id" readonly /></div>
                 </div>
                 <div class="row">
                     <label class="cell-2">고객이름</label>
