@@ -8,13 +8,13 @@
 <title>Home</title>
 </head>
 <body>
-홈 화면 출력됨zxc<br />
+홈 화면 출력됨<br />
 	<c:if test="${sessionEMAIL != null }">
-	${sessionEMAIL } 로그인 중<br />
-	
-	<!-- <a href="/rankingcafe/cafe/login.jsp"><button>로그아웃</button></a> -->
-	<a href="<c:url value="/cafe"/>?action=logout"><button>로그아웃</button></a>
-	<a href="/rankingcafe/cafe/write.jsp"><button>게시글쓰기</button></a>
+		${sessionEMAIL } 로그인 중<br />
+		${sessionNickName } 로그인 중<br />
+		${sessionCustomerId }로그인 중<br />
+		<a href="<c:url value="/cafe"/>?action=logout"><button>로그아웃</button></a>
+		<a href="<c:url value="/cafe"/>?action=community"><button>커뮤니티</button></a>
 	
 	<a href="<c:url value="/cafe"/>?action=mypage&id=${customerId}" data-id="${customerId}"><button>마이페이지</button></a>
 	
@@ -24,6 +24,5 @@
                 <input type="submit" value="마이페이지" id="add_button"/>
             </form> --%>
 	</c:if>
-
 </body>
 </html>

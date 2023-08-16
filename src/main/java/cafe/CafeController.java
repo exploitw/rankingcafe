@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 @WebServlet("/cafe")
 public class CafeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	private ServletContext ctx;
 
 	CustomerService customerService;
@@ -44,8 +45,7 @@ public class CafeController extends HttpServlet {
 		case "join":
 			join(request, response);
 			break;
-		case "rs":
-			view = rs(request, response);
+			view = signup(request, response);
 			break;
 		case "login":
 			login(request, response);
@@ -59,9 +59,11 @@ public class CafeController extends HttpServlet {
 		case "write":
 			write(request, response);
 			break;
+		case "writing":
+			view = writing(request, response);
+			break;
 		case "read":
 			read(request, response);
-			break;
 		case "mypage":
 			view = mypage(request, response);
 			break;
@@ -76,7 +78,6 @@ public class CafeController extends HttpServlet {
 		if (StringUtils.isNotEmpty(view)) {
 			getServletContext().getRequestDispatcher(view).forward(request, response);
 		}
-
 	}
 
 	private String getFilename(Part part) {
@@ -130,7 +131,7 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("hasOrdering", hasOrdering);
 		request.setAttribute("communityList", communityList);
 
-		return "/cafe/community.jsp";
+		return "/cafe/communityList.jsp";
 	}
 
 	String cafe(HttpServletRequest request, HttpServletResponse response) {
@@ -138,7 +139,7 @@ public class CafeController extends HttpServlet {
 
 	}
 
-	String rs(HttpServletRequest request, HttpServletResponse response) {
+	String signup(HttpServletRequest request, HttpServletResponse response) {
 		return "/cafe/signUp.jsp";
 
 	}
@@ -183,17 +184,16 @@ public class CafeController extends HttpServlet {
 			request.setAttribute("loginResult", loginResult);
 			RequestDispatcher rd = request.getRequestDispatcher("/cafe/signUp.jsp");
 			rd.forward(request, response);
-
 		}
 	}
 
 	void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-
-		RequestDispatcher rd = request.getRequestDispatcher("/cafe/login.jsp");
-		rd.forward(request, response);
-
+//		RequestDispatcher rd = request.getRequestDispatcher("/cafe/login.jsp");
+//		rd.forward(request, response);
+		
+		response.sendRedirect("cafe");
 	}
 
 	String read(HttpServletRequest request, HttpServletResponse response) {
@@ -205,7 +205,7 @@ public class CafeController extends HttpServlet {
 		return "/rankingcafe/cafe/index.jsp";
 	}
 
-	String write(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	void write(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
 		String sessionEMAIL = (String) session.getAttribute("sessionEMAIL");
@@ -217,6 +217,17 @@ public class CafeController extends HttpServlet {
 
 		Community community = new Community();
 
+		try {
+			BeanUtils.populate(community, request.getParameterMap());
+			community.setCustomerId(customerId);
+			communityService.write(community);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		
+
+		response.sendRedirect("cafe?action=community");
+		// return "/cafe/write.jsp";
 		/*
 		 * try { Part part = request.getPart("file"); String fileName =
 		 * getFilename(part); if(fileName != null && !fileName.isEmpty()) {
@@ -247,7 +258,9 @@ public class CafeController extends HttpServlet {
 		 */
 
 		// communityService.write(community);
-
 	}
-
+  
+	String writing(HttpServletRequest request, HttpServletResponse response) {
+		return "/cafe/write.jsp";
+	}
 }

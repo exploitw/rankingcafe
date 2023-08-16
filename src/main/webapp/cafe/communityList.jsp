@@ -24,6 +24,14 @@
     </head>
 
     <body>
+	    <c:if test="${sessionEMAIL != null }">
+			${sessionEMAIL } 로그인 중<br />
+			${sessionnickName } 로그인 중<br />
+			${sessionCustomerId }로그인 중<br />
+			<!-- <a href="/rankingcafe/cafe/login.jsp"><button>로그아웃</button></a> -->
+			<a href="<c:url value="/cafe"/>?action=logout"><button>로그아웃</button></a>
+			<a href="<c:url value="/cafe"/>?action=login"><button>메인</button></a>
+		</c:if>
     	<div class="container">
             <label>커뮤니티</label>
             <br />
@@ -42,9 +50,9 @@
                     <c:forEach var="community" items="${communityList}">
                         <tr>
                             <td>${community.id}</td>
-                            <td>${community.title}</td>
+                            <td><a class="community_title" href="<c:url value="/cafe"/>?action=communityInfo&id=${community.id}" data-id="${community.id}">${community.title}</a></td>
                             <td>${community.customerId}</td>
-                            <td>${community.date}</td>
+                            <td><fmt:formatDate value="${community.date}" pattern="yyyy-MM-dd HH:mm"/></td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -52,7 +60,7 @@
         </div>
 
         <div class="container">
-            <form id="goto_form" action="<c:url value="madang"/>" method="get">
+            <form id="goto_form" action="<c:url value="/cafe"/>?action=writing" method="post">
                 <input type="hidden" name="action" value="community"/>
                 <input type="hidden" name="id" value="-1"/>
                 <input type="submit" value="추가" id="add_button"/>

@@ -26,6 +26,18 @@
     <!-- en -->
     <link href="<c:url value="/cafe/css/reset.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/login.css"/>" rel="stylesheet" />
+    <!-- <script type="text/javascript">
+    function loginConfirm() {
+    	var email = document.getElementById('email').value;
+    	var password = document.getElemnetByid('password').value;
+    	
+    	if(email.length < 12) {
+    		window.alert('이메일 형식이 잘못됐습니다. 다시 적어주세요.');
+    		document.getElementById('email').value='';
+    		document.getElementById('email').focus();
+    	} else {}
+    }
+    </script> -->
   </head>
   <body>
   <input type="submit" id="loginBtn" value="커뮤니티" class="community" />
@@ -48,8 +60,8 @@
             />
           </p>
           <p>
-            <input type="submit" id="loginBtn" value="로그인" class="login" />
-            <a href="<c:url value="/cafe?action=rs"/>" id="signup">회원가입</a>
+            <input type="submit" id="loginBtn" value="로그인" class="login" onchange="loginConfirm()"/>
+            <a href="<c:url value="/cafe?action=signup"/>" id="signup">회원가입</a>
           </p>
           <p>
             <label class="hidden" for="check1">아이디 저장시 체크</label>
