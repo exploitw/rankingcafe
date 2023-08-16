@@ -1,0 +1,224 @@
+@charset "UTF-8";
+div#cafeListWrap {
+  width: 95%;
+  max-width: 1500px;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+@media screen and (min-width: 1000.1px) and (min-width: 1000.1px) {
+  div#cafeListWrap {
+    padding: 50px 0;
+  }
+}
+@media screen and (min-width: 1000.1px) and (max-width: 1000px) {
+  div#cafeListWrap {
+    padding: 30px 0;
+  }
+}
+@media screen and (min-width: 1000.1px) {
+  div#cafeListWrap::after {
+    content: "";
+    clear: both;
+    display: block;
+  }
+  div#cafeListWrap aside#sideNav {
+    float: left;
+    width: 20%;
+  }
+  div#cafeListWrap aside#sideNav nav {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 3px 0;
+  }
+  div#cafeListWrap aside#sideNav nav ul {
+    padding: 30px 0;
+  }
+  div#cafeListWrap aside#sideNav nav ul li button {
+    font-family: "나눔바른펜", "nanum-barun-pen";
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 15px 45px;
+    font-size: 14px;
+    color: #8a7c7c;
+    box-sizing: border-box;
+    text-align: left;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+  div#cafeListWrap aside#sideNav nav ul li button::before {
+    position: absolute;
+    left: 45px;
+    bottom: 45%;
+    transform: translate(0, 0);
+    opacity: 0;
+    display: block;
+    content: "";
+    width: 0;
+    height: 1px;
+    background-color: #747474;
+  }
+  div#cafeListWrap aside#sideNav nav ul li button.active {
+    padding-left: 37px;
+    font-weight: bold;
+    font-size: 17px;
+    color: #dab799;
+  }
+  div#cafeListWrap aside#sideNav nav ul li button:hover {
+    background-color: rgba(218, 183, 153, 0.2);
+    border-radius: 10px;
+    padding-left: 63px;
+  }
+  div#cafeListWrap aside#sideNav nav ul li button:hover::before {
+    opacity: 1;
+    transition: all 0.3s;
+    display: block;
+    width: 13px;
+  }
+  div#cafeListWrap article#content {
+    width: 75%;
+    float: right;
+  }
+}
+@media screen and (max-width: 1000px) {
+  div#cafeListWrap ul {
+    margin-top: 70px;
+    margin-bottom: 30px;
+  }
+  div#cafeListWrap ul li {
+    display: inline-block;
+    width: 24%;
+  }
+  div#cafeListWrap ul li button {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 10px;
+    border-bottom: 1px solid #f5f5f5;
+    border-right: 1px solid #f5f5f5;
+    box-sizing: border-box;
+    text-align: center;
+    color: #8a7c7c;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+  div#cafeListWrap ul li button.active {
+    font-weight: bold;
+    font-size: 17px;
+    color: #dab799;
+  }
+  div#cafeListWrap ul li button:hover {
+    background-color: rgba(218, 183, 153, 0.2);
+  }
+  div#cafeListWrap ul li:first-child button {
+    border-left: 1px solid #f5f5f5;
+  }
+}
+div#cafeListWrap article#content section#cafeList {
+  width: 100%;
+}
+div#cafeListWrap article#content section#cafeList #hBox {
+  margin: 30px 0;
+}
+div#cafeListWrap article#content section#cafeList #hBox h2 {
+  font-family: "Hind Guntur", sans-serif;
+  text-align: center;
+  font-size: 2.2em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+div#cafeListWrap article#content section#cafeList div#ListContainer {
+  position: relative;
+}
+@media screen and (min-width: 1000.1px) {
+  div#cafeListWrap article#content section#cafeList div#ListContainer ul {
+    padding: 50px 0;
+  }
+}
+@media screen and (max-width: 1000px) {
+  div#cafeListWrap article#content section#cafeList div#ListContainer ul {
+    padding: 30px 0;
+  }
+}
+div#cafeListWrap article#content section#cafeList div#ListContainer ul::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+div#cafeListWrap article#content section#cafeList div#ListContainer ul li {
+  float: left;
+}
+div#cafeListWrap article#content section#cafeList div#ListContainer ul li .listBox {
+  padding: 25px 10px 10px 10px;
+  font-size: 18px;
+}
+div#cafeListWrap article#content section#cafeList div#ListContainer ul li .listBox a {
+  overflow: hidden;
+  display: block;
+  margin: 0 auto;
+  max-width: 300px;
+  max-height: 400px;
+  border-radius: 10px;
+}
+div#cafeListWrap article#content section#cafeList div#ListContainer ul li .listBox a img {
+  width: 100%;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.3s;
+}
+div#cafeListWrap article#content section#cafeList div#ListContainer ul li .listBox a img:hover {
+  transform: scale(1.2);
+}
+div#cafeListWrap article#content section#cafeList div#ListContainer ul li .listBox .contentBox {
+  position: relative;
+  padding: 10px;
+}
+div#cafeListWrap article#content section#cafeList div#ListContainer ul li .listBox .contentBox h3 {
+  font-size: 24px;
+}
+div#cafeListWrap article#content section#cafeList div#ListContainer ul li .listBox .contentBox p.heart {
+  /* position: absolute;
+  right: 10px;
+  top: 7px; */
+  margin: 10px 0;
+}
+div#cafeListWrap article#content section#cafeList div#ListContainer ul li .listBox .contentBox p.desc {
+  padding: 10px 5px;
+}
+@media screen and (min-width: 1000.1px) {
+  div#cafeListWrap article#content section#cafeList div#ListContainer ul li {
+    width: 33%;
+    box-sizing: border-box;
+  }
+  div#cafeListWrap article#content section#cafeList div#ListContainer ul li.mtop {
+    margin-top: 60px;
+  }
+}
+@media screen and (min-width: 700.1px) and (max-width: 1000px) {
+  div#cafeListWrap article#content section#cafeList div#ListContainer ul li {
+    width: 49.5%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 700px) {
+  div#cafeListWrap article#content section#cafeList div#ListContainer ul li {
+    width: 100%;
+  }
+}
+div#cafeListWrap.active > aside,
+div#cafeListWrap.active > article#content {
+  opacity: 1;
+  transform: translateX(0);
+}
+div#cafeListWrap aside {
+  transform: translateX(-100px);
+}
+div#cafeListWrap article#content {
+  transition-delay: 0.3s !important;
+  transform: translateX(100px);
+}
+div#cafeListWrap aside,
+div#cafeListWrap article#content {
+  opacity: 0;
+  transition: transform 1s, opacity 1s;
+}/*# sourceMappingURL=cafeList.css.map */

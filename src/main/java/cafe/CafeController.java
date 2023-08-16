@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import javax.servlet.ServletException;import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +18,11 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 @WebServlet("/cafe")
+@MultipartConfig(maxFileSize=1024*1024*2,location="c:/Temp/img")
 public class CafeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private ServletContext ctx;
-
+	
 	CustomerService customerService;
 	CommunityService communityService;
 
@@ -89,7 +89,7 @@ public class CafeController extends HttpServlet {
 
 		int start = header.indexOf("filename=");
 		fileName = header.substring(start + 10, header.length() - 1);
-		ctx.log("파일명:" + fileName);
+		
 		return fileName;
 	}
 
@@ -207,7 +207,7 @@ public class CafeController extends HttpServlet {
 		List<Object[]> customerList = communityService.getCustomer();
 
 		request.setAttribute("customerList", customerList);
-		System.out.println(customerList);
+		//System.out.println(customerList);
 
 		return "/rankingcafe/cafe/index.jsp";
 	}
@@ -225,8 +225,16 @@ public class CafeController extends HttpServlet {
 		Community community = new Community();
 
 		try {
+			Part part = request.getPart("file");
+			String fileName = getFilename(part);
+			if(fileName != null && !fileName.isEmpty()) {
+				part.write(fileName);
+			}
+			
+			
 			BeanUtils.populate(community, request.getParameterMap());
 			community.setCustomerId(customerId);
+			community.setImg("/img/"+fileName);
 			communityService.write(community);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();

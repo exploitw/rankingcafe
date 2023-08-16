@@ -1,0 +1,284 @@
+@charset "UTF-8";
+body {
+  font-family: "나눔바른펜", "nanum-barun-pen";
+  color: #666;
+  box-sizing: border-box;
+  /* lg */
+  /* sm */
+}
+@media screen and (min-width: 1000.1px) {
+  body {
+    padding: 120px 30px 30px 30px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  body {
+    padding: 60px 15px 15px 15px;
+  }
+}
+body header#header {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+body header#header.active::before {
+  height: 100%;
+}
+@media screen and (min-width: 1000.1px) {
+  body header#header.active .frame_l,
+  body header#header.active .frame_r {
+    width: 30px !important;
+  }
+  body header#header.active .frame_b {
+    height: 30px !important;
+  }
+}
+@media screen and (max-width: 1000px) {
+  body header#header.active .frame_l,
+  body header#header.active .frame_r {
+    width: 15px !important;
+  }
+  body header#header.active .frame_b {
+    height: 15px !important;
+  }
+}
+body header#header::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 0;
+  left: 0;
+  top: 0;
+  background: #fff;
+  transition: all 2s;
+}
+body header#header::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 0;
+  left: 0;
+  top: 0;
+  background: #fff;
+  transition: all 2s;
+}
+body header#header .frame {
+  position: fixed;
+  background: #fff;
+  transition: all 1s;
+}
+body header#header .frame.frame_l {
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+body header#header .frame.frame_r {
+  height: 100%;
+  right: 0;
+  top: 0;
+}
+body header#header .frame.frame_b {
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+@media screen and (min-width: 1000.1px) {
+  body header#header .frame.frame_l, body header#header .frame.frame_r {
+    width: 0;
+  }
+  body header#header .frame.frame_b {
+    height: 0;
+  }
+}
+@media screen and (max-width: 1000px) {
+  body header#header .frame.frame_l, body header#header .frame.frame_r {
+    width: 0;
+  }
+  body header#header .frame.frame_b {
+    height: 0;
+  }
+}
+@media screen and (min-width: 1000.1px) {
+  body header#header {
+    height: 120px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  body header#header {
+    height: 60px;
+  }
+}
+body header#header h1 {
+  z-index: 1;
+  font-weight: bold;
+  color: #e9d4c2;
+}
+body header#header h1 img {
+  display: block;
+  width: 100%;
+}
+@media screen and (min-width: 1000.1px) {
+  body header#header h1 {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  body header#header h1 a {
+    font-size: 50px;
+    letter-spacing: 0.3em;
+  }
+}
+@media screen and (max-width: 1000px) {
+  body header#header h1 {
+    position: relative;
+    float: left;
+    transition: color 0.5s;
+  }
+  body header#header h1 a {
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 20px;
+    font-size: 30px;
+  }
+  body header#header h1.active {
+    color: #fff;
+  }
+}
+@media screen and (min-width: 1000.1px) {
+  body header#header nav.gnb {
+    position: relative;
+    width: 90%;
+    height: 60px;
+    margin: 30px auto;
+  }
+  body header#header nav.gnb ul.menu {
+    float: left;
+  }
+  body header#header nav.gnb ul.member {
+    float: right;
+  }
+  body header#header nav.gnb ul li {
+    float: left;
+  }
+  body header#header nav.gnb ul li a {
+    position: relative;
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 20px;
+    color: #666;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  body header#header nav.gnb ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    left: 20px;
+    bottom: 0;
+    border-top: 1px solid #dab799;
+    transition: width 0.5s;
+  }
+  body header#header nav.gnb ul li a:hover::after {
+    width: calc(100% - 40px);
+  }
+  body header#header nav.gnb.gnb_sm {
+    display: none;
+  }
+}
+@media screen and (max-width: 1000px) {
+  body header#header nav.gnb.gnb_sm {
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    color: #fff;
+    background: #000;
+  }
+  body header#header nav.gnb.gnb_sm > div {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 300px;
+    text-align: center;
+  }
+  body header#header nav.gnb.gnb_sm > div ul li a {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+  }
+  body header#header nav.gnb.gnb_sm > div ul li a:hover {
+    color: #dab799;
+    border-bottom: 1px solid rgba(218, 183, 153, 0.5);
+  }
+  body header#header nav.gnb.gnb_sm > div ul li a ion-icon {
+    transform: translateY(4px);
+  }
+  body header#header nav.gnb.gnb_lg {
+    display: none;
+  }
+}
+@media screen and (min-width: 1000.1px) {
+  body header#header button.btn {
+    display: none;
+  }
+}
+@media screen and (max-width: 1000px) {
+  body header#header button.btn {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    right: 15px;
+    top: 5px;
+    transition: transform 0.5s;
+  }
+  body header#header button.btn.active {
+    display: none !important;
+  }
+  body header#header button.btn.btn_menu, body header#header button.btn.btn_close {
+    position: absolute;
+    right: 5px;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    font-size: 1.7em;
+  }
+  body header#header button.btn.btn_menu i, body header#header button.btn.btn_close i {
+    transition: color 0.3s;
+  }
+  body header#header button.btn.btn_menu::before, body header#header button.btn.btn_close::before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    content: "";
+    display: block;
+    width: 0;
+    height: 50px;
+    background-color: #dab799;
+    transition: all 0.4s;
+  }
+  body header#header button.btn.btn_menu:hover::before, body header#header button.btn.btn_close:hover::before {
+    width: 50px;
+  }
+  body header#header button.btn.btn_menu:hover i, body header#header button.btn.btn_close:hover i {
+    color: #fff;
+  }
+  body header#header button.btn.btn_menu i, body header#header button.btn.btn_close i {
+    position: relative;
+    display: block;
+  }
+}/*# sourceMappingURL=header.css.map */
