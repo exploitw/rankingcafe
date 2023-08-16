@@ -74,7 +74,7 @@ textarea {
 	${sessionCustomerId }로그인 중<br />
 	<!-- <a href="/rankingcafe/cafe/login.jsp"><button>로그아웃</button></a> -->
 	<a href="<c:url value="/cafe"/>?action=logout"><button>로그아웃</button></a>
-	<a href="/rankingcafe/cafe/write.jsp"><button>게시글쓰기</button></a>
+	<a href="<c:url value="/cafe"/>?action=community"><button>커뮤니티</button></a>
 	</c:if>
 	
 	<div class="controller">

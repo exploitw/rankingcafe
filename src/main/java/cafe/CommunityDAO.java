@@ -5,9 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -100,7 +98,8 @@ public class CommunityDAO {
 						 community.getCustomerId(),
 						 community.getTitle(),
 						 community.getImg(),
-						 community.getContent()
+						 community.getContent(),
+						 new java.util.Date()
 						 };
 						
 				 qr.execute(c, QM.get("addingnewCommunity"),h,p);
