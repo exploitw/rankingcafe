@@ -1,4 +1,4 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -18,13 +18,31 @@
 
 	<div class="container">
 		<label>커뮤니티 수정</label> <br /> <br />
-		<form id="community_form" action="<c:url value="/cafe"/>?action=community" method="post">
+		<form id="community_form"
+			action="<c:url value="/cafe"/>?action=community" method="post">
 			<input type="hidden" name="action" id="community_form_action" />
 			<div class="row">
-				<label class="cell-2">번호</label>
+				<table border="1">
+					<thead>
+						<tr>
+							<th><input type="text" data-role="input" name="customerid"
+								value="${community.customerId}" id="customerId" readonly /></th>
+							<th><input type="text" data-role="input" name="date"
+								<fmt:formatDate value="${community.date}" pattern="yyyy-MM-dd HH:mm"/>
+								id="date" readonly /></th>
+						</tr>
+					</thead>
+					<%-- <tbody>
+						<input type="text" data-role="input" name="content" value="${community.content}" id=content />
+						<input type="img" data-role="input" name="img" value="${community.img}" id="img" />
+					</tbody> --%>
+				</table>
+
+
+				<%-- <label class="cell-2">번호</label>
 				<div class="cell-10">
-					<input type="number" data-role="input" name="id" value="${community.id}"
-						id="id" readonly />
+					<input type="number" data-role="input" name="id"
+						value="${community.id}" id="id" readonly />
 				</div>
 			</div>
 			<div class="row">
@@ -35,17 +53,17 @@
 				</div>
 			</div>
 			<div class="row">
-				<label class="cell-2">출판사</label>
+				<label class="cell-2">내용</label>
 				<div class="cell-10">
-					<input type="text" data-role="input" name="publisher"
-						value="${book.publisher}" id="publisher" />
+					<input type="text" data-role="input" name="content"
+						value="${community.content}" id="publisher" />
 				</div>
 			</div>
 			<div class="row">
 				<label class="cell-2">가격</label>
 				<div class="cell-10">
 					<input type="text" data-role="input" name="price"
-						value="${book.price}" id="price" />
+						value="${community.price}" id="price" />
 				</div>
 			</div>
 			<div class="row">
@@ -56,8 +74,9 @@
 				</div>
 				<div class="cell-3"></div>
 				<div class="cell-3"></div>
-			</div>
+			</div> --%>
 		</form>
 	</div>
+	<script src="communityInfo.js"></script>
 </body>
-</html> --%>
+</html>

@@ -134,6 +134,14 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/communityList.jsp";
 	}
+	
+//	String communityInfo(HttpServletRequest request, HttpServletResponse response) {
+//		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+//		Community community = communityService.getCommunityOrBlank(id);
+//		request.setAttribute("community", community);
+//		
+//		return "/book.jsp";
+//	}
 
 	String cafe(HttpServletRequest request, HttpServletResponse response) {
 		return "/cafe/login.jsp";
