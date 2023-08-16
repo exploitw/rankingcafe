@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.Context;
@@ -16,6 +18,9 @@ import org.apache.commons.dbutils.QueryLoader;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+
+
 
 public class CustomerDAO {
 	final static String QUERY_PATH = "/cafe/cafe_queries.properties";
@@ -98,4 +103,64 @@ public class CustomerDAO {
 
 		return rtn;
 	}
+
+	public void update(Customer customer) {
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			Object[] p = { customer.getName(),
+					customer.getEmail(),
+					customer.getNickName(),
+					customer.getAddress(),
+					customer.getPhone(),
+					customer.getId()
+
+			};
+			qr.execute(c, QM.get("update"), p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+
+	
+	public List<Customer> getCustomer(){ 
+		  List<Customer> rtn = new ArrayList<>();
+	  
+	  
+	  try { QueryRunner qr = new QueryRunner(dataSource);
+				ResultSetHandler<List<Customer>> h = new BeanListHandler<>(Customer.class);
+	  	rtn = qr.query(QM.get("selectCustomer"),h);
+			  }catch(SQLException sqle) {
+					sqle.printStackTrace();
+				}
+				
+				return rtn;
+	  
+	  }
+
+	public Customer getCustomerById(int id) {
+		Customer rtn = null;
+
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			ResultSetHandler<Customer> h = new BeanHandler<>(Customer.class);
+			Object[] p = { id };
+			rtn = qr.query(c, QM.get("getCustomerById"), h, p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+
+		return rtn;
+	}
+
+	public void delete(int id) {
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			Object[] p = { id };
+			qr.execute(c, QM.get("delete"), p);
+		} catch (SQLException sqle) {
+
+			sqle.printStackTrace();
+		}
+	}
+
 }

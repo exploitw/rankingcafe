@@ -70,8 +70,7 @@ textarea {
 <body>
 	<c:if test="${sessionEMAIL != null }">
 	${sessionEMAIL } 로그인 중<br />
-	${sessionnickName } 로그인 중<br />
-	${sessionCustomerId }로그인 중<br />
+	
 	<!-- <a href="/rankingcafe/cafe/login.jsp"><button>로그아웃</button></a> -->
 	<a href="<c:url value="/cafe"/>?action=logout"><button>로그아웃</button></a>
 	<a href="<c:url value="/cafe"/>?action=community"><button>커뮤니티</button></a>
@@ -91,10 +90,11 @@ textarea {
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2"><textarea rows="12" cols="50"
-							name="content" required></textarea></td>
+					<td colspan="2"><textarea rows="12" cols="50" name="content" required></textarea></td>
 				</tr>
 				<tr>
+					<label class="form-label">이미지</label>
+					<input type="file" name="file" class="form-control">
 					<td align="center"><input type="submit" value="작성" class="button"></td>
 					<td align="center"><input type="reset" value="내용 초기화" class="button"></td>
 				</tr>
