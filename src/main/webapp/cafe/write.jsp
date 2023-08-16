@@ -78,7 +78,7 @@ textarea {
 	
 	<div class="controller">
 	<div id="wriTitle"><b>게시글 작성</b></div>
-		<form action="<c:url value="/cafe"/>?action=write"  method="post">
+		<form action="<c:url value="/cafe"/>?action=write"  method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td width="100px">카테고리</td>
