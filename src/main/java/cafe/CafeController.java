@@ -134,6 +134,14 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/communityList.jsp";
 	}
+	
+//	String communityInfo(HttpServletRequest request, HttpServletResponse response) {
+//		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+//		Community community = communityService.getCommunityOrBlank(id);
+//		request.setAttribute("community", community);
+//		
+//		return "/book.jsp";
+//	}
 
 	String cafe(HttpServletRequest request, HttpServletResponse response) {
 		return "/cafe/login.jsp";
@@ -191,8 +199,6 @@ public class CafeController extends HttpServlet {
 	void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.invalidate();
-//		RequestDispatcher rd = request.getRequestDispatcher("/cafe/login.jsp");
-//		rd.forward(request, response);
 		
 		response.sendRedirect("cafe");
 	}
@@ -234,7 +240,6 @@ public class CafeController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-
 		response.sendRedirect("cafe?action=community");
 	}
   
