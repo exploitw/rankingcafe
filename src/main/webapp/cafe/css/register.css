@@ -1,0 +1,105 @@
+section#register {
+  width: 100%;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+section#register #hBox {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+section#register #hBox h2 {
+  position: absolute;
+  left: 50%;
+  top: 150px;
+  transform: translateX(-50%);
+  font-family: "Hind Guntur", sans-serif;
+  text-align: center;
+  font-size: 3em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+section#register div#registerWrap {
+  width: 95%;
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+section#register div#registerWrap form#registerForm p {
+  width: 100%;
+}
+section#register div#registerWrap form#registerForm p input[type=text],
+section#register div#registerWrap form#registerForm p input[type=password],
+section#register div#registerWrap form#registerForm p input[type=email] {
+  width: 100%;
+  padding: 17px;
+  font-size: 1.15em;
+  font-weight: bold;
+  border: 1px solid #f5f5f5;
+  border-bottom: none;
+  box-sizing: border-box;
+}
+section#register div#registerWrap form#registerForm p input[type=text]::-moz-placeholder, section#register div#registerWrap form#registerForm p input[type=password]::-moz-placeholder, section#register div#registerWrap form#registerForm p input[type=email]::-moz-placeholder {
+  color: #555;
+  letter-spacing: 1px;
+}
+section#register div#registerWrap form#registerForm p input[type=text]::placeholder,
+section#register div#registerWrap form#registerForm p input[type=password]::placeholder,
+section#register div#registerWrap form#registerForm p input[type=email]::placeholder {
+  color: #555;
+  letter-spacing: 1px;
+}
+section#register div#registerWrap form#registerForm p > span.checkPass {
+  color: #dab799;
+}
+section#register div#registerWrap form#registerForm p > span.checkFalse {
+  color: #ff0000;
+}
+section#register div#registerWrap form#registerForm p:nth-child(2), section#register div#registerWrap form#registerForm p:nth-child(4) {
+  position: relative;
+}
+section#register div#registerWrap form#registerForm p:nth-child(2) span, section#register div#registerWrap form#registerForm p:nth-child(4) span {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+}
+section#register div#registerWrap form#registerForm p:nth-child(7) {
+  border-bottom: 1px solid #f5f5f5;
+}
+section#register div#registerWrap form#registerForm p.emailCheck, section#register div#registerWrap form#registerForm p.pwCheck {
+  padding: 10px 20px;
+  box-sizing: border-box;
+  text-align: end;
+}
+section#register div#registerWrap form#registerForm p.jcheck1 {
+  margin: 20px 0;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: 12px;
+}
+section#register div#registerWrap form#registerForm p.jcheck1 > i {
+  display: block;
+  margin: 20px 10px;
+  font-size: 11px;
+  color: #b9b9b9;
+  font-weight: normal;
+  line-height: 170%;
+}
+section#register div#registerWrap form#registerForm p #btn_submit {
+  display: block;
+  margin: 30px auto;
+  padding: 13px 70px;
+  background-color: #dab799;
+  color: #fff;
+  border: 1px solid #dab799;
+  border-radius: 7px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+section#register div#registerWrap form#registerForm p #btn_submit:hover {
+  background-color: #fff;
+  border: 1px solid #dab799;
+  color: #dab799;
+}/*# sourceMappingURL=register.css.map */

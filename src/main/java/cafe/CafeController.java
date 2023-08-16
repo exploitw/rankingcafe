@@ -236,36 +236,6 @@ public class CafeController extends HttpServlet {
 		
 
 		response.sendRedirect("cafe?action=community");
-		// return "/cafe/write.jsp";
-		/*
-		 * try { Part part = request.getPart("file"); String fileName =
-		 * getFilename(part); if(fileName != null && !fileName.isEmpty()) {
-		 * part.write(fileName); } BeanUtils.populate(community,
-		 * request.getParameterMap()); community.setCustomerId(customerId); //
-		 * community.setImg("/img/"+fileName); communityService.write(community);
-		 * }catch(IllegalAccessException |InvocationTargetException e) {
-		 * e.printStackTrace(); }
-		 */
-
-		
-		/*
-		 * HttpSession session = request.getSession(); Customer customer = (Customer)
-		 * request.getSession().getAttribute("CUSTOMER"); int sessionCustomerId =
-		 * (Integer) session.getAttribute("sessionCustomerId"); //if (sessionCustomerId
-		 * == null) { sessionCustomerId = "비회원"; }
-		 * 
-		 * 
-		 * String title = request.getParameter("title"); String content =
-		 * request.getParameter("content");
-		 * 
-		 * 
-		 * Community community = new Community();
-		 * 
-		 * community.setCustomerId(sessionCustomerId); community.setTitle(title);
-		 * community.setContent(content);
-		 */
-
-		// communityService.write(community);
 	}
   
 	String writing(HttpServletRequest request, HttpServletResponse response) {

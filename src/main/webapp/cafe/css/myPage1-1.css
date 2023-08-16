@@ -1,0 +1,69 @@
+section#myPage1_1 {
+  width: 100%;
+}
+section#myPage1_1 #hBox {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+section#myPage1_1 #hBox h2 {
+  position: absolute;
+  left: 50%;
+  top: 150px;
+  transform: translateX(-50%);
+  font-family: "Hind Guntur", sans-serif;
+  text-align: center;
+  font-size: 3em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+section#myPage1_1 div#myPage1_1Wrap {
+  width: 95%;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 70px 0;
+}
+section#myPage1_1 div#myPage1_1Wrap > div {
+  padding: 50px 0;
+}
+section#myPage1_1 div#myPage1_1Wrap > div.contentTitle {
+  font-size: 45px;
+  font-weight: bold;
+}
+section#myPage1_1 div#myPage1_1Wrap > div.contentDetail p {
+  display: inline-block;
+  padding: 20px 30px;
+}
+section#myPage1_1 div#myPage1_1Wrap > div.contentDetail p span {
+  padding: 0 10px;
+}
+section#myPage1_1 div#myPage1_1Wrap > div.like {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+section#myPage1_1 div#myPage1_1Wrap > div.like > div {
+  width: 30px;
+  margin-right: 10px;
+}
+section#myPage1_1 div#myPage1_1Wrap > div.like > div img {
+  display: block;
+  width: 100%;
+}
+section#myPage1_1 div#myPage1_1Wrap > div.control .left {
+  float: left;
+}
+section#myPage1_1 div#myPage1_1Wrap > div.control .right {
+  float: right;
+  display: flex;
+}
+section#myPage1_1 div#myPage1_1Wrap > div.control .right p {
+  margin: 0 10px;
+}
+section#myPage1_1 div#myPage1_1Wrap > div.control a {
+  transition: all 0.3s;
+}
+section#myPage1_1 div#myPage1_1Wrap > div.control a:hover {
+  background-color: #fff;
+  color: #dab799;
+}/*# sourceMappingURL=myPage1-1.css.map */

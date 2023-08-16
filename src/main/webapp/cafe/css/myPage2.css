@@ -1,0 +1,88 @@
+section#myPage2 {
+  width: 100%;
+}
+section#myPage2 #hBox {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}
+section#myPage2 #hBox h2 {
+  position: absolute;
+  left: 50%;
+  top: 150px;
+  transform: translateX(-50%);
+  font-family: "Hind Guntur", sans-serif;
+  text-align: center;
+  font-size: 3em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+section#myPage2 > ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+section#myPage2 > ul li.active a {
+  color: #dab799;
+}
+section#myPage2 > ul li a {
+  display: block;
+  padding: 40px 70px;
+}
+section#myPage2 div#myPage2Wrap {
+  position: relative;
+  min-height: 500px;
+  padding: 20px 0;
+}
+section#myPage2 div#myPage2Wrap ul.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+}
+section#myPage2 div#myPage2Wrap ul.container li {
+  width: 33.3%;
+  padding: 0 15px;
+  box-sizing: border-box;
+  margin-bottom: 50px;
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 1s;
+}
+section#myPage2 div#myPage2Wrap ul.container li.active {
+  opacity: 1;
+  transform: translateY(50px);
+}
+section#myPage2 div#myPage2Wrap ul.container li .likeBox {
+  padding: 25px 10px 10px 10px;
+  border: 1px solid #ccc;
+  font-size: 18px;
+}
+section#myPage2 div#myPage2Wrap ul.container li .likeBox a {
+  overflow: hidden;
+  display: block;
+}
+section#myPage2 div#myPage2Wrap ul.container li .likeBox a img {
+  width: 100%;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.3s;
+}
+section#myPage2 div#myPage2Wrap ul.container li .likeBox a img:hover {
+  transform: scale(1.2);
+}
+section#myPage2 div#myPage2Wrap ul.container li .likeBox .contentBox {
+  padding: 10px;
+}
+section#myPage2 div#myPage2Wrap ul.container li .likeBox .contentBox h3 {
+  font-size: 24px;
+}
+section#myPage2 div#myPage2Wrap ul.container li .likeBox .contentBox p.heart {
+  margin: 10px 0;
+}/*# sourceMappingURL=myPage2.css.map */
