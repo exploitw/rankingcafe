@@ -5,7 +5,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletContext;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -59,6 +61,9 @@ public class CafeController extends HttpServlet {
 			break;
 		case "community":
 			view = community(request, response);
+			break;
+		case "communityInfo":
+			view = communityInfo(request, response);
 			break;
 		case "write":
 			write(request, response);
@@ -184,22 +189,30 @@ public class CafeController extends HttpServlet {
 		boolean hasOrdering = Boolean
 				.parseBoolean(StringUtils.defaultIfEmpty(request.getParameter("hasOrdering"), "false"));
 		List<Community> communityList = communityService.getCommunity();
+		List<Customer> customerList = customerService.getCustomer();
 
 		request.setAttribute("hasOrdering", hasOrdering);
 		request.setAttribute("communityList", communityList);
+		request.setAttribute("customerList", customerList);
 
 		return "/cafe/communityList.jsp";
 	}
 	
-	
-	/*
-	 * String communityInfo(HttpServletRequest request, HttpServletResponse
-	 * response) { int id =
-	 * Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"),
-	 * "-1")); Community community = communityService.getCommunityOrBlank(id);
-	 * request.setAttribute("community", community); return "/book.jsp"; }
-	 */
-	 
+
+	String communityInfo(HttpServletRequest request, HttpServletResponse response) {
+		CommunityDAO comuDao = new CommunityDAO();
+		CustomerDAO custDao = new CustomerDAO();
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		Community community = comuDao.selectCommunityById(id);
+		Customer customer = custDao.getCustomerById(id);
+		List<Customer> customerList = customerService.getCustomer();
+		request.setAttribute("community", community);
+		request.setAttribute("customerList", customerList);
+		
+		return "/cafe/communityInfo.jsp";
+	}
+
+
 	String cafe(HttpServletRequest request, HttpServletResponse response) {
 		return "/cafe/login.jsp";
 
