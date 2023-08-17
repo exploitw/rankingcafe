@@ -201,7 +201,7 @@ public class CafeController extends HttpServlet {
 
 		} else {
 			request.setAttribute("loginResult", loginResult);
-			RequestDispatcher rd = request.getRequestDispatcher("/cafe/signUp.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/cafe/login.jsp");
 			rd.forward(request, response);
 		}
 	}
