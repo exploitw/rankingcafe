@@ -36,6 +36,7 @@ section#register div#registerWrap form#registerForm p input[type=email] {
   padding: 17px;
   font-size: 1.15em;
   font-weight: bold;
+  border-collapse: collapse;
   border: 1px solid #f5f5f5;
   border-bottom: none;
   box-sizing: border-box;
@@ -56,6 +57,9 @@ section#register div#registerWrap form#registerForm p > span.checkPass {
 section#register div#registerWrap form#registerForm p > span.checkFalse {
   color: #ff0000;
 }
+section#register div#registerWrap form#registerForm p input.addLine {
+  border: 1px solid #f5f5f5;
+}
 section#register div#registerWrap form#registerForm p:nth-child(2), section#register div#registerWrap form#registerForm p:nth-child(4) {
   position: relative;
 }
@@ -64,11 +68,12 @@ section#register div#registerWrap form#registerForm p:nth-child(2) span, section
   top: 50%;
   right: 30px;
   transform: translateY(-50%);
+  font-size: 0.9em;
 }
 section#register div#registerWrap form#registerForm p:nth-child(7) {
   border-bottom: 1px solid #f5f5f5;
 }
-section#register div#registerWrap form#registerForm p.emailCheck, section#register div#registerWrap form#registerForm p.pwCheck {
+section#register div#registerWrap form#registerForm p.emailCheck, section#register div#registerWrap form#registerForm p.pwCheck, section#register div#registerWrap form#registerForm p.pwLCheck {
   padding: 10px 20px;
   box-sizing: border-box;
   text-align: end;

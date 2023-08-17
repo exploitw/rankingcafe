@@ -49,12 +49,12 @@ section#community div#communityWrap table th {
   padding: 15px;
   text-align: center;
 }
-section#community p {
+section#community div.btn_Wrtie {
   position: absolute;
   bottom: 0;
   width: 100%;
 }
-section#community p #btn_write {
+section#community div.btn_Wrtie #add_button {
   display: block;
   float: right;
   margin: 30px 0;
@@ -66,7 +66,7 @@ section#community p #btn_write {
   transition: all 0.3s;
   cursor: pointer;
 }
-section#community p #btn_write:hover {
+section#community div.btn_Wrtie #add_button:hover {
   background-color: #fff;
   border: 1px solid #dab799;
   color: #dab799;
