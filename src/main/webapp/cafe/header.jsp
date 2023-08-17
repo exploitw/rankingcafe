@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,7 +104,7 @@
       <nav class="gnb gnb_lg">
         <ul class="menu">
           <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=login">Home</a></li>
-          <li><a class="btn1-1" href="#">List</a></li>
+          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=cafeList">List</a></li>
           <li><a href="<c:url value="/cafe?action=community"/>" id="community">Community</a></li>
         </ul>
         <ul class="member">

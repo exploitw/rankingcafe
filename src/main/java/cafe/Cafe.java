@@ -13,6 +13,9 @@ public class Cafe {
 	private String website;
 	private String info;
 	
+	public Cafe() {
+		
+	}
 	public long getId() {
 		return id;
 	}

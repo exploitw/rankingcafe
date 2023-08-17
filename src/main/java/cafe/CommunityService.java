@@ -24,4 +24,18 @@ public class CommunityService {
 	public void write(Community community) {
 		communityDao.write(community);
 	}
+	
+	public Community getCommunityOrBlank(int id) {
+		Community rtn = null;
+
+		rtn = communityDao.selectCommunityById(id);
+
+		if (rtn == null) {
+			rtn = new Community();
+			rtn.setTitle("");
+			rtn.setImg("");
+			rtn.setContent("");
+		}
+		return rtn;
+	}
 }
