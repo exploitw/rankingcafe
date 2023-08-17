@@ -201,10 +201,8 @@ public class CafeController extends HttpServlet {
 
 	String communityInfo(HttpServletRequest request, HttpServletResponse response) {
 		CommunityDAO comuDao = new CommunityDAO();
-		CustomerDAO custDao = new CustomerDAO();
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 		Community community = comuDao.selectCommunityById(id);
-		Customer customer = custDao.getCustomerById(id);
 		List<Customer> customerList = customerService.getCustomer();
 		request.setAttribute("community", community);
 		request.setAttribute("customerList", customerList);
@@ -237,6 +235,7 @@ public class CafeController extends HttpServlet {
 
 	void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
+		String nickName = request.getParameter("nickName");
 		String password = request.getParameter("password");
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
