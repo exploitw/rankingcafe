@@ -91,6 +91,11 @@
 
   </head>
   <body>
+  <c:if test="${sessionEMAIL != null }">
+		${sessionEMAIL } 로그인 중<br />
+		${sessionnickName } 로그인 중<br />
+		${sessionCustomerId }로그인 중<br />
+	</c:if>
   <header id="header">
       <h1>
         <a href="#">Cafe</a>
@@ -98,7 +103,7 @@
 
       <nav class="gnb gnb_lg">
         <ul class="menu">
-          <li><a class="btn1-1" href="#">Home</a></li>
+          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=login">Home</a></li>
           <li><a class="btn1-1" href="#">List</a></li>
           <li><a href="<c:url value="/cafe?action=community"/>" id="community">Community</a></li>
         </ul>
@@ -107,7 +112,7 @@
             <a href="#"><ion-icon name="person-outline"></ion-icon> My Page</a>
           </li>
           <li>
-            <a href="#"><ion-icon name="log-out-outline"></ion-icon> Logout</a>
+            <a href="<c:url value="/cafe"/>?action=logout"><ion-icon name="log-out-outline"></ion-icon> Logout</a>
           </li>
         </ul>
       </nav>
