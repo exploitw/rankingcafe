@@ -5,9 +5,15 @@ function validateCommunity() {
     if (!$('#customerId').val()) {
         throw 'customerIdRequired';
     }
+    if (!$('#date').val()) {
+        throw 'dateRequired';
+    }
+    if (!$('#content').val()) {
+        throw 'contentRequired';
+    }
 }
 
-function updateBook(event) {
+function updateCommunity(event) {
     try {
         validateCommunity();
 
@@ -18,17 +24,20 @@ function updateBook(event) {
             case 'titleRequired':
                 alert('제목을 입력해 주십시오.');
                 break;
+            case 'contentRequired':
+                alert('내용을 입력해 주십시오.');
+                break;
         }
         event.preventDefault();
     }
 }
 
-function deleteBook() {
+function deleteCommunity() {
     $('#community_form_action').val('deleteCommunity');
     $('#community_form')[0].submit();
 }
 
 $(function () {
-    $('#update_button').click(updateBook);
-    $('#delete_button').click(deleteBook);
+    $('#update_button').click(updateCommunity);
+    $('#delete_button').click(deleteCommunity);
 });
