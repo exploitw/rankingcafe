@@ -51,10 +51,7 @@
 
 
 <script>
-	let hasOrdering = $
-	{
-		hasOrdering
-	};
+	let hasOrdering = ${hasOrdering};
 </script>
 
 <jsp:include page="footer.jsp" />
