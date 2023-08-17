@@ -5,6 +5,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
+
+import javax.servlet.ServletContext;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -25,10 +28,12 @@ public class CafeController extends HttpServlet {
 	
 	CustomerService customerService;
 	CommunityService communityService;
+	CafeService cafeService;
 
 	public CafeController() {
 		customerService = new CustomerService();
 		communityService = new CommunityService();
+		cafeService = new CafeService();
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -77,18 +82,71 @@ public class CafeController extends HttpServlet {
 		case "deleteCustomer":
 			deleteCustomer(request, response);
 			break;
+		case "insertCafe":
+			insertCafe(request,response);
+			break;
+		case "cafeList":
+			view = cafeList(request,response);
+			break;
+		case "cafeInfo":
+			view = cafeInfo(request,response);
+			break;
+		
 		}
 
 		if (StringUtils.isNotEmpty(view)) {
 			getServletContext().getRequestDispatcher(view).forward(request, response);
 		}
 	}
+	String cafeInfo(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		Cafe cafe  = cafeService.getCafeById(id);
+		request.setAttribute("cafe", cafe);
+
+		return "/cafe/cafeInfo.jsp";
+	}
+	
+	
+	String cafeList(HttpServletRequest request, HttpServletResponse response) {
+		boolean hasOrdering = Boolean
+				.parseBoolean(StringUtils.defaultIfEmpty(request.getParameter("hasOrdering"), "false"));
+		List<Cafe> cafeList = cafeService.getCafe();
+
+		request.setAttribute("hasOrdering", hasOrdering);
+		request.setAttribute("cafeList", cafeList);
+
+		return "/cafe/cafeList.jsp";
+	}
+	
+	
+		void insertCafe(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		
+		
+		Cafe cafe = new Cafe();
+
+		try {
+			Part part = request.getPart("file");
+			String fileName = getFilename(part);
+			if(fileName != null && !fileName.isEmpty()) {
+				part.write(fileName);
+			}
+			
+			BeanUtils.populate(cafe, request.getParameterMap());
+			cafe.setImg("/img/"+fileName);
+			cafeService.insertCafe(cafe);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		response.sendRedirect("cafe/index.jsp");
+	}
+	
 
 	private String getFilename(Part part) {
 		String fileName = null;
 
 		String header = part.getHeader("content-disposition");
-		System.out.println("Header => " + header);
+		//System.out.println("Header => " + header);
 
 		int start = header.indexOf("filename=");
 		fileName = header.substring(start + 10, header.length() - 1);
@@ -140,6 +198,7 @@ public class CafeController extends HttpServlet {
 		return "/cafe/communityList.jsp";
 	}
 	
+
 	String communityInfo(HttpServletRequest request, HttpServletResponse response) {
 		CommunityDAO comuDao = new CommunityDAO();
 		CustomerDAO custDao = new CustomerDAO();
@@ -152,6 +211,7 @@ public class CafeController extends HttpServlet {
 		
 		return "/cafe/communityInfo.jsp";
 	}
+
 
 	String cafe(HttpServletRequest request, HttpServletResponse response) {
 		return "/cafe/login.jsp";
