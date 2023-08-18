@@ -1,0 +1,116 @@
+section#communityWrite {
+  width: 100%;
+}
+section#communityWrite #hBox {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+section#communityWrite #hBox h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+  font-family: "Hind Guntur", sans-serif;
+  text-align: center;
+  font-size: 2em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+section#communityWrite div#communityWriteWrap {
+  position: relative;
+  width: 95%;
+  min-height: 500px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+section#communityWrite div#communityWriteWrap table {
+  width: 100%;
+}
+section#communityWrite div#communityWriteWrap table tr td:first-child {
+  width: 10%;
+}
+section#communityWrite div#communityWriteWrap table tr td:first-child p {
+  text-align: center;
+}
+section#communityWrite div#communityWriteWrap table tr td input[type=text],
+section#communityWrite div#communityWriteWrap table tr td input[type=password],
+section#communityWrite div#communityWriteWrap table tr td input[type=email],
+section#communityWrite div#communityWriteWrap table tr td input[type=file] {
+  border: none;
+  padding: 17px;
+  border-bottom: 1px solid #efefef;
+  text-align: left;
+}
+section#communityWrite div#communityWriteWrap table tr td textarea {
+  border: 1px solid #efefef;
+}
+section#communityWrite div#communityWriteWrap table tr td input[type=text],
+section#communityWrite div#communityWriteWrap table tr td input[type=password],
+section#communityWrite div#communityWriteWrap table tr td input[type=email],
+section#communityWrite div#communityWriteWrap table tr td input[type=file],
+section#communityWrite div#communityWriteWrap table tr td textarea {
+  width: 100%;
+  margin: 15px;
+  font-size: 1.15em;
+  font-weight: bold;
+  box-sizing: border-box;
+  border-collapse: collapse;
+}
+section#communityWrite div#communityWriteWrap table tr td input[type=text]::-moz-placeholder, section#communityWrite div#communityWriteWrap table tr td input[type=password]::-moz-placeholder, section#communityWrite div#communityWriteWrap table tr td input[type=email]::-moz-placeholder, section#communityWrite div#communityWriteWrap table tr td input[type=file]::-moz-placeholder, section#communityWrite div#communityWriteWrap table tr td textarea::-moz-placeholder {
+  color: #555;
+  letter-spacing: 1px;
+}
+section#communityWrite div#communityWriteWrap table tr td input[type=text]::placeholder,
+section#communityWrite div#communityWriteWrap table tr td input[type=password]::placeholder,
+section#communityWrite div#communityWriteWrap table tr td input[type=email]::placeholder,
+section#communityWrite div#communityWriteWrap table tr td input[type=file]::placeholder,
+section#communityWrite div#communityWriteWrap table tr td textarea::placeholder {
+  color: #555;
+  letter-spacing: 1px;
+}
+section#communityWrite div#communityWriteWrap div.btn_container::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+section#communityWrite div#communityWriteWrap div.btn_container div.btn1 {
+  float: left;
+}
+section#communityWrite div#communityWriteWrap div.btn_container div.btn1 a {
+  display: inline-block;
+  width: 120px;
+  margin: 30px auto;
+  padding: 7px 10px;
+  color: #dab799;
+  text-align: center;
+  border: 1px solid #dab799;
+  border-radius: 7px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+section#communityWrite div#communityWriteWrap div.btn_container div.btn1 a:hover {
+  background-color: #dab799;
+  color: #fff;
+}
+section#communityWrite div#communityWriteWrap div.btn_container div.btn2 {
+  float: right;
+}
+section#communityWrite div#communityWriteWrap div.btn_container div.btn2 button {
+  display: inline-block;
+  width: 120px;
+  margin: 30px auto;
+  padding: 7px 10px;
+  background-color: #dab799;
+  color: #fff;
+  border: 1px solid #dab799;
+  border-radius: 7px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+section#communityWrite div#communityWriteWrap div.btn_container div.btn2 button:hover {
+  background-color: #fff;
+  border: 1px solid #dab799;
+  color: #dab799;
+}/*# sourceMappingURL=communityWrite.css.map */

@@ -85,7 +85,7 @@ section#home_about {
   max-width: 1400px;
   margin: 0 auto;
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1000.1px) {
   section#home_about {
     padding: 70px 0;
   }
@@ -147,7 +147,7 @@ section#home_cafeCategory {
   color: #fff;
   background: #dab799;
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1000.1px) {
   section#home_cafeCategory {
     padding: 70px 0;
   }

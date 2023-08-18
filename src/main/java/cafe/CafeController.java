@@ -97,7 +97,6 @@ public class CafeController extends HttpServlet {
 			insertReview(request,response);
 			break;
 		
-		
 		}
 
 		if (StringUtils.isNotEmpty(view)) {

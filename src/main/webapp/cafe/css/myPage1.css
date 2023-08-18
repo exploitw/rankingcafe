@@ -4,16 +4,16 @@ section#myPage1 {
 section#myPage1 #hBox {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 200px;
 }
 section#myPage1 #hBox h2 {
   position: absolute;
   left: 50%;
-  top: 150px;
+  top: 50%;
   transform: translateX(-50%);
   font-family: "Hind Guntur", sans-serif;
   text-align: center;
-  font-size: 3em;
+  font-size: 2em;
   text-transform: uppercase;
   letter-spacing: 5px;
 }
@@ -40,34 +40,40 @@ section#myPage1 div#myPage1Wrap {
   margin: 0 auto;
   padding: 20px 0;
 }
-section#myPage1 div#myPage1Wrap table {
+section#myPage1 div#myPage1Wrap .tbContainer {
+  min-height: 400px;
+}
+section#myPage1 div#myPage1Wrap .tbContainer table {
   width: 100%;
 }
-section#myPage1 div#myPage1Wrap table tr {
+section#myPage1 div#myPage1Wrap .tbContainer table tr {
   border-bottom: 1px solid #f9f9f9;
 }
-section#myPage1 div#myPage1Wrap table tr td:nth-child(1) {
+section#myPage1 div#myPage1Wrap .tbContainer table tr td:nth-child(1) {
   text-align: left;
 }
-section#myPage1 div#myPage1Wrap table th {
+section#myPage1 div#myPage1Wrap .tbContainer table th {
   color: #dab799;
   background: #f9f9f9;
 }
-section#myPage1 div#myPage1Wrap table th td:nth-child(2) {
+section#myPage1 div#myPage1Wrap .tbContainer table th td:nth-child(2) {
   text-align: left;
 }
-section#myPage1 div#myPage1Wrap table th:first-child {
+section#myPage1 div#myPage1Wrap .tbContainer table th:first-child {
   text-align: left;
 }
-section#myPage1 div#myPage1Wrap table td,
-section#myPage1 div#myPage1Wrap table th {
+section#myPage1 div#myPage1Wrap .tbContainer table td,
+section#myPage1 div#myPage1Wrap .tbContainer table th {
   padding: 15px;
   text-align: center;
 }
 section#myPage1 p {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+  position: relative;
+}
+section#myPage1 p::after {
+  content: "";
+  clear: both;
+  display: block;
 }
 section#myPage1 p #btn_write {
   display: block;

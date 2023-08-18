@@ -4,18 +4,33 @@ section#myPage1_1 {
 section#myPage1_1 #hBox {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 200px;
 }
 section#myPage1_1 #hBox h2 {
   position: absolute;
   left: 50%;
-  top: 150px;
+  top: 50%;
   transform: translateX(-50%);
   font-family: "Hind Guntur", sans-serif;
   text-align: center;
-  font-size: 3em;
+  font-size: 2em;
   text-transform: uppercase;
   letter-spacing: 5px;
+}
+section#myPage1_1 ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+section#myPage1_1 ul li.active a {
+  color: #dab799;
+}
+section#myPage1_1 ul li a {
+  display: block;
+  padding: 40px 70px;
 }
 section#myPage1_1 div#myPage1_1Wrap {
   width: 95%;
