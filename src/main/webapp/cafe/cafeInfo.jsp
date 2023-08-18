@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,5 +103,21 @@
 
               </tbody>
             </table>
+            
+             <!-- 댓글 -->
+<div id="review">
+  <ol class="reviewList">
+    <c:forEach items="${reviewsList}" var="reviews">
+      <li>
+        <p>
+        작성자 : ${reviews.customerId}<br />
+        작성 날짜 :  <fmt:formatDate value="${reviews.date}" pattern="yyyy-MM-dd" />
+        </p>
+
+        <p>${reviews.content}</p>
+      </li>
+    </c:forEach>   
+  </ol>
+</div>
 </body>
 </html>
