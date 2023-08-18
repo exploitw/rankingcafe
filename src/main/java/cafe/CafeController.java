@@ -182,7 +182,7 @@ public class CafeController extends HttpServlet {
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect("cafe/cafeList.jsp");
+		response.sendRedirect("cafe?action=cafeList");
 	}
 	
 

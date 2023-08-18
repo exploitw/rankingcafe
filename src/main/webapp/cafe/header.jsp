@@ -103,12 +103,12 @@
   
   <header id="header">
       <h1>
-        <a href="<c:url value="/cafe"/>?action=index">Cafe</a>
+        <a href="<c:url value="/cafe"/>?action=login">Cafe</a>
       </h1>
 
       <nav class="gnb gnb_lg">
         <ul class="menu">
-          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=index">Home</a></li>
+          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=login">Home</a></li>
           <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=cafeList">List</a></li>
           <li><a href="<c:url value="/cafe?action=community"/>" id="community">Community</a></li>
         </ul>
@@ -200,5 +200,6 @@
       <button class="btn btn_close active">
         <i class="fas fa-times" aria-hidden="true"></i>
       </button>
+      <%-- <a href="<c:url value="/cafe"/>/insertcafe.jsp" class="btn btn-primary"><button>카페등록</button></a> --%>
     </header>
   
