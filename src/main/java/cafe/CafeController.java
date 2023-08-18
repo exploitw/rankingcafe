@@ -108,7 +108,9 @@ public class CafeController extends HttpServlet {
 	
 	void insertReview (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		Review review = new Review();
-
+		HttpSession session = request.getSession();
+		Long customerId = (Long) session.getAttribute("customerId");
+		
 		try {
 			Part part = request.getPart("file");
 			String fileName = getFilename(part);
@@ -117,12 +119,13 @@ public class CafeController extends HttpServlet {
 			}
 			
 			BeanUtils.populate(review, request.getParameterMap());
+			review.setCustomerId(customerId);
 			review.setImg("/img/"+fileName);
 			reviewService.insertReview(review);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect("cafe/index.jsp");
+		response.sendRedirect("cafe?action=cafeInfo&id="+review.getCafeId());
 	}
 	
 	
@@ -155,16 +158,7 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/cafeList.jsp";
 	}
-	/*
-	 * String reviewList(HttpServletRequest request, HttpServletResponse response) {
-	 * 
-	 * List<Review> reviewList = reviewService.getReview();
-	 * 
-	 * 
-	 * request.setAttribute("reviewList", reviewList);
-	 * 
-	 * return "/cafe/cafeList.jsp"; }
-	 */
+	
 	
 	
 		void insertCafe(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -214,7 +208,7 @@ public class CafeController extends HttpServlet {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		customerService.remove(id);
-		response.sendRedirect("cafe");
+		response.sendRedirect("cafe?action=logout");
 
 	}
 
@@ -226,7 +220,7 @@ public class CafeController extends HttpServlet {
 			BeanUtils.populate(customer, request.getParameterMap());
 
 			customerService.set(customer);
-			response.sendRedirect("cafe?action=mypage");
+			response.sendRedirect("cafe?action=mypage&id="+customer.getId());
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}

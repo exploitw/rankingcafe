@@ -94,7 +94,7 @@ public class ReviewDAO {
 					review.getCustomerId(),
 					review.getImg(),
 					review.getContent(),
-					review.getDate()
+					new java.util.Date()
 					
 			};
 			qr.execute(c, QM.get("insertReview"), p);

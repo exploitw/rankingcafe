@@ -110,6 +110,7 @@
     <c:forEach items="${reviewsList}" var="reviews">
       <li>
         <p>
+        <img class="cafe-img" src="${reviews.img}"><br />
         작성자 : ${reviews.customerId}<br />
         작성 날짜 :  <fmt:formatDate value="${reviews.date}" pattern="yyyy-MM-dd" />
         </p>
@@ -119,5 +120,24 @@
     </c:forEach>   
   </ol>
 </div>
+<form action="<c:url value="/cafe"/>?action=insertReview"  method="post" enctype="multipart/form-data">
+			<table>
+				 <input type="hidden" id="cafeId" name="cafeId" value="${cafe.id}" />
+				<div>
+    <label for="${review.customerId}">댓글 작성자</label><input type="hidden" id="${review.customerId}" name="customerId" />
+    <br/>
+    <label for="content">댓글 내용</label><input type="text" id="content" name="content" />
+  </div>
+				
+				<tr>
+					<label class="form-label">이미지</label>
+					<input type="file" name="file" class="form-control">
+					<td align="center"><input type="submit" value="작성" class="button"></td>
+					<td align="center"><input type="reset" value="내용 초기화" class="button"></td>
+				</tr>
+			</table>
+		</form>
+
+
 </body>
 </html>
