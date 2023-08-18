@@ -1,0 +1,94 @@
+section#communityInfo {
+  width: 100%;
+}
+section#communityInfo #hBox {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+section#communityInfo #hBox h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+  font-family: "Hind Guntur", sans-serif;
+  text-align: center;
+  font-size: 2em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+section#communityInfo div#communityInfoWrap {
+  width: 95%;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 70px 0;
+}
+section#communityInfo div#communityInfoWrap > div {
+  padding: 20px 0;
+}
+section#communityInfo div#communityInfoWrap > div.content {
+  /* p:nth-child(1) {
+    width: 150px;
+    overflow: hidden;
+    img {
+      display: block;
+      width: 100%;
+    }
+  } */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+section#communityInfo div#communityInfoWrap > div.content p:nth-child(1) {
+  width: 40%;
+  max-width: 300px;
+  overflow: hidden;
+}
+section#communityInfo div#communityInfoWrap > div.content p:nth-child(1) img {
+  display: block;
+  width: 100%;
+}
+section#communityInfo div#communityInfoWrap > div.content p:nth-child(2) {
+  width: 55%;
+}
+section#communityInfo div#communityInfoWrap > div.contentTitle {
+  font-size: 45px;
+  font-weight: bold;
+}
+section#communityInfo div#communityInfoWrap > div.contentDetail p {
+  display: inline-block;
+  padding: 20px 30px;
+}
+section#communityInfo div#communityInfoWrap > div.contentDetail p span {
+  padding: 0 10px;
+}
+section#communityInfo div#communityInfoWrap > div.like {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+section#communityInfo div#communityInfoWrap > div.like > div {
+  width: 30px;
+  margin-right: 10px;
+}
+section#communityInfo div#communityInfoWrap > div.like > div img {
+  display: block;
+  width: 100%;
+}
+section#communityInfo div#communityInfoWrap > div.control .left {
+  float: left;
+}
+section#communityInfo div#communityInfoWrap > div.control .right {
+  float: right;
+  display: flex;
+}
+section#communityInfo div#communityInfoWrap > div.control .right p {
+  margin: 0 10px;
+}
+section#communityInfo div#communityInfoWrap > div.control a {
+  transition: all 0.3s;
+}
+section#communityInfo div#communityInfoWrap > div.control a:hover {
+  background-color: #fff;
+  color: #dab799;
+}/*# sourceMappingURL=communityInfo.css.map */

@@ -29,6 +29,11 @@
       href="https://unpkg.com/@kfonts/nanum-barun-pen/index.css"
     />
     <!-- 나눔바른펜 -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <!-- 구글아이콘 -->
 
     <!-- <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
@@ -47,6 +52,8 @@
     <link href="<c:url value="/cafe/css/login.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/register.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/community.css"/>" rel="stylesheet" />
+    <link href="<c:url value="/cafe/css/communityInfo.css"/>" rel="stylesheet" />
+    <link href="<c:url value="/cafe/css/communityWrite.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/myPage1.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/myPage1-1.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/myPage2.css"/>" rel="stylesheet" />
@@ -76,7 +83,7 @@
     ></script>
 
 		<script src="<c:url value="/cafe/js/jquery.mousewheel.js"/>"></script>
-		<script src="<c:url value="/cafe/js/jquery.isotope.js"/>"></script>
+		<script src="<c:url value="/cafe/js/isotope.pkgd.min.js"/>"></script>
 		<script src="<c:url value="/cafe/js/jquery.viewbox.js"/>"></script>
 		<script src="<c:url value="/cafe/js/jquery.viewbox.min.js"/>"></script>
 		<script src="<c:url value="/cafe/js/masonry-docs.min.js"/>"></script>
@@ -88,33 +95,54 @@
 		<script src="<c:url value="/cafe/js/cafeList.js"/>"></script>
 		<script src="<c:url value="/cafe/js/register.js"/>"></script>
 		<script src="<c:url value="/cafe/js/page3-1.js"/>"></script>
+		<script src="<c:url value="/cafe/js/communityWrite.js"/>"></script>
 
   </head>
   <body>
-  <c:if test="${sessionEMAIL != null }">
-		${sessionEMAIL } 로그인 중<br />
-		${sessionnickName } 로그인 중<br />
-		${sessionCustomerId }로그인 중<br />
-	</c:if>
+  
   <header id="header">
       <h1>
-        <a href="#">Cafe</a>
+        <a href="<c:url value="/cafe"/>?action=index">Cafe</a>
       </h1>
 
       <nav class="gnb gnb_lg">
         <ul class="menu">
-          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=login">Home</a></li>
+          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=index">Home</a></li>
           <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=cafeList">List</a></li>
           <li><a href="<c:url value="/cafe?action=community"/>" id="community">Community</a></li>
         </ul>
-        <ul class="member">
-          <li>
-            <a href="#"><ion-icon name="person-outline"></ion-icon> My Page</a>
-          </li>
-          <li>
-            <a href="<c:url value="/cafe"/>?action=logout"><ion-icon name="log-out-outline"></ion-icon> Logout</a>
-          </li>
-        </ul>
+        <c:if test="${sessionEMAIL != null }">
+						<ul class="member">
+	            <li>
+	              <a href="<c:url value="/cafe"/>?action=myPage1">
+	                <span class="material-symbols-outlined">person</span>
+	                <span> My Page</span>
+	              </a>
+	            </li>
+	            <li>
+	              <a href="<c:url value="/cafe"/>?action=logout">
+	                <span class="material-symbols-outlined">logout</span>
+	                <span> Logout</span>
+	              </a>
+	            </li>
+         		</ul>
+					</c:if>
+					<c:if test="${sessionEMAIL == null }">
+						<ul class="member">
+	            <li>
+	              <a href="<c:url value="/cafe"/>?action=login">
+	                <span class="material-symbols-outlined">login</span>
+	                <span> Login</span>
+	              </a>
+	            </li>
+	            <li>
+	              <a href="<c:url value="/cafe"/>?action=signup">
+	                <span class="material-symbols-outlined">person</span>
+	                <span> SignUp</span>
+	              </a>
+	            </li>
+         		</ul>
+					</c:if>
       </nav>
 
       <div class="frame frame_l"></div>
@@ -129,20 +157,38 @@
             <li><a href="<c:url value="/cafe?action=community"/>" id="community">Community</a></li>
             
           </ul>
-          <ul class="member">
-            <li>
-              <a href="#">
-                <ion-icon name="person-outline"></ion-icon>
-                <span> My Page</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <ion-icon name="log-out-outline"></ion-icon>
-                <span> Logout</span>
-              </a>
-            </li>
-          </ul>
+          <c:if test="${sessionEMAIL != null }">
+						<ul class="member">
+	            <li>
+	              <a href="<c:url value="/cafe"/>?action=myPage1">
+	                <span class="material-symbols-outlined">person</span>
+	                <span> My Page</span>
+	              </a>
+	            </li>
+	            <li>
+	              <a href="<c:url value="/cafe"/>?action=logout">
+	                <span class="material-symbols-outlined">logout</span>
+	                <span> Logout</span>
+	              </a>
+	            </li>
+         		</ul>
+					</c:if>
+					<c:if test="${sessionEMAIL == null }">
+						<ul class="member">
+	            <li>
+	              <a href="<c:url value="/cafe"/>?action=login">
+	                <span class="material-symbols-outlined">login</span>
+	                <span> Login</span>
+	              </a>
+	            </li>
+	            <li>
+	              <a href="<c:url value="/cafe"/>?action=signup">
+	                <span class="material-symbols-outlined">person</span>
+	                <span> SignUp</span>
+	              </a>
+	            </li>
+         		</ul>
+					</c:if>
         </div>
       </nav>
 

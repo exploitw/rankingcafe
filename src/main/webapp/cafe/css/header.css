@@ -176,6 +176,11 @@ body header#header h1 img {
     font-weight: bold;
     text-transform: uppercase;
   }
+  body header#header nav.gnb ul li a .material-symbols-outlined {
+    display: inline-block;
+    transform: translateY(5px);
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+  }
   body header#header nav.gnb ul li a::after {
     content: "";
     position: absolute;

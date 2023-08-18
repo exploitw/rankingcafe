@@ -9,35 +9,37 @@
 		<h2>Community</h2>
 	</div>
 	<div id="communityWrap">
-		<table>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>작성일</th>
-					<th>조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="community" items="${communityList}">
+		<div class="tbContainer">
+			<table>
+				<thead>
 					<tr>
-						<td>${community.id}</td>
-						<td><a class="community_title"
-							href="<c:url value="/cafe"/>?action=communityInfo&id=${community.id}"
-							data-id="${community.id}">${community.title}</a></td>
-						<c:forEach var="customer" items="${customerList}">
-							<c:if test="${community.customerId == customer.id}">
-								<td>${customer.nickName}</td>
-							</c:if>
-						</c:forEach>
-						<td><fmt:formatDate value="${community.date}"
-								pattern="yyyy-MM-dd HH:mm" /></td>
-						<td>44</td>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>작성일</th>
+						<th>조회수</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach var="community" items="${communityList}">
+						<tr>
+							<td>${community.id}</td>
+							<td><a class="community_title"
+								href="<c:url value="/cafe"/>?action=communityInfo&id=${community.id}"
+								data-id="${community.id}">${community.title}</a></td>
+							<c:forEach var="customer" items="${customerList}">
+								<c:if test="${community.customerId == customer.id}">
+									<td>${customer.nickName}</td>
+								</c:if>
+							</c:forEach>
+							<td><fmt:formatDate value="${community.date}"
+									pattern="yyyy-MM-dd HH:mm" /></td>
+							<td>44</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 		<div class="btn_Wrtie">
 			<form id="goto_form" action="<c:url value="/cafe"/>?action=writing"
 				method="post">

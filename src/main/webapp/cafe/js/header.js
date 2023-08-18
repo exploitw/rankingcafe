@@ -18,7 +18,7 @@ $(function () {
     }
     $(
       "section#community, section#register, section#loginBox, section#myPage1, section#myPage3, section#edit"
-    ).css("min-height", bodyH - headerH - 300 - 101 - frameH + "px");
+    ).css("min-height", bodyH - headerH - 101 - frameH + "px");
   } // fn end clacminHeight
 
   let btn_menu = $(".btn_menu");

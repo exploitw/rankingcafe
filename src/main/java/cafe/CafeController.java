@@ -91,6 +91,10 @@ public class CafeController extends HttpServlet {
 		case "cafeInfo":
 			view = cafeInfo(request,response);
 			break;
+		case "index":
+			view = indexPage(request, response);
+		case "myPage1":
+			view = myPage1(request, response);
 		
 		}
 
@@ -315,4 +319,14 @@ public class CafeController extends HttpServlet {
 	String writing(HttpServletRequest request, HttpServletResponse response) {
 		return "/cafe/write.jsp";
 	}
+	
+	String indexPage(HttpServletRequest request, HttpServletResponse response) {
+
+		return "/cafe/index.jsp";
+	}
+	String myPage1(HttpServletRequest request, HttpServletResponse response) {
+
+		return "/cafe/myPage1.jsp";
+	}
+
 }
