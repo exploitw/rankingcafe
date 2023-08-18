@@ -2,15 +2,6 @@ function validateCommunity() {
     if (!$('#title').val()) {
         throw 'titleRequired';
     }
-    if (!$('#customerId').val()) {
-        throw 'customerIdRequired';
-    }
-    if (!$('#date').val()) {
-        throw 'dateRequired';
-    }
-    if (!$('#content').val()) {
-        throw 'contentRequired';
-    }
 }
 
 function updateCommunity(event) {
@@ -23,9 +14,6 @@ function updateCommunity(event) {
         switch (e) {
             case 'titleRequired':
                 alert('제목을 입력해 주십시오.');
-                break;
-            case 'contentRequired':
-                alert('내용을 입력해 주십시오.');
                 break;
         }
         event.preventDefault();

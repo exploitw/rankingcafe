@@ -54,6 +54,13 @@
 				</div>
 			</div>
 		</div>
+		<hr> --%>
+		<a href="javascript:history.back()" class="btn btn-primary">Back</a>
+		<a class="btn btn-primary" href="<c:url value="/cafe"/>?action=communityInfoUpdate&id=${community.id}" data-id="${community.id}">수정/삭제</a>
+		</div>
+	</footer>
+</body>
+</html>
 	</section>
 
 <jsp:include page="footer.jsp"/>

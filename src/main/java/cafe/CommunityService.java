@@ -17,14 +17,10 @@ public class CommunityService {
 		return communityDao.getCustomer();
 	}
 
-	public void nextval() {
-		communityDao.nextval();
-	}
-
 	public void write(Community community) {
 		communityDao.write(community);
 	}
-	
+
 	public Community getCommunityOrBlank(int id) {
 		Community rtn = null;
 
@@ -37,5 +33,21 @@ public class CommunityService {
 			rtn.setContent("");
 		}
 		return rtn;
+	}
+
+	public void setCommunity(Community community) {
+		communityDao.updateCommunity(community);
+	}
+
+	public void addOrSetCommunity(Community community) {
+		if (community.getId() == -1) {
+			write(community);
+		} else {
+			setCommunity(community);
+		}
+	}
+
+	public void removeCommunity(int id) {
+		communityDao.deleteCommunity(id);
 	}
 }

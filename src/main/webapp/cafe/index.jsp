@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+	<a href="<c:url value="/cafe"/>/insertcafe.jsp" class="btn btn-primary"><button>카페등록</button></a>
 
 <jsp:include page="header.jsp"/>
 
