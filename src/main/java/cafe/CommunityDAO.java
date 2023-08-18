@@ -2,10 +2,10 @@ package cafe;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -76,21 +76,6 @@ public class CommunityDAO {
 		return rtn;
 	}
 
-	public int nextval() {
-		try (Connection c = dataSource.getConnection();
-				PreparedStatement ps = c.prepareStatement(QM.get("addingnewId"));) {
-			try (ResultSet rs = ps.executeQuery();) {
-				while (rs.next()) {
-					result = rs.getInt("MAX(bbsId)");
-				}
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
 	public List<Object[]> getCustomer() {
 		List<Object[]> rtn = new ArrayList<>();
 
@@ -120,6 +105,28 @@ public class CommunityDAO {
 			sqle.printStackTrace();
 		}
 		return result;
+	}
+
+	public void updateCommunity(Community community) {
+
+		try {
+			QueryRunner qr = new QueryRunner(dataSource);
+			Object[] p = { community.getCustomerId(), community.getTitle(), community.getImg(), community.getContent(),community.getId() };
+			qr.execute(QM.get("updateCommunity"), p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+
+	public void deleteCommunity(int id) {
+
+		try (Connection c = dataSource.getConnection()) {
+			QueryRunner qr = new QueryRunner(dataSource);
+			Object[] p = { id };
+			qr.execute(QM.get("deleteCommunity"), p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
 	}
 
 }

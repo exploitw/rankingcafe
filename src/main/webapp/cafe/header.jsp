@@ -88,6 +88,7 @@
 		<script src="<c:url value="/cafe/js/cafeList.js"/>"></script>
 		<script src="<c:url value="/cafe/js/register.js"/>"></script>
 		<script src="<c:url value="/cafe/js/page3-1.js"/>"></script>
+		<script src="<c:url value="/cafe/js/communityInfo.js"/>"></script>
 
   </head>
   <body>
