@@ -69,6 +69,6 @@
             </form>
         </div>
         <script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script>
-        <script src="/p0726/javascript/customer1.js"></script>
+        <script src="<c:url value="/cafe/js/customer1.js"/>"></script>
 </body>
 </html>

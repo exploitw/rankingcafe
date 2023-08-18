@@ -25,27 +25,30 @@ section#community div#communityWrap {
   margin: 0 auto;
   padding: 20px 0;
 }
-section#community div#communityWrap table {
+section#community div#communityWrap .tbContainer {
+  min-height: 400px;
+}
+section#community div#communityWrap .tbContainer table {
   width: 100%;
 }
-section#community div#communityWrap table tr {
+section#community div#communityWrap .tbContainer table tr {
   border-bottom: 1px solid #f9f9f9;
 }
-section#community div#communityWrap table tr td:nth-child(1) {
+section#community div#communityWrap .tbContainer table tr td:nth-child(1) {
   text-align: left;
 }
-section#community div#communityWrap table th {
+section#community div#communityWrap .tbContainer table th {
   color: #dab799;
   background: #f9f9f9;
 }
-section#community div#communityWrap table th td:nth-child(2) {
+section#community div#communityWrap .tbContainer table th td:nth-child(2) {
   text-align: left;
 }
-section#community div#communityWrap table th:first-child {
+section#community div#communityWrap .tbContainer table th:first-child {
   text-align: left;
 }
-section#community div#communityWrap table td,
-section#community div#communityWrap table th {
+section#community div#communityWrap .tbContainer table td,
+section#community div#communityWrap .tbContainer table th {
   padding: 15px;
   text-align: center;
 }
