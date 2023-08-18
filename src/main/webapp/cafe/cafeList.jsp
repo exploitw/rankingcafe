@@ -18,7 +18,7 @@
           <li><a href="#">contact</a></li>
           <li><a href="#">shop</a></li>
           <li><a href="#">cart</a></li>
-          <li><a href="#">login</a></li>
+          <li><a href="#">login</a></li> 
           <a href="<c:url value="/cafe"/>/index.jsp"><button>메인으로</button></a>
         </ul>
     </div>
