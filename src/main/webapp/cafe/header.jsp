@@ -49,6 +49,7 @@
     <link href="<c:url value="/cafe/css/footer.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/home.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/cafeList.css"/>" rel="stylesheet" />
+    <link href="<c:url value="/cafe/css/cafeInfo.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/login.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/register.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/community.css"/>" rel="stylesheet" />
@@ -81,6 +82,7 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+    
 
 		<script src="<c:url value="/cafe/js/jquery.mousewheel.js"/>"></script>
 		<script src="<c:url value="/cafe/js/isotope.pkgd.min.js"/>"></script>
@@ -93,6 +95,7 @@
 		<script src="<c:url value="/cafe/js/header.js"/>"></script>
 		<script src="<c:url value="/cafe/js/home.js"/>"></script>
 		<script src="<c:url value="/cafe/js/cafeList.js"/>"></script>
+		<script src="<c:url value="/cafe/js/cafeInfo.js"/>"></script>
 		<script src="<c:url value="/cafe/js/register.js"/>"></script>
 		<script src="<c:url value="/cafe/js/page3-1.js"/>"></script>
 		<script src="<c:url value="/cafe/js/communityInfo.js"/>"></script>
@@ -105,12 +108,12 @@
   
   <header id="header">
       <h1>
-        <a href="<c:url value="/cafe"/>?action=login">Cafe</a>
+        <a href="<c:url value="/cafe"/>?action=home">Cafe</a>
       </h1>
 
       <nav class="gnb gnb_lg">
         <ul class="menu">
-          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=login">Home</a></li>
+          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=home">Home</a></li>
           <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=cafeList">List</a></li>
           <li><a href="<c:url value="/cafe?action=community"/>" id="community">Community</a></li>
         </ul>
@@ -163,7 +166,7 @@
           <c:if test="${sessionEMAIL != null }">
 						<ul class="member">
 	            <li>
-	              <a href="<c:url value="/cafe"/>?action=myPage1">
+	              <a href="<c:url value="/cafe"/>?action=myPage">
 	                <span class="material-symbols-outlined">person</span>
 	                <span> My Page</span>
 	              </a>

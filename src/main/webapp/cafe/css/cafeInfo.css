@@ -1,0 +1,372 @@
+section#cafeInfo {
+  width: 100%;
+}
+section#cafeInfo #hBox {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+section#cafeInfo #hBox h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%);
+  font-family: "Hind Guntur", sans-serif;
+  text-align: center;
+  font-size: 2em;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+section#cafeInfo div#cafeInfoWrap {
+  position: relative;
+  width: 95%;
+  min-height: 500px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 0;
+  /* .desc {
+    @include clearfix;
+    margin-top: 50px;
+    padding: 0 30px;
+    .desc1 {
+      float: left;
+    }
+    .desc2 {
+      float: right;
+      button {
+        display: inline-block;
+        padding: 0 15px;
+        span.icon {
+          display: block;
+          font-size: 30px;
+          text-align: center;
+        }
+      }
+    }
+  } */
+}
+section#cafeInfo div#cafeInfoWrap div.imgContainer {
+  position: relative;
+  width: 95%;
+  max-width: 700px;
+  height: 300px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+section#cafeInfo div#cafeInfoWrap div.imgContainer div.imgbox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+section#cafeInfo div#cafeInfoWrap div.imgContainer div.imgbox::before {
+  content: "";
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url(../img/b277993889a3b793af5ed4565a719cb1_w800.jpg);
+}
+section#cafeInfo div#cafeInfoWrap div.imgContainer div.imgbox::after {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(51, 51, 51, 0.5);
+}
+section#cafeInfo div#cafeInfoWrap div.imgContainer h3 {
+  font-family: "Raleway", sans-serif;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 60px;
+  letter-spacing: 15px;
+  text-shadow: 2px 2px 2px #333;
+  color: #fff;
+}
+section#cafeInfo div#cafeInfoWrap div.imgContainer img {
+  display: block;
+  width: 100%;
+}
+section#cafeInfo div#cafeInfoWrap .desc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 80px;
+  margin-top: 70px;
+  margin-bottom: 30px;
+}
+section#cafeInfo div#cafeInfoWrap .desc .desc2 button {
+  display: inline-block;
+  padding: 0 15px;
+}
+section#cafeInfo div#cafeInfoWrap .desc .desc2 button span.icon {
+  display: block;
+  font-size: 30px;
+  text-align: center;
+}
+section#cafeInfo div#cafeInfoWrap .infoContainer {
+  display: flex;
+  padding: 30px 10px;
+}
+@media screen and (min-width: 1000.1px) {
+  section#cafeInfo div#cafeInfoWrap .infoContainer {
+    justify-content: space-around;
+  }
+}
+@media screen and (max-width: 1000px) {
+  section#cafeInfo div#cafeInfoWrap .infoContainer {
+    flex-direction: column;
+  }
+}
+@media screen and (min-width: 1000.1px) {
+  section#cafeInfo div#cafeInfoWrap .infoContainer table {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  section#cafeInfo div#cafeInfoWrap .infoContainer table {
+    width: 100%;
+  }
+}
+section#cafeInfo div#cafeInfoWrap .infoContainer table tr:nth-child(8) td:nth-child(1) {
+  vertical-align: top;
+}
+section#cafeInfo div#cafeInfoWrap .infoContainer table tr td {
+  padding: 10px 20px;
+}
+section#cafeInfo div#cafeInfoWrap .infoContainer table tr td ul li {
+  padding: 10px;
+  border-bottom: 1px solid #f5f5f5;
+}
+section#cafeInfo div#cafeInfoWrap .infoContainer table tr td ul li div {
+  display: flex;
+  justify-content: space-between;
+}
+section#cafeInfo div#cafeInfoWrap .infoContainer table tr td ul li div span.menuname {
+  width: 70%;
+}
+section#cafeInfo div#cafeInfoWrap .infoContainer table tr td ul li div span.price {
+  width: 25%;
+}
+section#cafeInfo div#cafeInfoWrap .infoContainer .cafeMap {
+  max-width: 500px;
+  background-color: #dab799;
+}
+@media screen and (min-width: 1000.1px) {
+  section#cafeInfo div#cafeInfoWrap .infoContainer .cafeMap {
+    width: 40%;
+    height: auto;
+    max-height: 500px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  section#cafeInfo div#cafeInfoWrap .infoContainer .cafeMap {
+    width: 95%;
+    height: 300px;
+    margin: 40px auto;
+  }
+}
+section#cafeInfo div#cafeInfoWrap div.comment {
+  margin-top: 30px;
+}
+section#cafeInfo div#cafeInfoWrap div.comment::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+section#cafeInfo div#cafeInfoWrap div.comment span {
+  display: block;
+  float: left;
+  padding: 5px 30px;
+  font-size: 22px;
+}
+section#cafeInfo div#cafeInfoWrap div.comment button {
+  display: block;
+  float: right;
+  margin: 30px 0;
+  padding: 13px 70px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+section#cafeInfo div#cafeInfoWrap div.comment button:hover {
+  color: #dab799;
+}
+section#cafeInfo div#cafeInfoWrap div#review {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+@media screen and (min-width: 1000.1px) {
+  section#cafeInfo div#cafeInfoWrap div#review {
+    padding: 50px 0;
+  }
+}
+@media screen and (max-width: 1000px) {
+  section#cafeInfo div#cafeInfoWrap div#review {
+    padding: 30px 0;
+  }
+}
+section#cafeInfo div#cafeInfoWrap div#review li {
+  padding: 30px 20px;
+  border-bottom: 1px solid #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+section#cafeInfo div#cafeInfoWrap div#review li .imgbox {
+  overflow: hidden;
+}
+section#cafeInfo div#cafeInfoWrap div#review li .imgbox img {
+  display: block;
+  width: 100%;
+}
+section#cafeInfo div#cafeInfoWrap div#review li .textbox p {
+  margin: 10px 0;
+}
+section#cafeInfo div#cafeInfoWrap div#review li .textbox p span {
+  display: inline-block;
+  width: 120px;
+  margin-right: 20px;
+}
+section#cafeInfo div#cafeInfoWrap div#review li .imgbox {
+  width: 15%;
+  max-width: 120px;
+  max-height: 120px;
+}
+section#cafeInfo div#cafeInfoWrap div#review li .textbox {
+  width: 80%;
+}
+@media screen and (min-width: 1000.1px) {
+  section#cafeInfo div#cafeInfoWrap div#review li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  section#cafeInfo div#cafeInfoWrap div#review li .imgbox {
+    width: 15%;
+    max-width: 120px;
+    max-height: 120px;
+  }
+  section#cafeInfo div#cafeInfoWrap div#review li .textbox {
+    width: 80%;
+  }
+}
+section#cafeInfo div#cafeInfoWrap .modal {
+  z-index: 101;
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr {
+  display: block;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table {
+  width: 100%;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td:first-child {
+  width: 10%;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td:first-child p {
+  color: #fff;
+  text-align: center;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=text],
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=password],
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=email],
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=file] {
+  border: none;
+  padding: 17px;
+  border-bottom: 1px solid #efefef;
+  text-align: left;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td textarea {
+  border: 1px solid #efefef;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=text],
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=password],
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=email],
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=file],
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td textarea {
+  width: 100%;
+  margin: 15px;
+  font-size: 1.15em;
+  font-weight: bold;
+  box-sizing: border-box;
+  border-collapse: collapse;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=text]::-moz-placeholder, section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=password]::-moz-placeholder, section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=email]::-moz-placeholder, section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=file]::-moz-placeholder, section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td textarea::-moz-placeholder {
+  color: #fff;
+  letter-spacing: 1px;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=text]::placeholder,
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=password]::placeholder,
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=email]::placeholder,
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td input[type=file]::placeholder,
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td textarea::placeholder {
+  color: #fff;
+  letter-spacing: 1px;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap form#reviewWr table tr td textarea {
+  padding: 10px;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap div.btn_container::after {
+  content: "";
+  clear: both;
+  display: block;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap div.btn_container div.btn1 {
+  float: left;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap div.btn_container div.btn1 button {
+  display: inline-block;
+  width: 120px;
+  margin: 30px auto;
+  padding: 7px 10px;
+  color: #dab799;
+  text-align: center;
+  border: 1px solid #dab799;
+  border-radius: 7px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap div.btn_container div.btn1 button:hover {
+  background-color: #dab799;
+  color: #fff;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap div.btn_container div.btn2 {
+  float: right;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap div.btn_container div.btn2 button {
+  display: inline-block;
+  width: 120px;
+  margin: 30px auto;
+  padding: 7px 10px;
+  background-color: #dab799;
+  color: #fff;
+  border: 1px solid #dab799;
+  border-radius: 7px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+section#cafeInfo div#cafeInfoWrap .modal .modalWrap div.btn_container div.btn2 button:hover {
+  background-color: #fff;
+  border: 1px solid #dab799;
+  color: #dab799;
+}/*# sourceMappingURL=cafeInfo.css.map */
