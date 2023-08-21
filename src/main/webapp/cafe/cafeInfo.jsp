@@ -103,12 +103,14 @@
 
               </tbody>
             </table>
-            
+           	<a href="<c:url value="/cafe"/>?action=cafeInfoUpdate&id=${cafe.id}" data-id="${cafe.id}"><button>수정</button></a>
+           
              <!-- 댓글 -->
 <div id="review">
   <ol class="reviewList">
     <c:forEach items="${reviewsList}" var="reviews">
-      <li>
+      <li >
+      		
         <p>
         <img class="cafe-img" src="${reviews.img}"><br />
         작성자 : ${reviews.customerId}<br />
@@ -124,7 +126,8 @@
 			<table>
 				 <input type="hidden" id="cafeId" name="cafeId" value="${cafe.id}" />
 				<div>
-    <label for="${review.customerId}">댓글 작성자</label><input type="hidden" id="${review.customerId}" name="customerId" />
+    <label for="${review.customerId}">댓글 작성자</label>
+    <input type="hidden" id="${customerId}" name="customerId" />
     <br/>
     <label for="content">댓글 내용</label><input type="text" id="content" name="content" />
   </div>

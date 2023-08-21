@@ -103,4 +103,60 @@ public class ReviewDAO {
 			sqle.printStackTrace();
 		}
 	}
+	public void updateReview(Review review) {
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			Object[] p = { 
+					review.getImg(),
+					review.getContent(),
+					new java.util.Date(),
+					review.getId()
+
+			};
+			qr.execute(c, QM.get("updateReview"), p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+	public void updateReviewNoImg(Review review) {
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			Object[] p = { 
+					
+					review.getContent(),
+					new java.util.Date(),
+					review.getId()
+
+			};
+			qr.execute(c, QM.get("updateReview"), p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+	
+	public void deleteReview(int id) {
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			Object[] p = { id };
+			qr.execute(c, QM.get("deleteReview"), p);
+		} catch (SQLException sqle) {
+
+			sqle.printStackTrace();
+		}
+	}
+	
+	public Review getReviewByCustomerId(int customerId) {
+		Review rtn = null;
+		
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			ResultSetHandler<Review> h = new BeanHandler<>(Review.class);
+			Object[] p = { customerId };
+			rtn = qr.query(c, QM.get("getReviewByCustomerId"), h, p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+
+		return rtn;
+	}
 }
