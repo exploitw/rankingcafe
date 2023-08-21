@@ -4,12 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:include page="header.jsp" />
-<form id="community_form"
-	action="<c:url value="/cafe"/>"
-	method="post" data-id="${community.id}">
-	<input type="hidden" name="action" id="community_form_action"  />
-		
-	
+<form id="community_form" action="<c:url value="/cafe"/>" method="post" data-id="${community.id}" enctype="multipart/form-data">
+	<input type="hidden" name="action" id="community_form_action" /> 
+	<input type="hidden" name="id" value="${community.id}" />
 	<div class="container w-75 mt-5 mx-auto">
 		<table
 			style="table-layout: fixed; word-wrap: break-word; clear: both;">
@@ -28,16 +25,16 @@
 			<tbody>
 				<tr>
 					<td><h2>
-							<input type="text" data-role="input" name="title"
-								value="${community.title}" id="title" />
+							<input type="text" data-role="input" name="title" id="title" value="${community.title}" />
 						</h2></td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td><img class="card-img-top" src="${community.img}"
-						name="img" id="img"> <input type="text" data-role="input"
-						name="content" value="${community.content}" id="content" /></td>
+					<td><img class="card-img-top" src="${community.img}">
+						<input type="file" class="form-control" name="file" id="img" value="${community.img}" multiple />
+						<input type="text" data-role="input" name="content" id="content" value="${community.content}" />
+					</td>
 				</tr>
 			</tfoot>
 		</table>

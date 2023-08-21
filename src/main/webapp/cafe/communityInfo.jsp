@@ -25,7 +25,7 @@
 			</p>
 			<p>
 				<span>작성일</span> <span> <fmt:formatDate
-						value="${community.date}" pattern="yyyy-MM-dd HH:mm" />
+						value="${community.date}" pattern="yyyy-MM-dd HH:mm:ss" />
 				</span>
 			</p>
 			<p>
@@ -58,6 +58,26 @@
 				</p>
 			</div>
 		</div>
+		<%-- <div class="commentControl">
+			<div class="left">
+				<span>댓글(114)</span> <span><a href="#">등록순</a></span> | <span><a href="#">최신순</a></span>
+			</div>
+			<div class="right">
+				<span>새로고침</span>
+			</div>
+		</div>
+		<div class="comment">
+			<div class="left">
+				<c:forEach var="comment" items="${commentList}">
+					<c:if test="${comment.customerId == customer.id}">
+						<span>${customer.nickName}</span>
+					</c:if>
+				</c:forEach>
+			</div>
+			<div class="right">
+				<span><button>좋아요</button></span> <span><button>싫어요</button></span>
+			</div>
+		</div> --%>
 	</div>
 </section>
 

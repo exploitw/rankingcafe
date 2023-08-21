@@ -1,10 +1,13 @@
 package cafe;
 
+import java.util.Date;
+
 public class Comment {
 	private long id;
 	private long customerId;
 	private long communityId;
 	private String content;
+	private Date date;
 	
 	public long getId() {
 		return id;
@@ -29,5 +32,11 @@ public class Comment {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 }
