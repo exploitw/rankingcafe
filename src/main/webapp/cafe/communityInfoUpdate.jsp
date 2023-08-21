@@ -7,7 +7,9 @@
 <form id="community_form"
 	action="<c:url value="/cafe"/>"
 	method="post" data-id="${community.id}">
-	<input type="hidden" name="action" id="community_form_action" />
+	<input type="hidden" name="action" id="community_form_action"  />
+		
+	
 	<div class="container w-75 mt-5 mx-auto">
 		<table
 			style="table-layout: fixed; word-wrap: break-word; clear: both;">

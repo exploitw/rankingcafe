@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
-    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,7 +31,7 @@
             <br />
             <br />
       
- 	<form id="customer_form" action="<c:url value="cafe"/>?action=deleteCustomer" method="post">
+ 	<form id="customer_form" action="<c:url value="cafe"/>" method="post">
 	<input type="hidden" name="action" value="${customer.id}" id="customer_form_action"/>
 	 			<div class="row">
                     <div class="cell-10"><input type="hidden" data-role="input" name="id" value="${customer.id}" id="id" readonly /></div>

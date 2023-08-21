@@ -99,18 +99,84 @@ public class CafeController extends HttpServlet {
 		case "cafeInfo":
 			view = cafeInfo(request,response);
 			break;
+		case "cafeInfoUpdate":
+			view = cafeInfoUpdate(request, response);
+			break;
+		case "updateCafe":
+			updateCafe(request,response);
+			break;
+		case "deleteCafe":
+			deleteCafe(request,response);
+			break;
 		case "insertReview":
 			insertReview(request,response);
 			break;
 		case "home":
 			view = home(request, response);
 			break;
+		case "updateReview":
+			updateReview(request,response);
+			break;
+		case "deleteReview":
+			deleteReview(request,response);
+			break;
+		case "reviewInfoUpdate":
+			view = reviewInfoupdate(request,response);
+			break;
+		
 		}
 
 		if (StringUtils.isNotEmpty(view)) {
 			getServletContext().getRequestDispatcher(view).forward(request, response);
 		}
-	}	
+	}
+	String reviewInfoupdate(HttpServletRequest request, HttpServletResponse response) {
+		int customerId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("customerId"), "-1"));
+
+		Review review = reviewService.getReviewByCustomerId(customerId);
+		request.setAttribute("review", review);
+
+		return "/cafe/reviewInfoUpdate.jsp";
+	}
+
+	
+	
+	void deleteReview(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		Review review = new Review();
+		reviewService.remove(id);
+		response.sendRedirect("cafe?action=cafeInfo&id="+review.getCafeId());
+
+	}
+
+	void updateReview(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+		Review review = new Review();
+
+		try {
+			Part part = request.getPart("file");
+			String fileName = getFilename(part);
+			if(fileName != null && !fileName.isEmpty()) {
+				part.write(fileName);
+				BeanUtils.populate(review, request.getParameterMap());
+				review.setImg("/img/"+fileName);
+				reviewService.set(review);
+			}else  {
+				BeanUtils.populate(review, request.getParameterMap());
+				review.setImg("/img/"+review.getImg());
+				reviewService.setNoImg(review);
+				
+			}
+			
+			
+			response.sendRedirect("cafe?action=cafeInfo&id="+review.getCafeId());
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
 	
 	void insertReview (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		Review review = new Review();
@@ -154,6 +220,7 @@ public class CafeController extends HttpServlet {
 	}
 	
 	
+	
 	String cafeList(HttpServletRequest request, HttpServletResponse response) {
 		
 		List<Cafe> cafeList = cafeService.getCafe();
@@ -164,9 +231,52 @@ public class CafeController extends HttpServlet {
 		return "/cafe/cafeList.jsp";
 	}
 	
+	void deleteCafe(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		cafeService.remove(id);
+		response.sendRedirect("cafe?action=cafeList");
+
+	}
+
+	void updateCafe(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+		Cafe cafe = new Cafe();
+
+		try {
+			Part part = request.getPart("file");
+			String fileName = getFilename(part);
+			if(fileName != null && !fileName.isEmpty()) {
+				part.write(fileName);
+				BeanUtils.populate(cafe, request.getParameterMap());
+				cafe.setImg("/img/"+fileName);
+				cafeService.set(cafe);
+			}else  {
+				BeanUtils.populate(cafe, request.getParameterMap());
+				cafe.setImg("/img/"+cafe.getImg());
+				cafeService.setNoImg(cafe);
+				
+			}
+			
+			
+			response.sendRedirect("cafe?action=cafeList");
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+
+	}
+	String cafeInfoUpdate(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		Cafe cafe = cafeService.getCafeById(id);
+		request.setAttribute("cafe", cafe);
+
+		return "/cafe/cafeInfoUpdate.jsp";
+	}
+
 	
 	
-		void insertCafe(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	void insertCafe(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		
 		Cafe cafe = new Cafe();

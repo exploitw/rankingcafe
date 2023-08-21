@@ -235,6 +235,7 @@
 	            position: new kakao.maps.LatLng(place.y, place.x) 
 	        });
 
+
 	        // 마커에 클릭이벤트를 등록합니다
 	        kakao.maps.event.addListener(marker, 'click', function() {
 	            // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
@@ -244,3 +245,48 @@
 	    }
     </script>
 <jsp:include page="footer.jsp"/>
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+              </tbody>
+            </table>
+           	<a href="<c:url value="/cafe"/>?action=cafeInfoUpdate&id=${cafe.id}" data-id="${cafe.id}"><button>수정</button></a>
+           
+             <!-- 댓글 -->
+<div id="review">
+  <ol class="reviewList">
+    <c:forEach items="${reviewsList}" var="reviews">
+      <li >
+      		
+        <p>
+        <img class="cafe-img" src="${reviews.img}"><br />
+        작성자 : ${reviews.customerId}<br />
+        작성 날짜 :  <fmt:formatDate value="${reviews.date}" pattern="yyyy-MM-dd" />
+        </p>
+
+        <p>${reviews.content}</p>
+      </li>
+    </c:forEach>   
+  </ol>
+</div>
+<form action="<c:url value="/cafe"/>?action=insertReview"  method="post" enctype="multipart/form-data">
+			<table>
+				 <input type="hidden" id="cafeId" name="cafeId" value="${cafe.id}" />
+				<div>
+    <label for="${review.customerId}">댓글 작성자</label>
+    <input type="hidden" id="${customerId}" name="customerId" />
+    <br/>
+    <label for="content">댓글 내용</label><input type="text" id="content" name="content" />
+  </div>
+				
+				<tr>
+					<label class="form-label">이미지</label>
+					<input type="file" name="file" class="form-control">
+					<td align="center"><input type="submit" value="작성" class="button"></td>
+					<td align="center"><input type="reset" value="내용 초기화" class="button"></td>
+				</tr>
+			</table>
+		</form>
+
+
+</body>
+</html>
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
