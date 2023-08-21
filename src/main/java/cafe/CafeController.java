@@ -81,7 +81,7 @@ public class CafeController extends HttpServlet {
 			break;
 		case "read":
 			read(request, response);
-		case "mypage":
+		case "myPage":
 			view = mypage(request, response);
 			break;
 		case "updateCustomer":
@@ -206,7 +206,7 @@ public class CafeController extends HttpServlet {
 		Customer customer = customerService.getCustomerById(id);
 		request.setAttribute("customer", customer);
 
-		return "/cafe/mypage.jsp";
+		return "/cafe/myPage1.jsp";
 	}
 
 	void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {

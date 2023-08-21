@@ -82,6 +82,7 @@
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
     ></script>
+    
 
 		<script src="<c:url value="/cafe/js/jquery.mousewheel.js"/>"></script>
 		<script src="<c:url value="/cafe/js/isotope.pkgd.min.js"/>"></script>
@@ -94,6 +95,7 @@
 		<script src="<c:url value="/cafe/js/header.js"/>"></script>
 		<script src="<c:url value="/cafe/js/home.js"/>"></script>
 		<script src="<c:url value="/cafe/js/cafeList.js"/>"></script>
+		<script src="<c:url value="/cafe/js/cafeInfo.js"/>"></script>
 		<script src="<c:url value="/cafe/js/register.js"/>"></script>
 		<script src="<c:url value="/cafe/js/page3-1.js"/>"></script>
 		<script src="<c:url value="/cafe/js/communityInfo.js"/>"></script>
@@ -162,7 +164,7 @@
           <c:if test="${sessionEMAIL != null }">
 						<ul class="member">
 	            <li>
-	              <a href="<c:url value="/cafe"/>?action=myPage1">
+	              <a href="<c:url value="/cafe"/>?action=myPage">
 	                <span class="material-symbols-outlined">person</span>
 	                <span> My Page</span>
 	              </a>
