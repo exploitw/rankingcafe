@@ -49,6 +49,7 @@
     <link href="<c:url value="/cafe/css/footer.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/home.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/cafeList.css"/>" rel="stylesheet" />
+    <link href="<c:url value="/cafe/css/cafeInfo.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/login.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/register.css"/>" rel="stylesheet" />
     <link href="<c:url value="/cafe/css/community.css"/>" rel="stylesheet" />
@@ -103,12 +104,12 @@
   
   <header id="header">
       <h1>
-        <a href="<c:url value="/cafe"/>?action=login">Cafe</a>
+        <a href="<c:url value="/cafe"/>?action=home">Cafe</a>
       </h1>
 
       <nav class="gnb gnb_lg">
         <ul class="menu">
-          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=login">Home</a></li>
+          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=home">Home</a></li>
           <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=cafeList">List</a></li>
           <li><a href="<c:url value="/cafe?action=community"/>" id="community">Community</a></li>
         </ul>
