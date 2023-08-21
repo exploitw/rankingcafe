@@ -56,5 +56,5 @@
 		</section>
 	</article>
 </div>
-
+<a href="<c:url value="/cafe"/>/insertcafe.jsp"	>asd</a>
 <jsp:include page="footer.jsp" />

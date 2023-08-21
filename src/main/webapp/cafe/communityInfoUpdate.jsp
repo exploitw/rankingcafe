@@ -4,8 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <jsp:include page="header.jsp" />
-<form id="community_form" action="<c:url value="/cafe"/>" method="post"
-	data-id="${community.id}" enctype="multipart/form-data">
+<form id="community_form" action="<c:url value="/cafe"/>" method="post" data-id="${community.id}" enctype="multipart/form-data">
 	<input type="hidden" name="action" id="community_form_action" /> 
 	<input type="hidden" name="id" value="${community.id}" />
 	<div class="container w-75 mt-5 mx-auto">
