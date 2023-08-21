@@ -111,7 +111,7 @@ public class CommunityDAO {
 
 		try {
 			QueryRunner qr = new QueryRunner(dataSource);
-			Object[] p = { community.getCustomerId(), community.getTitle(), community.getImg(), community.getContent(),community.getId() };
+			Object[] p = {  community.getTitle(), community.getImg(), community.getContent(),community.getId() };
 			qr.execute(QM.get("updateCommunity"), p);
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();

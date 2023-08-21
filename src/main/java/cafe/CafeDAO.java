@@ -93,4 +93,59 @@ public class CafeDAO {
 
 		return rtn;
 	}
+	
+	public void updateCafe(Cafe cafe) {
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			Object[] p = { cafe.getCity(),
+					cafe.getName(),
+					cafe.getImg(),
+					cafe.getAddress(),
+					cafe.getPhone(),
+					cafe.getDayOff(),
+					cafe.getOpeningHours(),
+					cafe.isParking(),
+					cafe.getWebsite(),
+					cafe.getInfo(),
+					cafe.getId()
+
+			};
+			qr.execute(c, QM.get("updateCafe"), p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+	public void updateCafeNoImg(Cafe cafe) {
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			Object[] p = { cafe.getCity(),
+					cafe.getName(),
+					cafe.getAddress(),
+					cafe.getPhone(),
+					cafe.getDayOff(),
+					cafe.getOpeningHours(),
+					cafe.isParking(),
+					cafe.getWebsite(),
+					cafe.getInfo(),
+					cafe.getId()
+
+			};
+			qr.execute(c, QM.get("updateCafeNoImg"), p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+	
+	public void deleteCafe(int id) {
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			Object[] p = { id };
+			qr.execute(c, QM.get("deleteCafe"), p);
+		} catch (SQLException sqle) {
+
+			sqle.printStackTrace();
+		}
+	}
+	
+	
 }

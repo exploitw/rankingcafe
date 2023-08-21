@@ -24,4 +24,19 @@ public class CafeService {
 		
 		return rtn;
 	}
+	
+	public void set(Cafe cafe) {
+		
+		cafeDao.updateCafe(cafe);
+	}
+	
+	public void setNoImg(Cafe cafe) {
+		
+		cafeDao.updateCafeNoImg(cafe);
+	}
+	
+	public void remove(int id) {
+		cafeDao.deleteCafe(id);
+	}
+	
 }

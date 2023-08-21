@@ -28,4 +28,23 @@ public class ReviewService {
 	public List<Review> getReviewsByCafeId(int id){
 		return reviewDao.getReviewsByCafeId(id);
 	}
+	public void set(Review review) {
+		
+		reviewDao.updateReview(review);
+	}
+	public void setNoImg(Review review) {
+		
+		reviewDao.updateReviewNoImg(review);
+	}
+	public void remove(int id) {
+	
+		reviewDao.deleteReview(id);
+	}
+	public Review getReviewByCustomerId(int customerId) {
+		Review rtn = null;
+		
+		rtn = reviewDao.getReviewByCustomerId(customerId);
+		
+		return rtn;
+	}
 }
