@@ -63,7 +63,7 @@ public class CommunityDAO {
 
 	public Community selectCommunityById(int id) {
 		Community rtn = null;
-		
+
 		try {
 			QueryRunner qr = new QueryRunner(dataSource);
 			ResultSetHandler<Community> h = new BeanHandler<>(Community.class);
@@ -72,7 +72,7 @@ public class CommunityDAO {
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
-		
+
 		return rtn;
 	}
 
@@ -93,13 +93,13 @@ public class CommunityDAO {
 
 	public int write(Community community) {
 
-		try (Connection c = dataSource.getConnection();) {
-			QueryRunner qr = new QueryRunner();
+		try {
+			QueryRunner qr = new QueryRunner(dataSource);
 			ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
 			Object[] p = { community.getCustomerId(), community.getTitle(), community.getImg(), community.getContent(),
 					new java.util.Date() };
 
-			qr.execute(c, QM.get("addingnewCommunity"), h, p);
+			qr.execute(QM.get("addingnewCommunity"), h, p);
 
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
@@ -111,7 +111,7 @@ public class CommunityDAO {
 
 		try {
 			QueryRunner qr = new QueryRunner(dataSource);
-			Object[] p = { community.getCustomerId(), community.getTitle(), community.getImg(), community.getContent(),community.getId() };
+			Object[] p = { community.getTitle(), community.getImg(), community.getContent(), community.getId() };
 			qr.execute(QM.get("updateCommunity"), p);
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
@@ -120,7 +120,7 @@ public class CommunityDAO {
 
 	public void deleteCommunity(int id) {
 
-		try (Connection c = dataSource.getConnection()) {
+		try {
 			QueryRunner qr = new QueryRunner(dataSource);
 			Object[] p = { id };
 			qr.execute(QM.get("deleteCommunity"), p);
@@ -128,5 +128,4 @@ public class CommunityDAO {
 			sqle.printStackTrace();
 		}
 	}
-
 }

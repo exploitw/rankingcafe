@@ -108,7 +108,7 @@
 
       <nav class="gnb gnb_lg">
         <ul class="menu">
-          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=login">Home</a></li>
+          <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=home">Home</a></li>
           <li><a class="btn1-1" href="<c:url value="/cafe"/>?action=cafeList">List</a></li>
           <li><a href="<c:url value="/cafe?action=community"/>" id="community">Community</a></li>
         </ul>
