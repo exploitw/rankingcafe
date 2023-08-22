@@ -2,6 +2,7 @@ package cafe;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -68,8 +70,14 @@ public class CafeController extends HttpServlet {
 		case "communityInfo":
 			view = communityInfo(request, response);
 			break;
+		case "myCommunityInfo":
+			view = myCommunityInfo(request, response);
+			break;
 		case "communityInfoUpdate":
 			view = communityInfoUpdate(request, response);
+			break;
+		case "myCommunityInfoUpdate":
+			view = myCommunityInfoUpdate(request, response);
 			break;
 		case "write":
 			write(request, response);
@@ -88,8 +96,18 @@ public class CafeController extends HttpServlet {
 			break;
 		case "read":
 			read(request, response);
+			break;
 		case "myPage":
 			view = mypage(request, response);
+			break;
+		case "myPage2":
+			view = mypage2(request, response);
+			break;
+		case "myPage3":
+			view = mypage3(request, response);
+			break;
+		case "myPage3_1":
+			view = mypage3_1(request, response);
 			break;
 		case "updateCustomer":
 			updateCustomer(request, response);
@@ -103,6 +121,7 @@ public class CafeController extends HttpServlet {
 		case "cafeList":
 			view = cafeList(request, response);
 			break;
+		
 		case "cafeInfo":
 			view = cafeInfo(request, response);
 			break;
@@ -135,9 +154,13 @@ public class CafeController extends HttpServlet {
 	}
 
 	String reviewInfoupdate(HttpServletRequest request, HttpServletResponse response) {
-		int customerId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("customerId"), "-1"));
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
-		Review review = reviewService.getReviewByCustomerId(customerId);
+		//int customerId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("customerId"), "-1"));
+
+		//Review review = reviewService.getReviewByCustomerId(customerId);
+		Review review = reviewService.getReviewById(id);
+		//request.setAttribute("review", review);
 		request.setAttribute("review", review);
 
 		return "/cafe/reviewInfoUpdate.jsp";
@@ -195,35 +218,51 @@ public class CafeController extends HttpServlet {
 		response.sendRedirect("cafe?action=cafeInfo&id=" + review.getCafeId());
 	}
 
-	String home(HttpServletRequest request, HttpServletResponse response) {
-		return "/cafe/index.jsp";
-	}
+	
 
 	String cafeInfo(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 //		int cafeId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("cafeId"), "-1"));
-
+		List<Cafe> cafeList = cafeService.getCafe();
 		Cafe cafe = cafeService.getCafeById(id);
 		// Review review = reviewService.getReviewBycafeId(cafeId);
 		// List<Review> reviewList = reviewService.getReview(cafeId);
+		
 		List<Review> reviewsList = reviewService.getReviewsByCafeId(id);
-
+		request.setAttribute("cafeList", cafeList);
 		request.setAttribute("reviewsList", reviewsList);
 		request.setAttribute("cafe", cafe);
 		// request.setAttribute("review", review);
-
+		List<String> cafejsonStringList = new ArrayList<>();
+		for(Cafe cafes : cafeList) {
+			cafejsonStringList.add(cafes.toJsonString());
+		}
+		
+		String cafeJsonArrayString = StringUtils.join(cafejsonStringList);
+		
+		response.setHeader("Content-Type", "application/json; charset=utf-8");
+		request.setAttribute("cafeJsonArrayString", cafeJsonArrayString);
+		
+		
 		return "/cafe/cafeInfo.jsp";
 	}
 
 	String cafeList(HttpServletRequest request, HttpServletResponse response) {
-
+		String city = request.getParameter("city");
+			
 		List<Cafe> cafeList = cafeService.getCafe();
+		List<Cafe> cafeListModern = cafeService.getCafeByCategoryM();
+		List<Cafe> cafeListDessert = cafeService.getCafeByCategoryD();
+		List<Cafe> cafeListCity = cafeService.getCafeByCity(city);
 
 		request.setAttribute("cafeList", cafeList);
+		request.setAttribute("cafeListModern", cafeListModern);
+		request.setAttribute("cafeListDessert", cafeListDessert);
+		request.setAttribute("cafeListCity", cafeListCity);
 
 		return "/cafe/cafeList.jsp";
 	}
-
+  
 	void deleteCafe(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
@@ -298,9 +337,52 @@ public class CafeController extends HttpServlet {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		Customer customer = customerService.getCustomerById(id);
+		List<Object[]> communityListByCust = communityService.getCommunityByCustomerId(id);
 		request.setAttribute("customer", customer);
+		request.setAttribute("communityListByCust", communityListByCust);
 
-		return "/cafe/myPage1.jsp";
+		return "/cafe/mypage.jsp";
+	}
+	String mypage2(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		Customer customer = customerService.getCustomerById(id);
+		List<Object[]> communityListByCust = communityService.getCommunityByCustomerId(id);
+		request.setAttribute("customer", customer);
+		request.setAttribute("communityListByCust", communityListByCust);
+
+		return "/cafe/myPage2.jsp";
+	}
+	String mypage3(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		Customer customer = customerService.getCustomerById(id);
+		
+		request.setAttribute("customer", customer);
+		
+		List<String> customerJson = new ArrayList<>();
+		customerJson.add(customer.toJsonString());
+		
+		String jsonArrayStringCustomer = StringUtils.join(customerJson);
+		request.setAttribute("jsonArrayStringCustomer", jsonArrayStringCustomer);
+
+		return "/cafe/myPage3.jsp";
+	}
+	
+	String mypage3_1(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		Customer customer = customerService.getCustomerById(id);
+		
+		request.setAttribute("customer", customer);
+		
+		List<String> customerJson = new ArrayList<>();
+		customerJson.add(customer.toJsonString());
+		
+		String jsonArrayStringCustomer = StringUtils.join(customerJson);
+		request.setAttribute("jsonArrayStringCustomer", jsonArrayStringCustomer);
+
+		return "/cafe/myPage3-1.jsp";
 	}
 
 	void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -318,7 +400,7 @@ public class CafeController extends HttpServlet {
 			BeanUtils.populate(customer, request.getParameterMap());
 
 			customerService.set(customer);
-			response.sendRedirect("cafe?action=mypage&id=" + customer.getId());
+			response.sendRedirect("cafe?action=myPage3&id=" + customer.getId());
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
@@ -353,8 +435,33 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/communityInfo.jsp";
 	}
+	
+	String myCommunityInfo(HttpServletRequest request, HttpServletResponse response) {
+		CommunityDAO comuDao = new CommunityDAO();
+		CommentDAO mentDao = new CommentDAO();
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		Community community = comuDao.selectCommunityById(id);
+		List<Customer> customerList = customerService.getCustomer();
+		Comment commentList = mentDao.selectCommentById(id);
+		request.setAttribute("community", community);
+		request.setAttribute("customerList", customerList);
+		request.setAttribute("commentList", commentList);
+
+		return "/cafe/myCommunityInfo.jsp";
+	}
 
 	private String communityInfoUpdate(HttpServletRequest request, HttpServletResponse response) {
+		CommunityDAO comuDao = new CommunityDAO();
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		Community community = comuDao.selectCommunityById(id);
+		List<Customer> customerList = customerService.getCustomer();
+		request.setAttribute("community", community);
+		request.setAttribute("customerList", customerList);
+
+		return "/cafe/communityInfoUpdate.jsp";
+	}
+	
+	private String myCommunityInfoUpdate(HttpServletRequest request, HttpServletResponse response) {
 		CommunityDAO comuDao = new CommunityDAO();
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 		Community community = comuDao.selectCommunityById(id);

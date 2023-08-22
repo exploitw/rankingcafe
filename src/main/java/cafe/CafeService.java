@@ -39,4 +39,15 @@ public class CafeService {
 		cafeDao.deleteCafe(id);
 	}
 	
+	public List<Cafe> getCafeByCategoryM(){
+		return cafeDao.getCafeByCategoryM();
+	}
+	public List<Cafe> getCafeByCategoryD(){
+		return cafeDao.getCafeByCategoryD();
+	}
+	
+	public List<Cafe> getCafeByCity(String city){
+		return cafeDao.getCafeByCity(city);
+	}
+	
 }

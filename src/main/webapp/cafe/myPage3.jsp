@@ -5,19 +5,19 @@
 <jsp:include page="header.jsp"/>
 	
 	<section id="myPage3">
-		<div id="hBox"><h2>My Post</h2></div>
+		<div id="hBox"><h2>My Page</h2></div>
 		<ul>
-			<li><a href="<c:url value="/cafe?action=myPage1"/>">내가 쓴 글</a></li>
-        <li><a href="<c:url value="/cafe?action=myPage2"/>">좋아요 한 카페</a></li>
-        <li class="active"><a href="<c:url value="/cafe?action=myPage3"/>">내 정보 수정</a></li>
+        <li><a href="<c:url value="/cafe?action=myPage&id=${customerId}"/>">내가 쓴 글</a></li>
+        <li><a href="<c:url value="/cafe?action=myPage2&id=${customerId}"/>">좋아요 한 카페</a></li>
+        <li class="active"><a href="<c:url value="/cafe?action=myPage3&id=${customerId}"/>">내 정보 수정</a></li>
 		</ul>
 		<hr />
 		<div id="myPage3Wrap">
-			<form id="pwCheckForm" action="">
+			<form id="pwCheckForm" action="<c:url value="/cafe"/>?action=myPage3_1&id=${customerId}" method="post">
 				<p>
 					<label class="hidden" for="email">아이디 입력</label>
-					<input id="email" name="email" type="hidden" placeholder="email" value="로그인 한 아이디" readonly/>
-					<span>로그인 한 아이디</span>
+					<input id="email" name="email" type="hidden" placeholder="email" value="${customer.email}" readonly/>
+					<span>${customer.email}</span>
 				</p>
 				<p>
 					<label class="hidden" for="password">비밀번호 입력</label>
@@ -33,5 +33,17 @@
 				</p>
 		</div>
 	</section>
+	<script>
+		let custJson = ${jsonArrayStringCustomer};
+		$("section#myPage3 input[type=submit]").on("click", function(e){
+			e.preventDefault();
+			let myPw = $("section#myPage3 #password").val();
+			if(custJson[0].password === myPw){
+				$("section#myPage3 #pwCheckForm").submit();
+			}else{
+				alert("비밀번호가 틀렸습니다.");
+			}
+		})
+	</script>
 	
 <jsp:include page="footer.jsp"/>

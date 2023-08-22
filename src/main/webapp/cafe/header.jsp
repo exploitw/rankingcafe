@@ -120,7 +120,7 @@
         <c:if test="${sessionEMAIL != null }">
 						<ul class="member">
 	            <li>
-	              <a href="<c:url value="/cafe"/>?action=mypage&id=${customerId}" data-id="${customerId}">
+	              <a href="<c:url value="/cafe"/>?action=myPage&id=${customerId}" data-id="${customerId}">
 	                <span class="material-symbols-outlined">person</span>
 	                <span> My Page</span>
 	              </a>
