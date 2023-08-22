@@ -114,9 +114,6 @@ public class CafeController extends HttpServlet {
 		case "insertReview":
 			insertReview(request, response);
 			break;
-		case "home":
-			view = home(request, response);
-			break;
 		case "updateReview":
 			updateReview(request,response);
 			break;
@@ -192,10 +189,6 @@ public class CafeController extends HttpServlet {
 			e.printStackTrace();
 		}
 		response.sendRedirect("cafe?action=cafeInfo&id=" + review.getCafeId());
-	}
-
-	String home(HttpServletRequest request, HttpServletResponse response) {
-		return "/cafe/index.jsp";
 	}
 
 	String cafeInfo(HttpServletRequest request, HttpServletResponse response) {
