@@ -3,12 +3,11 @@ function validateCommunity() {
 		throw 'titleRequired';
 	} else if (!$('#content').val()) {
 		throw 'contentRequired';
-	} else if (!$('#img').val()) {
-		throw 'imgRequired';
 	}
 }
 
 function updateCommunity(event) {
+			event.preventDefault();
 	try {
 		validateCommunity();
 
@@ -23,7 +22,6 @@ function updateCommunity(event) {
 				alert('내용을 입력해 주십시오.');
 				break;
 		}
-		event.preventDefault();
 	}
 }
 
@@ -33,6 +31,6 @@ function deleteCommunity() {
 }
 
 $(function() {
-	$('#update_button').click(updateCommunity);
-	$('#delete_button').click(deleteCommunity);
+	$('#updateCommunity_button').click(updateCommunity);
+	$('#deleteCommunity_button').click(deleteCommunity);
 });

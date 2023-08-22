@@ -96,8 +96,13 @@ public class CommunityDAO {
 		try {
 			QueryRunner qr = new QueryRunner(dataSource);
 			ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
-			Object[] p = { community.getCustomerId(), community.getTitle(), community.getImg(), community.getContent(),
-					new java.util.Date() };
+			Object[] p = {
+					community.getCustomerId(),
+					community.getTitle(),
+					community.getImg(),
+					community.getContent(),
+					new java.util.Date()
+			};
 
 			qr.execute(QM.get("addingnewCommunity"), h, p);
 
@@ -111,8 +116,28 @@ public class CommunityDAO {
 
 		try {
 			QueryRunner qr = new QueryRunner(dataSource);
-			Object[] p = { community.getTitle(), community.getImg(), community.getContent(), community.getId() };
+			Object[] p = {
+					community.getTitle(),
+					community.getImg(),
+					community.getContent(),
+					community.getId()
+			};
 			qr.execute(QM.get("updateCommunity"), p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+	
+	public void updateCommunityNoImg(Community community) {
+		
+		try {
+			QueryRunner qr = new QueryRunner(dataSource);
+			Object[] p = {
+					community.getTitle(),
+					community.getContent(),
+					community.getId()
+			};
+			qr.execute(QM.get("updateCommunityNoImg"), p);
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

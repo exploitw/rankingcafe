@@ -37,12 +37,7 @@
                 <td><p>파일 첨부</p></td>
                 <td>
                   <label class="form-label hidden">이미지</label>
-                  <input
-                    type="file"
-                    name="file"
-                    class="form-control"
-                    multiple
-                  />
+                  <input type="file" name="file" class="form-control" multiple />
                 </td>
               </tr>
             </tbody>
@@ -50,7 +45,7 @@
 		</form>
 		<div class="btn_container">
           <div class="btn1">
-            <a href="/cafe/index.jsp">돌아가기</a>
+            <a href="javascript:history.back()">돌아가기</a>
           </div>
           <div class="btn2">
             <button type="submit">작성</button>

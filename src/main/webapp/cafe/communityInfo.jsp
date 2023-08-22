@@ -47,37 +47,72 @@
 		<div class="control">
 			<div class="left">
 				<p>
-					<a href="<c:url value="/cafe"/>?action=community">목록보기</a>
+					<a href="javascript:history.back()">목록보기</a>
 				</p>
 			</div>
 			<div class="right">
 				<p>
-					<a
-						href="<c:url value="/cafe"/>?action=communityInfoUpdate&id=${community.id}">글
-						수정 / 삭제</a>
+					<a href="<c:url value="/cafe"/>?action=communityInfoUpdate&id=${community.id}">수정 / 삭제</a>
 				</p>
 			</div>
 		</div>
-		<%-- <div class="commentControl">
+		<div class="commentControl">
 			<div class="left">
-				<span>댓글(114)</span> <span><a href="#">등록순</a></span> | <span><a href="#">최신순</a></span>
+				<span>댓글(114)</span>
+			</div>
+			<div class="center">
+				<span><a href="#">등록순</a></span> | <span><a href="#">최신순</a></span>
 			</div>
 			<div class="right">
 				<span>새로고침</span>
 			</div>
 		</div>
-		<div class="comment">
-			<div class="left">
-				<c:forEach var="comment" items="${commentList}">
-					<c:if test="${comment.customerId == customer.id}">
-						<span>${customer.nickName}</span>
-					</c:if>
-				</c:forEach>
-			</div>
-			<div class="right">
-				<span><button>좋아요</button></span> <span><button>싫어요</button></span>
-			</div>
-		</div> --%>
+		<!-- 댓글 적고 수정하는 부분 -->
+		<div class="commentInfo">
+			<form action="<c:url value="/cafe"/>?action=addComment"  method="post">
+				<div>
+						<input type="hidden" id="communityId" name="communityId" value="${community.id}" />
+						<label for="${comment.customerId}">댓글 작성자</label>
+						<input type="hidden" id="${customerId}" name="customerId" />
+						<label for="content">댓글 내용</label><input type="text" id="content" name="content" />
+						<input type="submit" value="등록" class="button">
+				</div>
+			</form>
+			<!-- 댓글 적고 수정하는 부분 -->
+			<form id="comment_form" action="<c:url value="/cafe"/>" method="post" data-id="${comment.id}">
+				<input type="hidden" name="action" id="comment_form_action" /> 
+				<input type="hidden" name="id" value="${comment.id}" />
+				<div>
+					<table>
+						<tr>
+							<td><textarea rows="5" cols="80" name="content" id="comment_content" placeholder="여러분의 소중한 댓글을 입력해주세요." required>${comment.content}</textarea></td>
+							<td><button id="insertComment_button">등록</button></td>
+						</tr>
+					</table>
+				</div>
+				<c:if test="${comment.communityId==community.id}">
+					<c:forEach var="comment" items="${commentList}">
+						<div class="left">
+							<c:if test="${comment.customerId == customer.id}">
+								<span>${customer.nickName}</span>
+							</c:if>
+							<c:forEach var="customer" items="${customerList}">
+								<c:if test="${comment.customerId == customer.id}">
+									<span>${customer.nickName}</span>
+								</c:if>
+							</c:forEach>
+						</div>
+						<div class="center">
+							<p>${comment.content}</p>
+						</div>
+						<div class="right">
+							<span><button>좋아요</button></span> | <span><button>싫어요</button></span>
+							<button id="deleteComment_button">삭제</button>
+						</div>
+					</c:forEach>
+				</c:if>
+			</form>
+		</div>
 	</div>
 </section>
 
