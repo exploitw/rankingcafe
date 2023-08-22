@@ -128,7 +128,7 @@ public class ReviewDAO {
 					review.getId()
 
 			};
-			qr.execute(c, QM.get("updateReview"), p);
+			qr.execute(c, QM.get("updateReviewNoImg"), p);
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
@@ -153,6 +153,21 @@ public class ReviewDAO {
 			ResultSetHandler<Review> h = new BeanHandler<>(Review.class);
 			Object[] p = { customerId };
 			rtn = qr.query(c, QM.get("getReviewByCustomerId"), h, p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+
+		return rtn;
+	}
+	
+	public Review getReviewById(int id) {
+		Review rtn = null;
+		
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			ResultSetHandler<Review> h = new BeanHandler<>(Review.class);
+			Object[] p = { id };
+			rtn = qr.query(c, QM.get("getReviewById"), h, p);
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

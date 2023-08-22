@@ -18,8 +18,7 @@
  	<div data-role="appbar">
             <ul class="app-bar-menu">
                <li><a href="<c:url value="/cafe/index.jsp"/>">메인</a></li>
-                <li><a href="<c:url value="madang?action=customers"/>">고객</a></li>
-                <li><a href="<c:url value="madang?action=books"/>">도서</a></li>
+            
             </ul>
         </div>
 

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -116,6 +117,7 @@ public class CafeController extends HttpServlet {
 		case "cafeList":
 			view = cafeList(request, response);
 			break;
+		
 		case "cafeInfo":
 			view = cafeInfo(request, response);
 			break;
@@ -148,9 +150,13 @@ public class CafeController extends HttpServlet {
 	}
   
 	String reviewInfoupdate(HttpServletRequest request, HttpServletResponse response) {
-		int customerId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("customerId"), "-1"));
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
-		Review review = reviewService.getReviewByCustomerId(customerId);
+		//int customerId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("customerId"), "-1"));
+
+		//Review review = reviewService.getReviewByCustomerId(customerId);
+		Review review = reviewService.getReviewById(id);
+		//request.setAttribute("review", review);
 		request.setAttribute("review", review);
 
 		return "/cafe/reviewInfoUpdate.jsp";
@@ -208,34 +214,52 @@ public class CafeController extends HttpServlet {
 		response.sendRedirect("cafe?action=cafeInfo&id=" + review.getCafeId());
 	}
 
-	String home(HttpServletRequest request, HttpServletResponse response) {
-		return "/cafe/index.jsp";
-	}
+	
 
 	String cafeInfo(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 //		int cafeId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("cafeId"), "-1"));
-
+		List<Cafe> cafeList = cafeService.getCafe();
 		Cafe cafe = cafeService.getCafeById(id);
 		// Review review = reviewService.getReviewBycafeId(cafeId);
 		// List<Review> reviewList = reviewService.getReview(cafeId);
+		
 		List<Review> reviewsList = reviewService.getReviewsByCafeId(id);
-
+		request.setAttribute("cafeList", cafeList);
 		request.setAttribute("reviewsList", reviewsList);
 		request.setAttribute("cafe", cafe);
 		// request.setAttribute("review", review);
-
+		List<String> cafejsonStringList = new ArrayList<>();
+		for(Cafe cafes : cafeList) {
+			cafejsonStringList.add(cafes.toJsonString());
+		}
+		
+		String cafeJsonArrayString = StringUtils.join(cafejsonStringList);
+		
+		response.setHeader("Content-Type", "application/json; charset=utf-8");
+		request.setAttribute("cafeJsonArrayString", cafeJsonArrayString);
+		
+		
 		return "/cafe/cafeInfo.jsp";
 	}
   
 	String cafeList(HttpServletRequest request, HttpServletResponse response) {
-
+		String city = request.getParameter("city");
+			
 		List<Cafe> cafeList = cafeService.getCafe();
+		List<Cafe> cafeListModern = cafeService.getCafeByCategoryM();
+		List<Cafe> cafeListDessert = cafeService.getCafeByCategoryD();
+		List<Cafe> cafeListCity = cafeService.getCafeByCity(city);
 
 		request.setAttribute("cafeList", cafeList);
+		request.setAttribute("cafeListModern", cafeListModern);
+		request.setAttribute("cafeListDessert", cafeListDessert);
+		request.setAttribute("cafeListCity", cafeListCity);
 
 		return "/cafe/cafeList.jsp";
 	}
+	
+	
   
 	void deleteCafe(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
@@ -315,7 +339,7 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("customer", customer);
 		request.setAttribute("communityListByCust", communityListByCust);
 
-		return "/cafe/myPage1.jsp";
+		return "/cafe/mypage.jsp";
 	}
 	String mypage2(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
