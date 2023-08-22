@@ -114,9 +114,6 @@ public class CafeController extends HttpServlet {
 		case "insertReview":
 			insertReview(request, response);
 			break;
-		case "home":
-			view = home(request, response);
-			break;
 		case "updateReview":
 			updateReview(request,response);
 			break;
@@ -495,9 +492,5 @@ public class CafeController extends HttpServlet {
 
 	String writing(HttpServletRequest request, HttpServletResponse response) {
 		return "/cafe/write.jsp";
-	}
-	
-	String home(HttpServletRequest request, HttpServletResponse response) {
-		return "/cafe/index.jsp";
 	}
 }
