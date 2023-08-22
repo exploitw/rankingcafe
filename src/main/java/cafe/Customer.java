@@ -11,6 +11,7 @@ public class Customer {
 	private String address;
 	private String phone;
 	
+	@SuppressWarnings("unchecked")
 	public String toJsonString() {
    	String rtn = null;
   	JSONObject jo = new JSONObject();

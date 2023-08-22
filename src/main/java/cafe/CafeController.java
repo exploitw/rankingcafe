@@ -121,7 +121,6 @@ public class CafeController extends HttpServlet {
 		case "cafeList":
 			view = cafeList(request, response);
 			break;
-		
 		case "cafeInfo":
 			view = cafeInfo(request, response);
 			break;
@@ -151,6 +150,10 @@ public class CafeController extends HttpServlet {
 		if (StringUtils.isNotEmpty(view)) {
 			getServletContext().getRequestDispatcher(view).forward(request, response);
 		}
+	}
+	
+	String home(HttpServletRequest request, HttpServletResponse response) {
+		return "/cafe/index.jsp";
 	}
 
 	String reviewInfoupdate(HttpServletRequest request, HttpServletResponse response) {

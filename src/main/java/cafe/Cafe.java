@@ -19,6 +19,7 @@ public class Cafe {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public String toJsonString() {
         String rtn = null;
 
