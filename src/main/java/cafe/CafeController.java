@@ -89,6 +89,9 @@ public class CafeController extends HttpServlet {
 		case "deleteCommunity":
 			deleteCommunity(request, response);
 			break;
+		case "deleteMyCommunity":
+			deleteMyCommunity(request, response);
+			break;
 		case "read":
 			read(request, response);
 			break;
@@ -476,6 +479,12 @@ public class CafeController extends HttpServlet {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 		communityService.removeCommunity(id);
 		response.sendRedirect("cafe?action=community");
+	}
+	
+	void deleteMyCommunity(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		communityService.removeCommunity(id);
+		response.sendRedirect("cafe?action=myPage");
 	}
 
 	String cafe(HttpServletRequest request, HttpServletResponse response) {

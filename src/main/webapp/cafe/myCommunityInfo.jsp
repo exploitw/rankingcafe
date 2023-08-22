@@ -52,7 +52,7 @@
 			</div>
 			<div class="right">
      		<p><a href="<c:url value="/cafe"/>?action=myCommunityInfoUpdate&id=${community.id}">글 수정</a></p>
-        <p><a href="<c:url value="/cafe"/>?action=myCommunityInfoDelete&id=${community.id}">글 삭제</a></p>
+        <p><a href="<c:url value="/cafe"/>?action=deleteMyCommunity&id=${community.id}">글 삭제</a></p>
 			</div>
 		</div>
 	</div>
