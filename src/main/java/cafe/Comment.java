@@ -8,6 +8,8 @@ public class Comment {
 	private long communityId;
 	private String content;
 	private Date date;
+	Customer customer;
+	Community community;
 	
 	public long getId() {
 		return id;

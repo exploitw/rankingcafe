@@ -77,8 +77,12 @@ public class CommentDAO {
 		try {
 			QueryRunner qr = new QueryRunner(dataSource);
 			ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
-			Object[] p = { comment.getCustomerId(), comment.getCommunityId(), comment.getContent(),
-					new java.util.Date() };
+			Object[] p = {
+					comment.getCustomerId(),
+					comment.getCommunityId(),
+					comment.getContent(),
+					new java.util.Date()
+			};
 			qr.execute(QM.get("insertComment"), h, p);
 
 		} catch (SQLException sqle) {

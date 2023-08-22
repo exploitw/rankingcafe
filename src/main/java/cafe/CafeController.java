@@ -33,6 +33,7 @@ public class CafeController extends HttpServlet {
 		communityService = new CommunityService();
 		cafeService = new CafeService();
 		reviewService = new ReviewService();
+		commentService = new CommentService();
 	}
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -82,6 +83,9 @@ public class CafeController extends HttpServlet {
 		case "deleteCommunity":
 			deleteCommunity(request, response);
 			break;
+		case "addComment":
+			addComment(request, response);
+			break;
 		case "read":
 			read(request, response);
 		case "myPage":
@@ -106,22 +110,22 @@ public class CafeController extends HttpServlet {
 			view = cafeInfoUpdate(request, response);
 			break;
 		case "updateCafe":
-			updateCafe(request,response);
+			updateCafe(request, response);
 			break;
 		case "deleteCafe":
-			deleteCafe(request,response);
+			deleteCafe(request, response);
 			break;
 		case "insertReview":
 			insertReview(request, response);
 			break;
 		case "updateReview":
-			updateReview(request,response);
+			updateReview(request, response);
 			break;
 		case "deleteReview":
-			deleteReview(request,response);
+			deleteReview(request, response);
 			break;
 		case "reviewInfoUpdate":
-			view = reviewInfoupdate(request,response);
+			view = reviewInfoupdate(request, response);
 			break;
 		}
 
@@ -129,7 +133,7 @@ public class CafeController extends HttpServlet {
 			getServletContext().getRequestDispatcher(view).forward(request, response);
 		}
 	}
-  
+
 	String reviewInfoupdate(HttpServletRequest request, HttpServletResponse response) {
 		int customerId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("customerId"), "-1"));
 
@@ -138,12 +142,12 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/reviewInfoUpdate.jsp";
 	}
-  
+
 	void deleteReview(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 		Review review = new Review();
 		reviewService.remove(id);
-		response.sendRedirect("cafe?action=cafeInfo&id="+review.getCafeId());
+		response.sendRedirect("cafe?action=cafeInfo&id=" + review.getCafeId());
 	}
 
 	void updateReview(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -153,23 +157,23 @@ public class CafeController extends HttpServlet {
 		try {
 			Part part = request.getPart("file");
 			String fileName = getFilename(part);
-			if(fileName != null && !fileName.isEmpty()) {
+			if (fileName != null && !fileName.isEmpty()) {
 				part.write(fileName);
 				BeanUtils.populate(review, request.getParameterMap());
-				review.setImg("/img/"+fileName);
+				review.setImg("/img/" + fileName);
 				reviewService.set(review);
-			}else  {
+			} else {
 				BeanUtils.populate(review, request.getParameterMap());
-				review.setImg("/img/"+review.getImg());
-				reviewService.setNoImg(review);				
+				review.setImg("/img/" + review.getImg());
+				reviewService.setNoImg(review);
 			}
-			response.sendRedirect("cafe?action=cafeInfo&id="+review.getCafeId());
+			response.sendRedirect("cafe?action=cafeInfo&id=" + review.getCafeId());
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	void insertReview (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+
+	void insertReview(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Review review = new Review();
 		HttpSession session = request.getSession();
 		Long customerId = (Long) session.getAttribute("customerId");
@@ -210,7 +214,7 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/cafeInfo.jsp";
 	}
-  
+
 	String cafeList(HttpServletRequest request, HttpServletResponse response) {
 
 		List<Cafe> cafeList = cafeService.getCafe();
@@ -219,7 +223,7 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/cafeList.jsp";
 	}
-  
+
 	void deleteCafe(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
@@ -234,14 +238,14 @@ public class CafeController extends HttpServlet {
 		try {
 			Part part = request.getPart("file");
 			String fileName = getFilename(part);
-			if(fileName != null && !fileName.isEmpty()) {
+			if (fileName != null && !fileName.isEmpty()) {
 				part.write(fileName);
 				BeanUtils.populate(cafe, request.getParameterMap());
-				cafe.setImg("/img/"+fileName);
+				cafe.setImg("/img/" + fileName);
 				cafeService.set(cafe);
-			}else  {
+			} else {
 				BeanUtils.populate(cafe, request.getParameterMap());
-				cafe.setImg("/img/"+cafe.getImg());
+				cafe.setImg("/img/" + cafe.getImg());
 				cafeService.setNoImg(cafe);
 			}
 			response.sendRedirect("cafe?action=cafeList");
@@ -249,7 +253,7 @@ public class CafeController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-  
+
 	String cafeInfoUpdate(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
@@ -258,7 +262,7 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/cafeInfoUpdate.jsp";
 	}
-  
+
 	void insertCafe(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Cafe cafe = new Cafe();
 
@@ -335,12 +339,15 @@ public class CafeController extends HttpServlet {
 
 	String communityInfo(HttpServletRequest request, HttpServletResponse response) {
 		CommunityDAO comuDao = new CommunityDAO();
-		CommentDAO mentDao = new CommentDAO();
+//		CommentDAO mentDao = new CommentDAO();
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 		Community community = comuDao.selectCommunityById(id);
+		List<Community> communityList = communityService.getCommunity();
 		List<Customer> customerList = customerService.getCustomer();
-		Comment commentList = mentDao.selectCommentById(id);
+		List<Comment> commentList = commentService.getComment();
+//		Comment commentList = mentDao.selectCommentById(id);
 		request.setAttribute("community", community);
+		request.setAttribute("communityList", communityList);
 		request.setAttribute("customerList", customerList);
 		request.setAttribute("commentList", commentList);
 
@@ -358,14 +365,14 @@ public class CafeController extends HttpServlet {
 		return "/cafe/communityInfoUpdate.jsp";
 	}
 
-	void updateCommunity(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		HttpSession session = request.getSession();
-		String sessionEMAIL = (String) session.getAttribute("sessionEMAIL");
-		Long customerId = (Long) session.getAttribute("customerId");
-
-		if (sessionEMAIL == null) {
-			sessionEMAIL = "비회원";
-		}
+	void updateCommunity(HttpServletRequest request, HttpServletResponse response) {
+//		HttpSession session = request.getSession();
+//		String sessionEMAIL = (String) session.getAttribute("sessionEMAIL");
+//		Long customerId = (Long) session.getAttribute("customerId");
+//
+//		if (sessionEMAIL == null) {
+//			sessionEMAIL = "비회원";
+//		}
 
 		Community community = new Community();
 
@@ -374,23 +381,45 @@ public class CafeController extends HttpServlet {
 			String fileName = getFilename(part);
 			if (fileName != null && !fileName.isEmpty()) {
 				part.write(fileName);
+				BeanUtils.populate(community, request.getParameterMap());
+				community.setImg("/img/" + fileName);
+				communityService.setCommunity(community);
+			} else {
+				BeanUtils.populate(community, request.getParameterMap());
+				community.setImg("/img/" + community.getImg());
+				communityService.setCommunityNoImg(community);
 			}
-
-			BeanUtils.populate(community, request.getParameterMap());
-			community.setCustomerId(customerId);
-			community.setImg("/img/" + fileName);
-			communityService.setCommunity(community);
 			response.sendRedirect("cafe?action=communityInfo&id=" + community.getId());
-//			response.sendRedirect("javascript:history.back()");
-		} catch (IllegalAccessException | InvocationTargetException e) {
+//			community.setCustomerId(customerId);
+		} catch (ServletException | IOException | IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
 
-	void deleteCommunity(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
-		communityService.removeCommunity(id);
-		response.sendRedirect("cafe?action=community");
+	void deleteCommunity(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+			communityService.removeCommunity(id);
+			response.sendRedirect("cafe?action=community");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	void addComment(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			Comment comment = new Comment();
+			HttpSession session = request.getSession();
+			Long customerId = (Long) session.getAttribute("customerId");
+//			Long communityId= (Long) session.getAttribute("communityId");
+			BeanUtils.populate(comment, request.getParameterMap());
+//			comment.setCommunityId(communityId);
+			comment.setCustomerId(customerId);
+			commentService.addComment(comment);
+			response.sendRedirect("cafe?action=communityInfo&id=" + comment.getCommunityId());
+		} catch (IllegalAccessException | InvocationTargetException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	String cafe(HttpServletRequest request, HttpServletResponse response) {

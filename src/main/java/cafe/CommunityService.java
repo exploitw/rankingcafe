@@ -38,6 +38,10 @@ public class CommunityService {
 	public void setCommunity(Community community) {
 		communityDao.updateCommunity(community);
 	}
+	
+	public void setCommunityNoImg(Community community) {
+		communityDao.updateCommunityNoImg(community);
+	}
 
 	public void addOrSetCommunity(Community community) {
 		if (community.getId() == -1) {
