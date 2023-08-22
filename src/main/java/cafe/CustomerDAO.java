@@ -110,6 +110,7 @@ public class CustomerDAO {
 			Object[] p = { customer.getName(),
 					customer.getEmail(),
 					customer.getNickName(),
+					customer.getPassword(),
 					customer.getAddress(),
 					customer.getPhone(),
 					customer.getId()

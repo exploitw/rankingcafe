@@ -1,5 +1,7 @@
 package cafe;
 
+import org.json.simple.JSONObject;
+
 public class Customer {
 	private long id;
 	private String name;
@@ -8,6 +10,20 @@ public class Customer {
 	private String nickName;
 	private String address;
 	private String phone;
+	
+	public String toJsonString() {
+   	String rtn = null;
+  	JSONObject jo = new JSONObject();
+  	jo.put("id", id);
+  	jo.put("name", name);
+  	jo.put("email", email);
+  	jo.put("password", password);
+  	jo.put("nickName", nickName);
+  	jo.put("address", address);
+  	jo.put("phone", phone);
+  	rtn = jo.toString();
+  	return rtn;
+	}
 	
 	 public Customer(){
 		
