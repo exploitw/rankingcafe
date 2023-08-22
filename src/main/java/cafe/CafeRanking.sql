@@ -30,27 +30,27 @@ CREATE TABLE cafe(
 );
 CREATE TABLE menu(
     id IDENTITY,
-    cafeId BIGINT NOT NULL REFERENCES cafe(id),
+    cafeId BIGINT NOT NULL REFERENCES cafe(id) ON DELETE CASCADE,
     name VARCHAR(64) NOT NULL,
     price INT NOT NULL,
     content VARCHAR
 );
 CREATE TABLE type(
     id IDENTITY,
-    cafeId BIGINT NOT NULL REFERENCES cafe(id),
+    cafeId BIGINT NOT NULL REFERENCES cafe(id) ON DELETE CASCADE,
     name VARCHAR(10) NOT NULL
 );
 CREATE TABLE review(
     id IDENTITY,
-    cafeId BIGINT NOT NULL REFERENCES cafe(id),
-    customerId BIGINT NOT NULL REFERENCES customer(id),
+    cafeId BIGINT NOT NULL REFERENCES cafe(id) ON DELETE CASCADE,
+    customerId BIGINT NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
     img VARCHAR,
     content VARCHAR NOT NULL,
     date DATE NOT NULL
 );
 CREATE TABLE community(
     id IDENTITY,
-    customerId BIGINT NOT NULL REFERENCES customer(id),
+    customerId BIGINT NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
     title VARCHAR(64) NOT NULL,
     img VARCHAR,
     content VARCHAR NOT NULL,
@@ -58,8 +58,8 @@ CREATE TABLE community(
 );
 CREATE TABLE comment(
     id IDENTITY,
-    customerId BIGINT NOT NULL REFERENCES customer(id),
-    communityId BIGINT NOT NULL REFERENCES community(id),
+    customerId varchar(24) NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
+    communityId BIGINT NOT NULL REFERENCES community(id) ON DELETE CASCADE,
     content VARCHAR,
     date TIMESTAMP
 );
