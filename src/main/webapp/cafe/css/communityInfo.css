@@ -120,7 +120,6 @@ section#communityInfo div#communityInfoWrap > div.commentInfo .center {
 }
 section#communityInfo div#communityInfoWrap > div.commentInfo .right {
   float: right;
-  display: flex;
 }
 section#communityInfo div#communityInfoWrap > div.commentInfo .right p {
   margin: 0 10px;

@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -421,12 +420,13 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/communityList.jsp";
 	}
-
+	
 	String communityInfo(HttpServletRequest request, HttpServletResponse response) {
 		CommunityDAO comuDao = new CommunityDAO();
-//		CommentDAO mentDao = new CommentDAO();
+		CommentDAO mentDao = new CommentDAO();
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 		Community community = comuDao.selectCommunityById(id);
+		Comment comment = mentDao.selectCommentById(id);
 		List<Community> communityList = communityService.getCommunity();
 		List<Customer> customerList = customerService.getCustomer();
 		List<Comment> commentList = commentService.getComment();
@@ -435,6 +435,7 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("communityList", communityList);
 		request.setAttribute("customerList", customerList);
 		request.setAttribute("commentList", commentList);
+		request.setAttribute("comment", comment);
 
 		return "/cafe/communityInfo.jsp";
 	}
@@ -555,6 +556,7 @@ public class CafeController extends HttpServlet {
 	void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String nickName = request.getParameter("nickName");
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		Customer customer1 = customerService.getCustomerById(id);
@@ -569,9 +571,12 @@ public class CafeController extends HttpServlet {
 			HttpSession session = request.getSession();
 
 			session.setAttribute("sessionEMAIL", email);
+			session.setAttribute("sessionNICKNAME", nickName);
 
 			Customer customer = customerDao.getCustomerByEmail(email);
 			session.setAttribute("customerId", customer.getId());
+//			Customer customerNickName = customerDao.getCustomerByNickName(nickName);
+//			session.setAttribute("customerId", customerNickName.getId());
 
 			RequestDispatcher rd = request.getRequestDispatcher("/cafe/index.jsp");
 			rd.forward(request, response);

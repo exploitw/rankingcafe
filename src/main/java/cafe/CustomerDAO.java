@@ -103,6 +103,21 @@ public class CustomerDAO {
 
 		return rtn;
 	}
+	
+	public Customer getCustomerByNickName(String nickName) {
+		Customer rtn = null;
+		
+		try {
+			QueryRunner qr = new QueryRunner(dataSource);
+			ResultSetHandler<Customer> h = new BeanHandler<>(Customer.class);
+			Object[] p = { nickName };
+			rtn = qr.query(QM.get("getCustomerByNickName"), h, p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		
+		return rtn;
+	}
 
 	public void update(Customer customer) {
 		try (Connection c = dataSource.getConnection();) {
