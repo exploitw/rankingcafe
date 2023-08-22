@@ -5,7 +5,7 @@
 <jsp:include page="header.jsp"/>
 
 <section id="myPage1_1">
-      <div id="hBox"><h2>My Post</h2></div>
+      <div id="hBox"><h2>My Page</h2></div>
       <ul>
         <li class="active"><a href="<c:url value="/cafe?action=myPage1"/>">내가 쓴 글</a></li>
         <li><a href="<c:url value="/cafe?action=myPage2"/>">좋아요 한 카페</a></li>

@@ -50,4 +50,8 @@ public class CommunityService {
 	public void removeCommunity(int id) {
 		communityDao.deleteCommunity(id);
 	}
+	
+	public List<Object[]> getCommunityByCustomerId(int id) {
+		return communityDao.getCommunityByCustomerId(id);
+	}
 }

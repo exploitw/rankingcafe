@@ -128,4 +128,21 @@ public class CommunityDAO {
 			sqle.printStackTrace();
 		}
 	}
+	
+	public List<Object[]> getCommunityByCustomerId(int id) {
+		List<Object[]> rtn = new ArrayList<>();
+
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
+			Object[] p = { id };
+			rtn = qr.query(c, QM.get("getCommunityByCustomerId"), h, p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+
+		return rtn;
+
+	}
+	
 }
