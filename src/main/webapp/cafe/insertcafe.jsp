@@ -122,6 +122,9 @@ input {
 				<tr>
 					<td><input type="text" placeholder="정보" name="info" required style="height: 30px; width: 495px" /></td>
 				</tr>
+				<tr>
+					<td><input type="text" placeholder="카테고리" name="category" required style="height: 30px; width: 495px" /></td>
+				</tr>
 				
 			</table>
 			<br>

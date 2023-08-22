@@ -15,8 +15,11 @@ import javax.sql.DataSource;
 import org.apache.commons.dbutils.QueryLoader;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+
+
 
 public class CafeDAO {
 	final static String QUERY_PATH = "/cafe/cafe_queries.properties";
@@ -58,6 +61,7 @@ public class CafeDAO {
 					cafe.isParking(),
 					cafe.getWebsite(),
 					cafe.getInfo(),
+					cafe.getCategory()
 			};
 			qr.execute(c, QM.get("insertCafe"), p);
 
@@ -107,6 +111,7 @@ public class CafeDAO {
 					cafe.isParking(),
 					cafe.getWebsite(),
 					cafe.getInfo(),
+					cafe.getCategory(),
 					cafe.getId()
 
 			};
@@ -127,6 +132,7 @@ public class CafeDAO {
 					cafe.isParking(),
 					cafe.getWebsite(),
 					cafe.getInfo(),
+					cafe.getCategory(),
 					cafe.getId()
 
 			};
@@ -147,5 +153,74 @@ public class CafeDAO {
 		}
 	}
 	
+	public List<Cafe> getCafeByCategoryM(){
+		List<Cafe> rtn = new ArrayList<>();
+		 try { QueryRunner qr = new QueryRunner(dataSource);
+			ResultSetHandler<List<Cafe>> h = new BeanListHandler<>(Cafe.class);
+	rtn = qr.query(QM.get("getCafeByCategoryM"),h);
+		  }catch(SQLException sqle) {
+				sqle.printStackTrace();
+			}
+			
+			return rtn;
+
+	}
+	
+	public List<Cafe> getCafeByCategoryD(){
+		List<Cafe> rtn = new ArrayList<>();
+		 try { QueryRunner qr = new QueryRunner(dataSource);
+			ResultSetHandler<List<Cafe>> h = new BeanListHandler<>(Cafe.class);
+	rtn = qr.query(QM.get("getCafeByCategoryD"),h);
+		  }catch(SQLException sqle) {
+				sqle.printStackTrace();
+			}
+			
+			return rtn;
+
+	}
+	
+	public List<Cafe> getCafeByCity(String city){
+		List<Cafe> rtn = new ArrayList<>();
+		try {
+			QueryRunner qr = new QueryRunner(dataSource);
+			ResultSetHandler<List<Cafe>> h = new BeanListHandler<>(Cafe.class);
+			Object[] p = {
+					city
+			};
+			qr.execute(QM.get("getCafeByCity"),h, p);
+			}catch(SQLException sqle) {
+				sqle.printStackTrace();
+			}
+			
+			return rtn;
+		
+	}
+	
+	/*
+	 * public void insert(Ordering ordering) { List<Object[]> rtn = new
+	 * ArrayList<>(); try { QueryRunner qr = new QueryRunner(dataSource);
+	 * ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
+	 * 
+	 * Object[] p = { ordering.getCustomerId(), ordering.getBookId(),
+	 * ordering.getSellingPrice(), new java.util.Date() };
+	 * 
+	 * qr.execute(sqls.getProperty("insert"), h, p);
+	 * 
+	 * } catch (SQLException sqle) { sqle.printStackTrace();
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
+	/*
+	 * public List<Cafe> getCafe(){ List<Cafe> rtn = new ArrayList<>(); try {
+	 * QueryRunner qr = new QueryRunner(dataSource); ResultSetHandler<List<Cafe>> h
+	 * = new BeanListHandler<>(Cafe.class); rtn = qr.query(QM.get("selectCafe"),h);
+	 * }catch(SQLException sqle) { sqle.printStackTrace(); }
+	 * 
+	 * return rtn;
+	 * 
+	 * }
+	 */
 	
 }

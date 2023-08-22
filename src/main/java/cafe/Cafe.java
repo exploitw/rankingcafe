@@ -1,5 +1,7 @@
 package cafe;
 
+import org.json.simple.JSONObject;
+
 public class Cafe {
 	private long id;
 	private String city;
@@ -12,10 +14,31 @@ public class Cafe {
 	private boolean parking;
 	private String website;
 	private String info;
-	
+	private String category;
 	public Cafe() {
 		
 	}
+	
+	public String toJsonString() {
+        String rtn = null;
+
+        JSONObject jo = new JSONObject();
+        jo.put("id", id);
+        jo.put("city", city);
+        jo.put("name", name);
+        jo.put("img", img);
+        jo.put("address", address);
+        jo.put("phone", phone);
+        jo.put("dayOff", dayOff);
+        jo.put("openingHours", openingHours);
+        jo.put("parking", parking);
+        jo.put("website", website);
+        jo.put("info", info);
+
+        rtn = jo.toString();
+
+        return rtn;
+    }
 	public long getId() {
 		return id;
 	}
@@ -81,5 +104,13 @@ public class Cafe {
 	}
 	public void setInfo(String info) {
 		this.info = info;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }

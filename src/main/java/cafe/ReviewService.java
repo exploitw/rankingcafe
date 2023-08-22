@@ -47,4 +47,12 @@ public class ReviewService {
 		
 		return rtn;
 	}
+	
+	public Review getReviewById(int id) {
+		Review rtn = null;
+		
+		rtn = reviewDao.getReviewById(id);
+		
+		return rtn;
+	}
 }

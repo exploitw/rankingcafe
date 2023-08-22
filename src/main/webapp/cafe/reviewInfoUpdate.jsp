@@ -31,16 +31,16 @@
             <br />
             <br />
       
- 	<form id="cafe_form" action="<c:url value="cafe"/>" method="post" data-id="${review.customerId}" enctype="multipart/form-data">
-	<input type="hidden" name="action" id="cafe_form_action"/>
-	<input type="hidden" name="id" value="${review.customerId}"  />
+ 	<form id="review_form" action="<c:url value="cafe"/>" method="post" data-id="${review.id}" enctype="multipart/form-data">
+	<input type="hidden" name="action" id="review_form_action"/>
+	<input type="hidden" name="id" value="${review.id}"  />
 	 			
                 <table>
 				
 				<tr>
 					<td><label class="form-label">이미지</label>
 					<input type="file" name="file" value="${review.img}" class="form-control">
-					<img class="cafe-img" src="${review.img}" id="${review.img}"></td>
+					<img class="review-img" src="${review.img}" id="${review.img}" ></td>
 				</tr>
 				
 				<tr>
@@ -52,8 +52,8 @@
                 <div class="row">
                     <div class="cell-3"></div>
                     <div class="cell-3">
-                        <button class="button" id="update_button">카페 정보수정</button>
-                        <button class="button" id="delete_button">카페 삭제</button>
+                        <button class="button" id="update_button">리뷰 수정</button>
+                        <button class="button" id="delete_button">리뷰 삭제</button>
                     </div>
                     <div class="cell-3"></div>
                     <div class="cell-3"></div>
@@ -62,6 +62,6 @@
             </form>
         </div>
         <script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script>
-        <script src="<c:url value="/cafe/js/cafeUpdate.js"/>"></script>
+        <script src="<c:url value="/cafe/js/reviewUpdate.js"/>"></script>
 </body>
 </html>
