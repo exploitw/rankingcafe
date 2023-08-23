@@ -55,6 +55,9 @@
                     <label class="cell-2">전화번호</label>
                     <div class="cell-10"><input type="text" data-role="input" name="phone" value="${customer.phone}" id="phone" /></div>
                 </div>
+                <div class="row">
+                    <div class="cell-10"><input class="hidden" type="text" data-role="input" name="admin" value="${customer.admin}" id="admin" /></div>
+                </div>
                 <br/>
                 <div class="row">
                     <div class="cell-3"></div>

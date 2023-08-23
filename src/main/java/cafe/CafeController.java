@@ -150,6 +150,9 @@ public class CafeController extends HttpServlet {
 		case "reviewInfoUpdate":
 			view = reviewInfoupdate(request, response);
 			break;
+		case "admin":
+			view = admin(request, response);
+			break;
 		}
 
 		if (StringUtils.isNotEmpty(view)) {
@@ -416,6 +419,20 @@ public class CafeController extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
+	
+	void updateAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		Customer customer = new Customer();
+		
+		try {
+			BeanUtils.populate(customer, request.getParameterMap());
+			
+			customerService.set(customer);
+			response.sendRedirect("cafe?action=admin");
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
 
 	String community(HttpServletRequest request, HttpServletResponse response) {
 		boolean hasOrdering = Boolean
@@ -448,6 +465,31 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/communityInfo.jsp";
 	}
+	
+	String admin(HttpServletRequest request, HttpServletResponse response) {
+		CustomerDAO custDao = new CustomerDAO();
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		Customer customer = custDao.getCustomerById(id);
+		List<Customer> customerList = customerService.getCustomer();
+		request.setAttribute("customer", customer);
+		request.setAttribute("customerList", customerList);
+		
+		return "/cafe/admin.jsp";
+	}
+
+//	void updateAdmin(HttpServletRequest request, HttpServletResponse response) {
+//		
+//		Customer customer = new Customer();
+//
+//		try {
+//			BeanUtils.populate(customer, request.getParameterMap());
+//
+//			customerService.setAdmin(customer);
+//			response.sendRedirect("cafe?action=admin");
+//		} catch (IOException | IllegalAccessException | InvocationTargetException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	String myCommunityInfo(HttpServletRequest request, HttpServletResponse response) {
 		CommunityDAO comuDao = new CommunityDAO();
@@ -592,7 +634,9 @@ public class CafeController extends HttpServlet {
 	void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String nickName = request.getParameter("nickName");
+		boolean admin = false;
+		List<Customer> customerList = customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		Customer customer1 = customerService.getCustomerById(id);
@@ -605,21 +649,21 @@ public class CafeController extends HttpServlet {
 		if (loginResult == 1) {
 			request.setAttribute("loginResult", loginResult);
 			HttpSession session = request.getSession();
-
+			
 			session.setAttribute("sessionEMAIL", email);
-			session.setAttribute("sessionNICKNAME", nickName);
+			session.setAttribute("sessionADMIN", admin);
 
 			Customer customer = customerDao.getCustomerByEmail(email);
 			session.setAttribute("customerId", customer.getId());
-//			Customer customerNickName = customerDao.getCustomerByNickName(nickName);
-//			session.setAttribute("customerId", customerNickName.getId());
+//			Customer customerAdmin = customerDao.getCustomerByAdmin(admin);
+//			session.setAttribute("customerId", customerAdmin.getId());
 
-			RequestDispatcher rd = request.getRequestDispatcher("/cafe/index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/cafe?action=home");
 			rd.forward(request, response);
 
 		} else {
 			request.setAttribute("loginResult", loginResult);
-			RequestDispatcher rd = request.getRequestDispatcher("/cafe/login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/cafe?action=cafe");
 			rd.forward(request, response);
 		}
 	}

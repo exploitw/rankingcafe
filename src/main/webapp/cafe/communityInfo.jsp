@@ -109,6 +109,7 @@
 				</div> --%>
 				<table class="jb-th-1">
 					<c:forEach var="comment" items="${commentList}" varStatus="status">
+					<c:if test="${community.id==comment.communityId }">
 						<thead>
 							<tr>
 								<th>${status.index+1}</th>
@@ -142,6 +143,7 @@
 								</c:if>
 							</tr>
 						</tbody>
+					</c:if>
 					</c:forEach>
 				</table>
 			</form>
