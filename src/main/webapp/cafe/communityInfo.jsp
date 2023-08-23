@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <jsp:include page="header.jsp" />
 
@@ -51,7 +52,15 @@
 			</div>
 			<div class="right">
 				<p>
-					<a href="<c:url value="/cafe"/>?action=communityInfoUpdate&id=${community.id}">수정 / 삭제</a>
+					<c:if test="${sessionEMAIL != null }">
+						<c:forEach var="customer" items="${customerList}">
+							<c:if test="${sessionEMAIL == customer.email}">
+								<c:if test="${customer.id == community.customerId}">
+									<a href="<c:url value="/cafe"/>?action=communityInfoUpdate&id=${community.id}">수정 / 삭제</a>
+								</c:if>
+							</c:if>
+						</c:forEach>
+					</c:if>
 				</p>
 			</div>
 		</div>
@@ -79,21 +88,6 @@
 					<input type="submit" value="등록" class="button">
 				</div>
 			</form> --%>
-			<form action="<c:url value="/cafe"/>?action=addComment"  method="post">
-				<div>
-					<input type="hidden" id="communityId" name="communityId" value="${community.id}" />
-					<c:if test="${sessionEMAIL != null }">
-						<c:forEach var="customer" items="${customerList}">
-							<c:if test="${sessionEMAIL == customer.email}">
-								<span>${customer.nickName}</span>
-							</c:if>
-						</c:forEach>
-					</c:if>
-					<input type="hidden" id="${customerId}" name="customerId" />
-					<textarea rows="5" cols="80" name="content" id="comment_content" placeholder="여러분의 소중한 댓글을 입력해주세요." required></textarea>
-					<input type="submit" value="등록" class="button">
-				</div>
-			</form>
 			<!-- 댓글 수정 -->
 			<form id="comment_form" action="<c:url value="/cafe"/>" method="post" data-id="${comment.id}">
 				<input type="hidden" name="action" id="comment_form_action" /> 
@@ -113,28 +107,58 @@
 						</tr>
 					</table>
 				</div> --%>
-				<table border="1">
-				<tr>
-				<c:if test="${comment.communityId==community.id}">
-					<c:forEach var="comment" items="${commentList}">
-						<div class="left">
-							<c:forEach var="customer" items="${customerList}">
-								<c:if test="${comment.customerId == customer.id}">
-									<span>${customer.nickName}</span>
+				<table class="jb-th-1">
+					<c:forEach var="comment" items="${commentList}" varStatus="status">
+						<thead>
+							<tr>
+								<th>${status.index+1}</th>
+								<th></th>
+								<th><span><fmt:formatDate value="${comment.date}" pattern="yyyy-MM-dd HH:mm:ss" /></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<c:if test="${comment.communityId==community.id}">
+									<c:forEach var="customer" items="${customerList}">
+										<c:if test="${comment.customerId == customer.id}">
+											<td><span>${customer.nickName}</span></td>
+										</c:if>
+									</c:forEach>
 								</c:if>
-							</c:forEach>
-						</div>
-						<div class="center">
-							<p>${comment.content}</p>
-						</div>
-						<div class="right">
-							<span><fmt:formatDate value="${comment.date}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
-							<button id="deleteComment_button">삭제</button>
-						</div>
+								<td>${comment.content}</td>
+								<c:if test="${sessionEMAIL != null}">
+									<c:forEach var="customer" items="${customerList}">
+										<c:if test="${sessionEMAIL == customer.email}">
+											<c:choose>
+												<c:when test="${customer.id == comment.customerId}">
+													<td><button class="button" id="deleteComment_button">삭제</button></td>
+												</c:when>
+												<c:otherwise>
+													<td><button>답글(미구현)</button>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
+									</c:forEach>
+								</c:if>
+							</tr>
+						</tbody>
 					</c:forEach>
-				</c:if>
-				</tr>
 				</table>
+			</form>
+			<form action="<c:url value="/cafe"/>?action=addComment"  method="post">
+				<div>
+					<input type="hidden" id="communityId" name="communityId" value="${community.id}" />
+					<c:if test="${sessionEMAIL != null }">
+						<c:forEach var="customer" items="${customerList}">
+							<c:if test="${sessionEMAIL == customer.email}">
+								<span>${customer.nickName}</span>
+							</c:if>
+						</c:forEach>
+					</c:if>
+					<input type="hidden" id="${customerId}" name="customerId" />
+					<textarea rows="5" cols="80" name="content" id="comment_content" placeholder="여러분의 소중한 댓글을 입력해주세요." required></textarea>
+					<input type="submit" value="등록" class="button">
+				</div>
 			</form>
 		</div>
 		<br>

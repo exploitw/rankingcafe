@@ -93,6 +93,12 @@ public class CafeController extends HttpServlet {
 		case "addComment":
 			addComment(request, response);
 			break;
+		case "updateComment":
+			updateComment(request, response);
+			break;
+		case "deleteComment":
+			deleteComment(request, response);
+			break;
 		case "read":
 			read(request, response);
 			break;
@@ -250,6 +256,9 @@ public class CafeController extends HttpServlet {
 	}
 
 	String cafeList(HttpServletRequest request, HttpServletResponse response) {
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
 		String city = request.getParameter("city");
 			
 		List<Cafe> cafeList = cafeService.getCafe();
@@ -343,7 +352,7 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("customer", customer);
 		request.setAttribute("communityListByCust", communityListByCust);
 
-		return "/cafe/mypage.jsp";
+		return "/cafe/myPage1.jsp";
 	}
 	String mypage2(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
@@ -529,6 +538,33 @@ public class CafeController extends HttpServlet {
 			commentService.addComment(comment);
 			response.sendRedirect("cafe?action=communityInfo&id=" + comment.getCommunityId());
 		} catch (IllegalAccessException | InvocationTargetException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	void updateComment(HttpServletRequest request, HttpServletResponse response) {
+		
+		Comment comment = new Comment();
+
+		try {
+			BeanUtils.populate(comment, request.getParameterMap());
+
+			commentService.setComment(comment);
+			response.sendRedirect("cafe?action=communityInfo&id=" + comment.getCommunityId());
+		} catch (IOException | IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+
+	void deleteComment(HttpServletRequest request, HttpServletResponse response) {		
+		try {
+			Comment comment = new Comment();
+			BeanUtils.populate(comment, request.getParameterMap());
+			commentService.setComment(comment);
+			int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+			commentService.removeComment(id);
+			response.sendRedirect("cafe?action=communityInfo&id=" + comment.getCommunityId());
+		} catch (IOException | IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
