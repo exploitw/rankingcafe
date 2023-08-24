@@ -27,7 +27,7 @@ function deleteReview() {
 }
 
 $(function () {
-    $('#update_button').click(updateReview);
-    $('#delete_button').click(deleteReview);
+    $('#updatereview_button').click(updateReview);
+    $('#deletereview_button').click(deleteReview);
 });
 

@@ -179,7 +179,7 @@ public class CafeController extends HttpServlet {
 
 	void deleteReview(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
-		Review review = new Review();
+		
 		reviewService.remove(id);
 		response.sendRedirect("cafe?action=cafeList");
 	}
@@ -406,6 +406,7 @@ public class CafeController extends HttpServlet {
 
 		customerService.remove(id);
 		response.sendRedirect("cafe?action=logout");
+		
 	}
 
 	void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -459,6 +460,8 @@ public class CafeController extends HttpServlet {
 		List<Customer> customerList = customerService.getCustomer();
 		List<Comment> commentList = commentService.getComment();
 //		Comment commentList = mentDao.selectCommentById(id);
+		
+		
 		request.setAttribute("community", community);
 		request.setAttribute("communityList", communityList);
 		request.setAttribute("customerList", customerList);
@@ -600,17 +603,20 @@ public class CafeController extends HttpServlet {
 		}
 	}
 
-	void deleteComment(HttpServletRequest request, HttpServletResponse response) {		
+	void deleteComment(HttpServletRequest request, HttpServletResponse response)  {		
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		
+		Comment comment = new Comment();
 		try {
-			Comment comment = new Comment();
 			BeanUtils.populate(comment, request.getParameterMap());
-			commentService.setComment(comment);
-			int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+			comment.setCommunityId(comment.getCommunityId());
 			commentService.removeComment(id);
-			response.sendRedirect("cafe?action=communityInfo&id=" + comment.getCommunityId());
+			response.sendRedirect("cafe?action=community" );
 		} catch (IOException | IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 	String cafe(HttpServletRequest request, HttpServletResponse response) {
