@@ -23,7 +23,7 @@
 		<hr />
 		<div id="editWrap">
 			<form id="editForm" action="<c:url value="/cafe?action=updateAdminCustomer"/>" method="post">
-				<input name="id" type="text" value="${customer.Id}"/>
+				<input name="id" type="text" value="${customerId}"/>
 				<p>
 					<label class="hidden" for="name">이름</label>
 					<input id="name" name="name" type="text" value="${customer.name}" placeholder="이름" readonly />

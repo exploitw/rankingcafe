@@ -61,40 +61,6 @@
 					</tr>
 					<tr>
 						<td>메뉴</td>
-						<!-- <td>
-							<ul>
-								<li>
-									<div>
-										<span class="menuname">asd</span>
-										<span class="price">1234won</span>
-									</div>
-								</li>
-								<li>
-									<div>
-										<span class="menuname">asd</span>
-										<span class="price">1234won</span>
-									</div>
-								</li>
-								<li>
-									<div>
-										<span class="menuname">asd</span>
-										<span class="price">1234won</span>
-									</div>
-								</li>
-								<li>
-									<div>
-										<span class="menuname">asd</span>
-										<span class="price">1234won</span>
-									</div>
-								</li>
-								<li>
-									<div>
-										<span class="menuname">asd</span>
-										<span class="price">1234won</span>
-									</div>
-								</li>
-							</ul>
-						</td> -->
 					</tr>
 					<tr>
 						<td>about</td>
@@ -102,33 +68,39 @@
 					</tr>
 				</table>
 				<div class="cafeMap"></div>
-			</div>						<a href="<c:url value="/cafe"/>?action=cafeInfoUpdate&id=${cafe.id}" data-id="${cafe.id}"><button>수정</button></a>
-			
+			</div>
+			<c:if test="${sessionEMAIL != null }">
+				<c:forEach var="customer" items="${customerList}">
+					<c:if test="${sessionEMAIL == customer.email}">
+						<c:if test="${customer.admin == true}">
+							<a href="<c:url value="/cafe"/>?action=cafeInfoUpdate&id=${cafe.id}" data-id="${cafe.id}"><button>수정</button></a>
+						</c:if>
+					</c:if>
+				</c:forEach>
+			</c:if>
 			<hr />
 			<div class="comment">
 				<p>
 					<span>리뷰 ()</span>
 				</p>
 			</div>
-			
 			<div id="review">
 				<ul>
 					<c:forEach items="${reviewsList}" var="reviews">
-						
 						<li>
 							<div class="imgbox">
 								<img src="${reviews.img}" alt="" />
 							</div>
 							<div class="textbox">
-							<c:forEach var="customer" items="${customerList}">
-								<c:if test="${reviews.customerId == customer.id}">
-								<p><span>작성자 : </span>${customer.nickName}</p>
-								<p><span>작성 날짜 : </span><fmt:formatDate value="${reviews.date}" pattern="yyyy-MM-dd" /></p>
-								<p><span>댓글 내용 : </span>${reviews.content}</p>
-								<c:if test="${customerId == reviews.customerId}">
-								<a href="<c:url value="/cafe"/>?action=reviewInfoUpdate&id=${reviews.id}" data-id="${reviews.id}">수정 / 삭제</a>
-								</c:if>
-								</c:if>
+								<c:forEach var="customer" items="${customerList}">
+									<c:if test="${reviews.customerId == customer.id}">
+										<p><span>작성자 : </span>${customer.nickName}</p>
+										<p><span>작성 날짜 : </span><fmt:formatDate value="${reviews.date}" pattern="yyyy-MM-dd" /></p>
+										<p><span>댓글 내용 : </span>${reviews.content}</p>
+										<c:if test="${customerId == reviews.customerId}">
+											<a href="<c:url value="/cafe"/>?action=reviewInfoUpdate&id=${reviews.id}" data-id="${reviews.id}">수정 / 삭제</a>
+										</c:if>
+									</c:if>
 								</c:forEach>
 							</div>
 						</li>
@@ -139,8 +111,8 @@
 			<div class="modal">
 				<div class="modalWrap">
 					<form action="<c:url value="/cafe"/>?action=insertReview"  method="post" id="reviewWr" enctype="multipart/form-data">
-					<input type="hidden" name="cafeId" value="${cafe.id}" />
-					<input type="hidden" id="" name="customerId" value="${review.customerId}" />
+						<input type="hidden" name="cafeId" value="${cafe.id}" />
+						<input type="hidden" id="" name="customerId" value="${review.customerId}" />
 						<table>
 							<thead>
 								<tr>
@@ -148,21 +120,20 @@
 									<td>
 										<c:forEach items="${reviewsList}" var="reviews">
 											<c:forEach var="customer" items="${customerList}">
-											<c:if test="${reviews.customerId == customer.id}">v
-										<input
-											type="text"
-											name="customerId"
-											required
-											id="${customerId}"
-											value="${customer.nickName}"
-											readonly
-										/>
-										</c:if>
-										</c:forEach>
+												<c:if test="${reviews.customerId == customer.id}">v
+													<input
+														type="text"
+														name="customerId"
+														required
+														id="${customerId}"
+														value="${customer.nickName}"
+														readonly
+													/>
+												</c:if>
+											</c:forEach>
 										</c:forEach>
 									</td>
 								</tr>
-								
 							</thead>
 							<tbody>
 								<tr>
@@ -201,7 +172,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- modal -->
+	<!-- modal -->
 		</div>
 	</section>
 
@@ -256,47 +227,3 @@
 	    }
     </script>
 <jsp:include page="footer.jsp"/>
-<%-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-              </tbody>
-            </table>
-           
-           
-             <!-- 댓글 -->
-<div id="review">
-  <ol class="reviewList">
-    <c:forEach items="${reviewsList}" var="reviews">
-      <li >
-      		
-        <p>
-        <img class="cafe-img" src="${reviews.img}"><br />
-        작성자 : ${reviews.customerId}<br />
-        작성 날짜 :  <fmt:formatDate value="${reviews.date}" pattern="yyyy-MM-dd" />
-        </p>
-
-        <p>${reviews.content}</p>
-      </li>
-    </c:forEach>   
-  </ol>
-</div>
-<form action="<c:url value="/cafe"/>?action=insertReview"  method="post" enctype="multipart/form-data">
-			<table>
-				 <input type="hidden" id="cafeId" name="cafeId" value="${cafe.id}" />
-				<div>
-    <label for="${review.customerId}">댓글 작성자</label>
-    <input type="hidden" id="${customerId}" name="customerId" />
-    <br/>
-    <label for="content">댓글 내용</label><input type="text" id="content" name="content" />
-  </div>
-				
-				<tr>
-					<label class="form-label">이미지</label>
-					<input type="file" name="file" class="form-control">
-					<td align="center"><input type="submit" value="작성" class="button"></td>
-					<td align="center"><input type="reset" value="내용 초기화" class="button"></td>
-				</tr>
-			</table>
-		</form>
-
- --%>
-</body>
-</html>

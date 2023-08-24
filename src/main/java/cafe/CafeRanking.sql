@@ -1,8 +1,7 @@
 DROP TABLE comment;
 DROP TABLE community;
 DROP TABLE review;
-DROP TABLE menu;
-DROP TABLE type;
+DROP TABLE heart;
 DROP TABLE cafe;
 DROP TABLE customer;
 
@@ -27,19 +26,14 @@ CREATE TABLE cafe(
     openingHours VARCHAR(64),
     parking BOOLEAN NOT NULL,
     webSite VARCHAR,
-    info VARCHAR
+    info VARCHAR,
+    category VARCHAR(12)
 );
-CREATE TABLE menu(
+CREATE TABLE heart(
     id IDENTITY,
     cafeId BIGINT NOT NULL REFERENCES cafe(id) ON DELETE CASCADE,
-    name VARCHAR(64) NOT NULL,
-    price INT NOT NULL,
-    content VARCHAR
-);
-CREATE TABLE type(
-    id IDENTITY,
-    cafeId BIGINT NOT NULL REFERENCES cafe(id) ON DELETE CASCADE,
-    name VARCHAR(10) NOT NULL
+    customerId BIGINT NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
+    likeCNT INT DEFAULT 0
 );
 CREATE TABLE review(
     id IDENTITY,
@@ -55,7 +49,8 @@ CREATE TABLE community(
     title VARCHAR(64) NOT NULL,
     img VARCHAR,
     content VARCHAR NOT NULL,
-    date TIMESTAMP
+    date TIMESTAMP,
+    view BIGINT
 );
 CREATE TABLE comment(
     id IDENTITY,

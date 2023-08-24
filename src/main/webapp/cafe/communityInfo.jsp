@@ -78,6 +78,44 @@
 			</div>
 		</div>
 		<!-- 댓글 등록 -->
+			<div id="comment">
+				<ul>
+					<c:forEach items="${commentList}" var="comment">
+						<li>
+							<div class="textbox">
+								<c:forEach var="customer" items="${customerList}">
+									<c:if test="${comment.customerId == customer.id}">
+										<p><span>작성자 : </span>${customer.nickName}</p>
+										<p><span>작성 날짜 : </span><fmt:formatDate value="${comment.date}" pattern="yyyy-MM-dd" /></p>
+										<p><span>댓글 내용 : </span>${comment.content}</p>
+										<%-- <c:if test="${customerId == comment.customerId}">
+											<a href="<c:url value="/cafe"/>?action=reviewInfoUpdate&id=${comment.id}" data-id="${comment.id}">수정 / 삭제</a>
+										</c:if> --%>
+										<c:if test="${sessionEMAIL != null}">
+											<c:choose>
+												<c:when test="${sessionEMAIL == customer.email}">
+													<c:if test="${customer.id == comment.customerId || customer.admin == true}">
+													   <!--  <td><button class="button" id="updateComment_button">댓글 수정</button></td> -->
+														<button class="button deleteComment_button" data-comment-id="${comment.id}">삭제</button>
+													</c:if>
+												</c:when>
+												<c:otherwise>
+													<c:if test="${sessionEMAIL == customer.email}">
+														<c:if test="${customer.admin == true}">
+														   <!--  <td><button class="button" id="updateComment_button">댓글 수정</button></td> -->
+															<button class="button deleteComment_button" data-comment-id="${comment.id}">삭제</button>
+														</c:if>
+													</c:if>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
+									</c:if>
+								</c:forEach>
+							</div>
+						</li>
+					</c:forEach>
+				</ul>
+			</div>
 		<div class="commentInfo">
 			<%-- <form action="<c:url value="/cafe"/>?action=addComment"  method="post">
 				<div>
