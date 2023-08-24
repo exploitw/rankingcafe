@@ -54,8 +54,8 @@
                 <div class="row">
                     <div class="cell-3"></div>
                     <div class="cell-3">
-                        <button class="button" id="update_button">리뷰 수정</button>
-                        <button class="button" id="delete_button">리뷰 삭제</button>
+                        <button class="button" id="updatereview_button">리뷰 수정</button>
+                        <button class="button" id="deletereview_button">리뷰 삭제</button>
                     </div>
                     <div class="cell-3"></div>
                     <div class="cell-3"></div>
@@ -64,5 +64,5 @@
             </form>
         </div>
         <script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script>
-        <script src="<c:url value="/cafe/js/reviewUpdate.js"/>"></script>
+       <%--  <script src="<c:url value="/cafe/js/reviewUpdate.js"/>"></script> --%>
 <jsp:include page="footer.jsp" />

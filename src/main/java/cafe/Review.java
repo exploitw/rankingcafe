@@ -2,6 +2,8 @@ package cafe;
 
 import java.util.Date;
 
+import org.json.simple.JSONObject;
+
 public class Review {
 	private long id;
 	private long cafeId;
@@ -9,6 +11,10 @@ public class Review {
 	private String img;
 	private String content;
 	private Date date;
+	
+	public Review () {
+		
+	}
 	
 	public long getId() {
 		return id;

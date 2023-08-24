@@ -77,8 +77,8 @@
                 <div class="row">
                     <div class="cell-3"></div>
                     <div class="cell-3">
-                        <button class="button" id="update_button">정보수정</button>
-                        <button class="button" id="delete_button">삭제</button>
+                        <button class="button" id="updatecafe_button">정보수정</button>
+                        <button class="button" id="deletecafe_button">삭제</button>
                     </div>
                     <div class="cell-3"></div>
                     <div class="cell-3"></div>
@@ -86,7 +86,7 @@
          
             </form>
         </div>
-        <script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script>
-        <script src="<c:url value="/cafe/js/cafeUpdate.js"/>"></script>
+       <!--  <script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script> -->
+       <%--  <script src="<c:url value="/cafe/js/cafeUpdate.js"/>"></script> --%>
 </section>
 <jsp:include page="footer.jsp" />
