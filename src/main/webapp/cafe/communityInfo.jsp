@@ -89,30 +89,20 @@
 				</div>
 			</form> --%>
 			<!-- 댓글 수정 -->
-			<form id="comment_form" action="<c:url value="/cafe"/>" method="post" data-id="${comment.id}">
+			<form id="comment_form" action="<c:url value="/cafe"/>?action=deleteComment" method="post" data-id="${comment.id}">
+			
 				<input type="hidden" name="action" id="comment_form_action" /> 
-				<input type="hidden" name="id" value="${comment.id}" />
-				<%-- <div>
-					<table>
-						<tr>
-							<c:if test="${sessionEMAIL != null }">
-								<c:forEach var="customer" items="${customerList}">
-									<c:if test="${sessionEMAIL == customer.email}">
-										<td>${customer.nickName}</td>
-									</c:if>
-								</c:forEach>
-							</c:if>
-							<td><textarea rows="5" cols="80" name="content" id="comment_content" placeholder="여러분의 소중한 댓글을 입력해주세요." required>${comment.content}</textarea></td>
-							<td><button id="insertComment_button">등록</button></td>
-						</tr>
-					</table>
-				</div> --%>
+				<input type="hidden" name="id" value="" id="comment_value" />
+		
 				<table class="jb-th-1">
 					<c:forEach var="comment" items="${commentList}" varStatus="status">
+					
 					<c:if test="${community.id==comment.communityId }">
+					
 						<thead>
 							<tr>
 								<th>${status.index+1}</th>
+								
 								<th></th>
 								<th><span><fmt:formatDate value="${comment.date}" pattern="yyyy-MM-dd HH:mm:ss" /></span></th>
 							</tr>
@@ -132,7 +122,9 @@
 										<c:if test="${sessionEMAIL == customer.email}">
 											<c:choose>
 												<c:when test="${customer.id == comment.customerId}">
-													<td><button class="button" id="deleteComment_button">삭제</button></td>
+												   <!--  <td><button class="button" id="updateComment_button">댓글 수정</button></td> -->
+												
+													<td><button class="button deleteComment_button" data-comment-id="${comment.id}">삭제</button></td>
 												</c:when>
 												<c:otherwise>
 													<td><button>답글(미구현)</button>
@@ -145,7 +137,8 @@
 						</tbody>
 					</c:if>
 					</c:forEach>
-				</table>
+				 </table>
+				
 			</form>
 			<form action="<c:url value="/cafe"/>?action=addComment"  method="post">
 				<div>

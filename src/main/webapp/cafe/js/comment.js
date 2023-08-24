@@ -1,3 +1,5 @@
+
+
 function validateComment() {
   if (!$("#content").val()) {
     throw "contentRequired";
@@ -36,13 +38,19 @@ function updateComment(event) {
   }
 }
 
-function deleteComment() {
+
+
+
+function deleteComment(event) {
+	
+	
   $("#comment_form_action").val("deleteComment");
+  $("#comment_value").val(event.target.dataset.commentId)
   $("#comment_form")[0].submit();
 }
 
 $(function () {
   $("#insertComment_button").click(addComment);
   $("#updateComment_button").click(updateComment);
-  $("#deleteComment_button").click(deleteComment);
+  $(".deleteComment_button").click(deleteComment);
 });

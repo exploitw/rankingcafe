@@ -27,7 +27,7 @@ function deleteCafe() {
 }
 
 $(function () {
-    $('#update_button').click(updateCafe);
-    $('#delete_button').click(deleteCafe);
+    $('#updatecafe_button').click(updateCafe);
+    $('#deletecafe_button').click(deleteCafe);
 });
 
