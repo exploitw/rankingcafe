@@ -4,12 +4,12 @@ function validateCustomer() {
     }
 }
 
-function updateCustomer(event) {
+function updateAdmin(event) {
     try {
         validateCustomer();
 
         $('#admin_form_action').val('updateAdmin');
-        $('#customerAdmin_form')[0].submit();
+        $('#admin_form')[0].submit();
     } catch (e) {
         switch (e) {
             case 'nameRequired':
@@ -20,7 +20,7 @@ function updateCustomer(event) {
     }
 }
 
-function deleteCustomer() {
+function deleteAdmin() {
     $('#admin_form_action').val('deleteAdmin');
     $('#admin_form')[0].submit();
 }
