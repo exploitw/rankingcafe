@@ -43,6 +43,10 @@
 					<label class="hidden" for="phone">휴대폰번호</label>
 					<input id="phone" name="phone" type="text" placeholder="휴대폰번호" />
 				</p>
+				<p>
+					<label class="hidden" for="admin">관리자</label>
+					<input class="hidden" id="admin" name="admin" type="checkbox" value="false"/>
+				</p>
 				<p class="jcheck1">
 					<label class="hidden" for="joincheck1">14세 이상이면 체크</label>
 					<input id="joincheck1" type="checkbox" />

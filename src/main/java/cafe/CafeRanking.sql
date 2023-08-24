@@ -13,7 +13,8 @@ CREATE TABLE customer(
     password VARCHAR NOT NULL,
     nickname VARCHAR(24),
     address VARCHAR,
-    phone VARCHAR
+    phone VARCHAR,
+    admin BOOLEAN
 );
 CREATE TABLE cafe(
     id IDENTITY,

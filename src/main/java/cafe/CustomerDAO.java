@@ -61,7 +61,7 @@ public class CustomerDAO {
 		try (Connection c = dataSource.getConnection();) {
 			QueryRunner qr = new QueryRunner();
 			Object[] p = { customer.getName(), customer.getEmail(), customer.getPassword(), customer.getNickName(),
-					customer.getAddress(), customer.getPhone() };
+					customer.getAddress(), customer.getPhone(), customer.isAdmin() };
 			qr.execute(c, QM.get("insertCustomer"), p);
 
 		} catch (SQLException sqle) {
@@ -128,7 +128,8 @@ public class CustomerDAO {
 					customer.getPassword(),
 					customer.getAddress(),
 					customer.getPhone(),
-					customer.getId()
+					customer.getId(),
+					customer.isAdmin()
 
 			};
 			qr.execute(c, QM.get("update"), p);
@@ -136,7 +137,6 @@ public class CustomerDAO {
 			sqle.printStackTrace();
 		}
 	}
-
 	
 	public List<Customer> getCustomer(){ 
 		  List<Customer> rtn = new ArrayList<>();

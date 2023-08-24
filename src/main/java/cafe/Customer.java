@@ -10,6 +10,7 @@ public class Customer {
 	private String nickName;
 	private String address;
 	private String phone;
+	private boolean admin;
 	
 	@SuppressWarnings("unchecked")
 	public String toJsonString() {
@@ -22,6 +23,7 @@ public class Customer {
   	jo.put("nickName", nickName);
   	jo.put("address", address);
   	jo.put("phone", phone);
+  	jo.put("admin", admin);
   	rtn = jo.toString();
   	return rtn;
 	}
@@ -80,5 +82,13 @@ public class Customer {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 }

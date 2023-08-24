@@ -14,6 +14,9 @@
           <span>COPYRIGHT@Cafe ALL RIGHT RESERVED.</span>
         </p>
         <p></p>
+        <h3>
+            <%-- ${sessionADMIN} --%>
+        </h3>
       </div>
     </footer>
   </body>
