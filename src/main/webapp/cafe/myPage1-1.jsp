@@ -9,7 +9,16 @@
       <ul>
         <li class="active"><a href="<c:url value="/cafe?action=myPage1"/>">내가 쓴 글</a></li>
         <li><a href="<c:url value="/cafe?action=myPage2"/>">좋아요 한 카페</a></li>
-        <li><a href="<c:url value="/cafe?action=myPage3"/>">내 정보 수정</a></li>
+        <li><a href="<c:url value="/cafe?action=myPage3"/>">내 정보 수정</a></li>        
+        <c:if test="${sessionEMAIL != null }">
+			<c:forEach var="customer" items="${customerList}">
+				<c:if test="${sessionEMAIL == customer.email}">
+					<c:if test="${customer.admin == true}">
+						<li><a href="<c:url value="/cafe"/>?action=adminPage1&id=${customerId}">관리자</a></li>
+					</c:if>
+				</c:if>
+			</c:forEach>
+		</c:if>
       </ul>
       <hr />
       <div id="myPage1_1Wrap">

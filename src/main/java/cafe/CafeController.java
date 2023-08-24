@@ -114,6 +114,15 @@ public class CafeController extends HttpServlet {
 		case "myPage3_1":
 			view = mypage3_1(request, response);
 			break;
+		case "adminPage1":
+			view = adminPage1(request, response);
+			break;
+		case "adminPage1_1":
+			view = adminPage1_1(request, response);
+			break;
+		case "adminPage1_2":
+			view = adminPage1_2(request, response);
+			break;
 		case "updateCustomer":
 			updateCustomer(request, response);
 			break;
@@ -150,8 +159,8 @@ public class CafeController extends HttpServlet {
 		case "reviewInfoUpdate":
 			view = reviewInfoupdate(request, response);
 			break;
-		case "admin":
-			view = admin(request, response);
+		case "updateAdminCustomer":
+			updateAdminCustomer(request, response);
 			break;
 		}
 
@@ -350,6 +359,10 @@ public class CafeController extends HttpServlet {
 	}
 
 	String mypage(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		Customer customer = customerService.getCustomerById(id);
@@ -360,6 +373,10 @@ public class CafeController extends HttpServlet {
 		return "/cafe/myPage1.jsp";
 	}
 	String mypage2(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		Customer customer = customerService.getCustomerById(id);
@@ -369,7 +386,12 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/myPage2.jsp";
 	}
+	
 	String mypage3(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		Customer customer = customerService.getCustomerById(id);
@@ -386,6 +408,10 @@ public class CafeController extends HttpServlet {
 	}
 	
 	String mypage3_1(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		Customer customer = customerService.getCustomerById(id);
@@ -399,6 +425,58 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("jsonArrayStringCustomer", jsonArrayStringCustomer);
 
 		return "/cafe/myPage3-1.jsp";
+	}
+	
+	String adminPage1(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		Customer customer = customerService.getCustomerById(id);
+		
+		request.setAttribute("customer", customer);
+		
+		List<String> customerJson = new ArrayList<>();
+		customerJson.add(customer.toJsonString());
+		
+		String jsonArrayStringCustomer = StringUtils.join(customerJson);
+		request.setAttribute("jsonArrayStringCustomer", jsonArrayStringCustomer);
+
+		return "/cafe/adminPage1.jsp";
+	}
+	
+	String adminPage1_1(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
+		boolean hasOrdering = Boolean
+				.parseBoolean(StringUtils.defaultIfEmpty(request.getParameter("hasOrdering"), "false"));
+		request.setAttribute("hasOrdering", hasOrdering);
+
+		return "/cafe/adminPage1-1.jsp";
+	}
+	
+	String adminPage1_2(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		Customer customer = customerService.getCustomerById(id);
+		
+		request.setAttribute("customer", customer);
+		
+		List<String> customerJson = new ArrayList<>();
+		customerJson.add(customer.toJsonString());
+		
+		String jsonArrayStringCustomer = StringUtils.join(customerJson);
+		request.setAttribute("jsonArrayStringCustomer", jsonArrayStringCustomer);
+
+		return "/cafe/adminPage1-2.jsp";
 	}
 
 	void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -423,15 +501,15 @@ public class CafeController extends HttpServlet {
 		}
 	}
 	
-	void updateAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	void updateAdminCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		Customer customer = new Customer();
-		
+
 		try {
 			BeanUtils.populate(customer, request.getParameterMap());
-			
+
 			customerService.set(customer);
-			response.sendRedirect("cafe?action=admin");
+			response.sendRedirect("cafe?action=adminPage1_1&id=" + customer.getId());
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
@@ -609,7 +687,6 @@ public class CafeController extends HttpServlet {
 		Comment comment = new Comment();
 		try {
 			BeanUtils.populate(comment, request.getParameterMap());
-			comment.setCommunityId(comment.getCommunityId());
 			commentService.removeComment(id);
 			response.sendRedirect("cafe?action=community" );
 		} catch (IOException | IllegalAccessException | InvocationTargetException e) {
