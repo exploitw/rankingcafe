@@ -47,7 +47,7 @@ section#myPage2 div#myPage2Wrap ul.container {
   box-sizing: border-box;
 }
 section#myPage2 div#myPage2Wrap ul.container li {
-  width: 33.3%;
+  width: 20%;
   padding: 0 15px;
   box-sizing: border-box;
   margin-bottom: 50px;
@@ -67,6 +67,7 @@ section#myPage2 div#myPage2Wrap ul.container li .likeBox {
 section#myPage2 div#myPage2Wrap ul.container li .likeBox a {
   overflow: hidden;
   display: block;
+  max-height: 250px;
 }
 section#myPage2 div#myPage2Wrap ul.container li .likeBox a img {
   width: 100%;
@@ -83,6 +84,9 @@ section#myPage2 div#myPage2Wrap ul.container li .likeBox .contentBox {
 section#myPage2 div#myPage2Wrap ul.container li .likeBox .contentBox h3 {
   font-size: 24px;
 }
-section#myPage2 div#myPage2Wrap ul.container li .likeBox .contentBox p.heart {
-  margin: 10px 0;
+section#myPage2 div#myPage2Wrap ul.container li .likeBox .contentBox button.heartBtn {
+  margin: 7px 0;
+}
+section#myPage2 div#myPage2Wrap ul.container li .likeBox .contentBox button.heartBtn .true {
+  color: #ff0000;
 }/*# sourceMappingURL=myPage2.css.map */

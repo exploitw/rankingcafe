@@ -35,7 +35,7 @@
 	                </td>
 	                <td>${community[2]}</td>
 	                <td><fmt:formatDate value="${community[3]}"	pattern="yyyy-MM-dd HH:mm" /></td>
-	                <td>4444</td>
+	                <td>${community[4]}</td>
 	              </tr>
             	</c:forEach>
             </tbody>

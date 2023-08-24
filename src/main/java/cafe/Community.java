@@ -10,6 +10,7 @@ public class Community {
 	private String img;
 	private String content;
 	private Date date;
+	private long view;
 	Customer customer;
 	
 public Community() {
@@ -67,6 +68,13 @@ public Community() {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public long getView() {
+		return view;
+	}
+
+	public void setView(long view) {
+		this.view = view;
 	}
 	@Override
 	public String toString() {

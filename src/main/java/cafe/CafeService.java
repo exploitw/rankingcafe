@@ -50,4 +50,23 @@ public class CafeService {
 		return cafeDao.getCafeByCity(city);
 	}
 	
+	public long getLike(long cafeId, long custId){
+		return cafeDao.getLike(cafeId, custId);
+	}
+	
+	public void insertLike(long cafeId, long custId) {
+		cafeDao.insertLike(cafeId, custId); 
+	}
+	
+	public void updateLike(long cafeId, long custId) {
+		cafeDao.updateLike(cafeId, custId); 
+	}
+	
+	public long getLikeCnt(long cafeId) {
+		return cafeDao.getLikeCnt(cafeId);
+	}
+	
+	public void deleteLike(long cafeId, long custId) {
+		cafeDao.deleteLike(cafeId, custId); 
+	}
 }

@@ -1,6 +1,7 @@
 package cafe;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,6 +91,9 @@ public class CafeController extends HttpServlet {
 		case "deleteCommunity":
 			deleteCommunity(request, response);
 			break;
+		case "deleteMyCommunity":
+			deleteMyCommunity(request, response);
+			break;
 		case "addComment":
 			addComment(request, response);
 			break;
@@ -144,12 +148,17 @@ public class CafeController extends HttpServlet {
 		case "reviewInfoUpdate":
 			view = reviewInfoupdate(request, response);
 			break;
+		case "updateLike":
+			updateLike(request, response);
+		case "findLike":
+			findLike(request, response);
 		}
 
 		if (StringUtils.isNotEmpty(view)) {
 			getServletContext().getRequestDispatcher(view).forward(request, response);
 		}
 	}
+	
 	
 	String home(HttpServletRequest request, HttpServletResponse response) {
 		return "/cafe/index.jsp";
@@ -245,11 +254,28 @@ public class CafeController extends HttpServlet {
 		response.setHeader("Content-Type", "application/json; charset=utf-8");
 		request.setAttribute("cafeJsonArrayString", cafeJsonArrayString);
 		
+		HttpSession session = request.getSession();
+		
+		long cafeId = cafe.getId();
+		long custId = (Long) session.getAttribute("customerId");
+		
+		long cnt = cafeService.getLike(cafeId, custId);
+		long likeCnt = cafeService.getLikeCnt(cafeId);
+		
+		request.setAttribute("likeCnt", likeCnt);
+		
+		if(cnt == 0) {
+			cafeService.insertLike(cafeId, custId);
+			cafeService.updateLike(cafeId, custId);
+		}else {
+			//cafeService.updateLike(cafeId, custId);
+		}
 		
 		return "/cafe/cafeInfo.jsp";
 	}
 
 	String cafeList(HttpServletRequest request, HttpServletResponse response) {
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 		String city = request.getParameter("city");
 			
 		List<Cafe> cafeList = cafeService.getCafe();
@@ -261,6 +287,25 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("cafeListModern", cafeListModern);
 		request.setAttribute("cafeListDessert", cafeListDessert);
 		request.setAttribute("cafeListCity", cafeListCity);
+		
+		HttpSession session = request.getSession();
+		Long customerId = (Long) session.getAttribute("customerId");
+		
+		request.setAttribute("customerId", customerId);
+		
+		List cntList = new ArrayList();
+		List likeCntList = new ArrayList();
+		List af = new ArrayList();
+		int custId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		for(Cafe cafe : cafeList) {
+			long cnt = cafeService.getLike(cafe.getId(), custId);
+			long likeCnt = cafeService.getLikeCnt(cafe.getId());
+			cntList.add(cnt);
+			likeCntList.add(likeCnt);
+			af.add(cafe.getId());
+		}
+		request.setAttribute("cntList", cntList);
+		request.setAttribute("likeCntList", likeCntList);
 
 		return "/cafe/cafeList.jsp";
 	}
@@ -343,15 +388,37 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("customer", customer);
 		request.setAttribute("communityListByCust", communityListByCust);
 
-		return "/cafe/mypage.jsp";
+		return "/cafe/myPage1.jsp";
 	}
 	String mypage2(HttpServletRequest request, HttpServletResponse response) {
+		
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		String city = request.getParameter("city");
+			
+		List<Cafe> cafeList = cafeService.getCafe();
 
-		Customer customer = customerService.getCustomerById(id);
-		List<Object[]> communityListByCust = communityService.getCommunityByCustomerId(id);
-		request.setAttribute("customer", customer);
-		request.setAttribute("communityListByCust", communityListByCust);
+		request.setAttribute("cafeList", cafeList);
+		
+		HttpSession session = request.getSession();
+		Long customerId = (Long) session.getAttribute("customerId");
+		
+		request.setAttribute("customerId", customerId);
+		
+		List cntList = new ArrayList();
+		List likeCntList = new ArrayList();
+		List af = new ArrayList();
+		int custId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		for(Cafe cafe : cafeList) {
+			long cnt = cafeService.getLike(cafe.getId(), custId);
+			long likeCnt = cafeService.getLikeCnt(cafe.getId());
+			cntList.add(cnt);
+			likeCntList.add(likeCnt);
+			af.add(cafe.getId());
+		}
+		request.setAttribute("cntList", cntList);
+		request.setAttribute("likeCntList", likeCntList);
+
+		
 
 		return "/cafe/myPage2.jsp";
 	}
@@ -409,6 +476,7 @@ public class CafeController extends HttpServlet {
 	}
 
 	String community(HttpServletRequest request, HttpServletResponse response) {
+		
 		boolean hasOrdering = Boolean
 				.parseBoolean(StringUtils.defaultIfEmpty(request.getParameter("hasOrdering"), "false"));
 		List<Community> communityList = communityService.getCommunity();
@@ -417,6 +485,8 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("hasOrdering", hasOrdering);
 		request.setAttribute("communityList", communityList);
 		request.setAttribute("customerList", customerList);
+		
+
 
 		return "/cafe/communityList.jsp";
 	}
@@ -436,6 +506,13 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("customerList", customerList);
 		request.setAttribute("commentList", commentList);
 		request.setAttribute("comment", comment);
+		
+		HttpSession session = request.getSession();
+		Long customerId = (Long) session.getAttribute("customerId");
+		if(community.getCustomerId() != customerId) {
+			long cnt = community.getCustomerId();
+			communityService.viewCnt(cnt);
+		}
 
 		return "/cafe/communityInfo.jsp";
 	}
@@ -473,7 +550,7 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("community", community);
 		request.setAttribute("customerList", customerList);
 
-		return "/cafe/communityInfoUpdate.jsp";
+		return "/cafe/CommunityInfoUpdate.jsp";
 	}
 
 	void updateCommunity(HttpServletRequest request, HttpServletResponse response) {
@@ -512,6 +589,16 @@ public class CafeController extends HttpServlet {
 			int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 			communityService.removeCommunity(id);
 			response.sendRedirect("cafe?action=community");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	void deleteMyCommunity(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+			communityService.removeCommunity(id);
+			response.sendRedirect("cafe?action=myPage");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -636,5 +723,26 @@ public class CafeController extends HttpServlet {
 
 	String writing(HttpServletRequest request, HttpServletResponse response) {
 		return "/cafe/write.jsp";
+	}
+	
+	void updateLike(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		long custId = Long.parseLong(request.getParameter("custId"));
+		long cafeId = Long.parseLong(request.getParameter("cafeId"));
+		long cnt = cafeService.getLike(cafeId, custId);
+		
+		if(cnt == 0) {
+			cafeService.insertLike(cafeId, custId);
+			cafeService.updateLike(cafeId, custId);
+		}else {
+			cafeService.deleteLike(cafeId, custId);
+		}
+		response.sendRedirect("cafe?action=cafeList");
+	}
+	
+	void findLike(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException  {
+		long cnt = cafeService.getLike(Long.parseLong(request.getParameter("cafeId")), Long.parseLong(request.getParameter("custId")));
+		PrintWriter pw = response.getWriter();
+		pw.print(cnt);
+		pw.close();
 	}
 }

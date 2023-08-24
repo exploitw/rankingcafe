@@ -1,6 +1,7 @@
 package cafe;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 
 
@@ -193,6 +195,70 @@ public class CafeDAO {
 			
 			return rtn;
 		
+	}
+	
+	public long getLike(long cafeId, long custId){
+		long rtn = 0;
+		
+		try {
+			QueryRunner qr = new QueryRunner(dataSource);
+			ResultSetHandler<Long> h = new ScalarHandler<>();
+			Object[] p = { cafeId, custId };
+			rtn = qr.query(QM.get("getLike"),h, p);
+			}catch(SQLException sqle) {
+				sqle.printStackTrace();
+			}
+		
+		return rtn;
+	}
+	
+	public void insertLike(long cafeId, long custId) {
+		try (Connection c = dataSource.getConnection();) {
+			QueryRunner qr = new QueryRunner();
+			Object[] p = { cafeId, custId };
+			qr.execute(c, QM.get("insertLike"), p);
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
+		
+		public void updateLike(long cafeId, long custId) {
+			try (Connection c = dataSource.getConnection();) {
+				QueryRunner qr = new QueryRunner();
+				Object[] p = { cafeId, custId };
+				qr.execute(c, QM.get("updateLike"), p);
+
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+		}
+	}
+		
+		
+		public long getLikeCnt(long cafeId) {
+			long rtn = 0;
+
+			try {
+				QueryRunner qr = new QueryRunner(dataSource);
+				ResultSetHandler<Long> h = new ScalarHandler<>();
+				Object[] p = { cafeId };
+				rtn = qr.query(QM.get("getLikeCnt"), h, p);
+
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+		}
+			return rtn;
+	}
+		
+		public void deleteLike(long cafeId, long custId) {
+			try (Connection c = dataSource.getConnection();) {
+				QueryRunner qr = new QueryRunner();
+				Object[] p = { cafeId, custId };
+				qr.execute(c, QM.get("deleteLike"), p);
+
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+		}
 	}
 	
 	/*

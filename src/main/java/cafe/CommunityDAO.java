@@ -170,4 +170,13 @@ public class CommunityDAO {
 
 	}
 	
+	public void viewCnt(long cnt) {
+		try {
+			QueryRunner qr = new QueryRunner(dataSource);
+			Object[] p = { cnt };
+			qr.execute(QM.get("updateViewcnt"), p);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+	}
 }

@@ -58,4 +58,9 @@ public class CommunityService {
 	public List<Object[]> getCommunityByCustomerId(int id) {
 		return communityDao.getCommunityByCustomerId(id);
 	}
+	
+	public void viewCnt(long cnt) {
+		communityDao.viewCnt(cnt);
+	}
+	
 }

@@ -64,12 +64,21 @@ $(function () {
 	  e.preventDefault();
 	  let nowPw = custEdit[0].password;
 	  
-		if(nowPw == $pw.val()){
-		 if($pwCheck.val()) {
-				$("form#editForm").submit();
-			}
-		}else{
-			alert("비밀번호가 일치하지 않습니다.");
-		}
+	  if($pw.val() == ""){
+		  if($pwCheck != ""){
+			  alert("비밀번호가 일치하지 않습니다.");
+			  return false;
+		  }
+		  $pwCheck.val(nowPw);
+		  $("form#editForm").submit();
+	  }else{
+		   if($pw.val() != nowPw){
+			  alert("비밀번호가 일치하지 않습니다.");
+			  return false;
+		   }else{
+			   $("form#editForm").submit();
+		   }
+	  }
+	  
   });
 });

@@ -1,15 +1,3 @@
-DROP TABLE comment;
-DROP TABLE community;
-DROP TABLE review;
-DROP TABLE menu;
-DROP TABLE type;
-DROP TABLE cafe;
-DROP TABLE customer;
-
-CREATE TABLE customer(
-    id IDENTITY,
-    name VARCHAR(12) NOT NULL,
-    email VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
     nickname VARCHAR(24),
     address VARCHAR,
@@ -26,40 +14,42 @@ CREATE TABLE cafe(
     openingHours VARCHAR(64),
     parking BOOLEAN NOT NULL,
     webSite VARCHAR,
-    info VARCHAR
+    info VARCHAR,
+    category VARCHAR
 );
 CREATE TABLE menu(
     id IDENTITY,
-    cafeId BIGINT NOT NULL REFERENCES cafe(id) ON DELETE CASCADE,
+    cafeId BIGINT NOT NULL REFERENCES cafe(id),
     name VARCHAR(64) NOT NULL,
     price INT NOT NULL,
     content VARCHAR
 );
-CREATE TABLE type(
+CREATE TABLE HEART(
     id IDENTITY,
-    cafeId BIGINT NOT NULL REFERENCES cafe(id) ON DELETE CASCADE,
-    name VARCHAR(10) NOT NULL
+    cafeId BIGINT NOT NULL REFERENCES cafe(id),
+    customerID BIGINT NOT NULL REFERENCES customer(id)
 );
 CREATE TABLE review(
     id IDENTITY,
-    cafeId BIGINT NOT NULL REFERENCES cafe(id) ON DELETE CASCADE,
-    customerId BIGINT NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
+    cafeId BIGINT NOT NULL REFERENCES cafe(id),
+    customerId BIGINT NOT NULL REFERENCES customer(id),
     img VARCHAR,
     content VARCHAR NOT NULL,
     date DATE NOT NULL
 );
 CREATE TABLE community(
     id IDENTITY,
-    customerId BIGINT NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
+    customerId BIGINT NOT NULL REFERENCES customer(id),
     title VARCHAR(64) NOT NULL,
     img VARCHAR,
     content VARCHAR NOT NULL,
-    date TIMESTAMP
+    date TIMESTAMP,
+    view BIGINT DEFAULT 0
 );
 CREATE TABLE comment(
     id IDENTITY,
-    customerId varchar(24) NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
-    communityId BIGINT NOT NULL REFERENCES community(id) ON DELETE CASCADE,
+    customerId BIGINT NOT NULL REFERENCES customer(id),
+    communityId BIGINT NOT NULL REFERENCES community(id),
     content VARCHAR,
     date TIMESTAMP
 );

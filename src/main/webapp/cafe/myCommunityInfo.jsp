@@ -29,7 +29,7 @@
 				</span>
 			</p>
 			<p>
-				<span>조회수</span> <span>44</span>
+				<span>조회수</span> <span>${community.view}</span>
 			</p>
 		</div>
 		<div class="content">
@@ -38,12 +38,12 @@
 			</p>
 			<p>${community.content}</p>
 		</div>
-		<div class="like">
-			<div>
-				<img src="<c:url value="/cafe/img/heart-outline.svg"/>" alt="" />
-			</div>
+		<!-- <div class="like">
+			<button class="heartBtn">
+        <span class="material-symbols-outlined icon">favorite</span>
+      </button>
 			<span>44</span>
-		</div>
+		</div> -->
 		<div class="control">
 			<div class="left">
 				<p>
@@ -52,10 +52,16 @@
 			</div>
 			<div class="right">
      		<p><a href="<c:url value="/cafe"/>?action=myCommunityInfoUpdate&id=${community.id}">글 수정</a></p>
-        <p><a href="<c:url value="/cafe"/>?action=myCommunityInfoDelete&id=${community.id}">글 삭제</a></p>
+        <p><a href="<c:url value="/cafe"/>?action=deleteMyCommunity&id=${community.id}">글 삭제</a></p>
 			</div>
 		</div>
 	</div>
 </section>
+
+  <script>
+    $("section#communityInfo .heartBtn").on("click", function () {
+      $(this).find(".icon").toggleClass("true");
+    });
+  </script>
 
 <jsp:include page="footer.jsp" />

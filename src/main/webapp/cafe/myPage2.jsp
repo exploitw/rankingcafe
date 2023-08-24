@@ -14,80 +14,30 @@
       <hr />
       <div id="myPage2Wrap">
         <ul class="container">
-          <li>
-            <!--  -->
-            <div class="likeBox">
-              <a href="#" class="thumb"
-                ><img src="<c:url value="/cafe/img/02c724e9e233bc0d9ff7a2f417d9a7a0.jpg"/>" alt=""
-              /></a>
-              <div class="contentBox">
-                <div class="textbox">
-                  <h3>Cafe Name</h3>
-                  <p class="heart">
-                    <ion-icon name="heart-outline"></ion-icon>
-                  </p>
-                  <p class="tag"># tag # tag</p>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!--  -->
-          <li>
-            <!--  -->
-            <div class="likeBox">
-              <a href="#" class="thumb"
-                ><img src="<c:url value="/cafe/img/02c724e9e233bc0d9ff7a2f417d9a7a0.jpg"/>" alt=""
-              /></a>
-              <div class="contentBox">
-                <div class="textbox">
-                  <h3>Cafe Name</h3>
-                  <p class="heart">
-                    <ion-icon name="heart-outline"></ion-icon>
-                  </p>
-                  <p class="tag"># tag # tag</p>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!--  -->
-          <li>
-            <!--  -->
-            <div class="likeBox">
-              <a href="#" class="thumb"
-                ><img src="<c:url value="/cafe/img/02c724e9e233bc0d9ff7a2f417d9a7a0.jpg"/>" alt=""
-              /></a>
-              <div class="contentBox">
-                <div class="textbox">
-                  <h3>Cafe Name</h3>
-                  <p class="heart">
-                    <ion-icon name="heart-outline"></ion-icon>
-                  </p>
-                  <p class="tag"># tag # tag</p>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!--  -->
-          <li>
-            <!--  -->
-            <div class="likeBox">
-              <a href="#" class="thumb"
-                ><img src="<c:url value="/cafe/img/02c724e9e233bc0d9ff7a2f417d9a7a0.jpg"/>" alt=""
-              /></a>
-              <div class="contentBox">
-                <div class="textbox">
-                  <h3>Cafe Name</h3>
-                  <p class="heart">
-                    <ion-icon name="heart-outline"></ion-icon>
-                  </p>
-                  <p class="tag"># tag # tag</p>
-                </div>
-              </div>
-            </div>
-          </li>
-          <!--  -->
+					<%-- <c:forEach var="like" items="${likeList}" varStatus="status"> --%>
+						<li>
+							<div class="likeBox">
+								<a href="<c:url value="/cafe/action=&id="/>" class="thumb"><img src="<c:url value="/cafe/img/02c724e9e233bc0d9ff7a2f417d9a7a0.jpg"/>" alt=""	/></a>
+								<div class="contentBox">
+									<div class="textbox">
+										<h3>ad</h3>
+										<button class="heartBtn">
+											<span class="material-symbols-outlined icon">favorite</span>
+										</button>
+										<p class="tag">asd</p>
+									</div>
+								</div>
+							</div>
+						</li>
+					<%-- </c:forEach> --%>
         </ul>
       </div>
     </section>
+    
+    <script>
+      $("section#myPage2 .heartBtn").on("click", function () {
+        $(this).find(".icon").toggleClass("true");
+      });
+    </script>
 	
 <jsp:include page="footer.jsp"/>

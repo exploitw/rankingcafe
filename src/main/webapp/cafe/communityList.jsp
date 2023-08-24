@@ -34,7 +34,7 @@
 								</c:if>
 							</c:forEach>
 							<td><fmt:formatDate value="${community.date}" pattern="yyyy-MM-dd HH:mm" /></td>
-							<td>미구현</td>
+							<td>${community.view}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
