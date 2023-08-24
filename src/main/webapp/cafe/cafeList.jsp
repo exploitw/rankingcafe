@@ -69,6 +69,11 @@
 		</section>
 	</article>
 </div>
-
-<a href="<c:url value="/cafe"/>/insertcafe.jsp"	>카페 등록</a>
+<c:forEach var="customer" items="${customerList}">
+	<c:if test="${sessionEMAIL == customer.email}">
+		<c:if test="${customer.admin == true}">
+			<a href="<c:url value="/cafe"/>/insertcafe.jsp"	>글쓰기</a>
+		</c:if>
+	</c:if>
+</c:forEach>
 <jsp:include page="footer.jsp" />

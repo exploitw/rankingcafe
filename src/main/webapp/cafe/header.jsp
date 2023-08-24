@@ -102,6 +102,8 @@
 		<script src="<c:url value="/cafe/js/communityWrite.js"/>"></script>
 		<script src="<c:url value="/cafe/js/customer1.js"/>"></script>
 		<script src="<c:url value="/cafe/js/cafeUpdate.js"/>"></script>
+		<script src="<c:url value="/cafe/js/comment.js"/>"></script>
+		<script src="<c:url value="/cafe/js/updateAdmin.js"/>"></script>
 
   </head>
   <body>
