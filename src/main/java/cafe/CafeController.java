@@ -172,7 +172,7 @@ public class CafeController extends HttpServlet {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 		Review review = new Review();
 		reviewService.remove(id);
-		response.sendRedirect("cafe?action=cafeInfo&id=" + review.getCafeId());
+		response.sendRedirect("cafe?action=cafeList");
 	}
 
 	void updateReview(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -192,7 +192,7 @@ public class CafeController extends HttpServlet {
 				review.setImg("/img/" + review.getImg());
 				reviewService.setNoImg(review);
 			}
-			response.sendRedirect("cafe?action=cafeInfo&id=" + review.getCafeId());
+			response.sendRedirect("cafe?action=cafeList");
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
@@ -225,16 +225,18 @@ public class CafeController extends HttpServlet {
 	String cafeInfo(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 //		int cafeId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("cafeId"), "-1"));
+	
+		
 		List<Cafe> cafeList = cafeService.getCafe();
 		Cafe cafe = cafeService.getCafeById(id);
-		// Review review = reviewService.getReviewBycafeId(cafeId);
-		// List<Review> reviewList = reviewService.getReview(cafeId);
-		
+		List<Customer> customerList = customerService.getCustomer();
 		List<Review> reviewsList = reviewService.getReviewsByCafeId(id);
+		
+	
 		request.setAttribute("cafeList", cafeList);
 		request.setAttribute("reviewsList", reviewsList);
 		request.setAttribute("cafe", cafe);
-		// request.setAttribute("review", review);
+		request.setAttribute("customerList", customerList);
 		List<String> cafejsonStringList = new ArrayList<>();
 		for(Cafe cafes : cafeList) {
 			cafejsonStringList.add(cafes.toJsonString());

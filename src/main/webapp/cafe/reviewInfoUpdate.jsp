@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
+    <jsp:include page="header.jsp" />
+<%-- <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
@@ -18,16 +19,17 @@
  	<div data-role="appbar">
             <ul class="app-bar-menu">
                <li><a href="<c:url value="/cafe/index.jsp"/>">메인</a></li>
-                <li><a href="<c:url value="madang?action=customers"/>">고객</a></li>
-                <li><a href="<c:url value="madang?action=books"/>">도서</a></li>
+             
             </ul>
         </div>
-
+ --%>
+ 
+ <section id="reviewInfoUpdate">
         <br />
         <br />
         <br />
         <div class="container">
-            <label>고객 추가/수정/삭제 하기</label>
+            <label>리뷰 수정 / 삭제하기</label>
             <br />
             <br />
       
@@ -63,5 +65,4 @@
         </div>
         <script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script>
         <script src="<c:url value="/cafe/js/reviewUpdate.js"/>"></script>
-</body>
-</html>
+<jsp:include page="footer.jsp" />

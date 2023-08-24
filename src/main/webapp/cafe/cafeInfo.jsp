@@ -10,7 +10,7 @@
 		<div id="cafeInfoWrap">
 			<div class="imgContainer">
 				<div style="background-image: url(${cafe.img});" class="imgbox"></div>
-				<h3>CafeName</h3>
+				<h3>${cafe.name}</h3>
 			</div>
 			<div class="desc">
 				<div class="desc1">
@@ -41,15 +41,15 @@
 					</tr>
 					<tr>
 						<td>Category</td>
-						<td># dessert</td>
+						<td>#${cafe.category}</td>
 					</tr>
 					<tr>
-						<td>주소</td>
-						<td>asdasd</td>
+						<td>City</td>
+						<td>${cafe.city}</td>
 					</tr>
 					<tr>
-						<td>가격대</td>
-						<td>? ~ ?</td>
+						<td>여는시간</td>
+						<td>${cafe.openingHours}</td>
 					</tr>
 					<tr>
 						<td>휴무일</td>
@@ -61,7 +61,7 @@
 					</tr>
 					<tr>
 						<td>메뉴</td>
-						<td>
+						<!-- <td>
 							<ul>
 								<li>
 									<div>
@@ -94,32 +94,42 @@
 									</div>
 								</li>
 							</ul>
-						</td>
+						</td> -->
 					</tr>
 					<tr>
 						<td>about</td>
-						<td>asdasdasdasdadasdascsdvrgdfrrgfdrgr</td>
+						<td></td>
 					</tr>
 				</table>
 				<div class="cafeMap"></div>
-			</div>
+			</div>						<a href="<c:url value="/cafe"/>?action=cafeInfoUpdate&id=${cafe.id}" data-id="${cafe.id}"><button>수정</button></a>
+			
 			<hr />
 			<div class="comment">
 				<p>
 					<span>리뷰 ()</span>
 				</p>
 			</div>
+			
 			<div id="review">
 				<ul>
 					<c:forEach items="${reviewsList}" var="reviews">
+						
 						<li>
 							<div class="imgbox">
 								<img src="${reviews.img}" alt="" />
 							</div>
 							<div class="textbox">
-								<p><span>작성자 : </span>${reviews.customerId}</p>
+							<c:forEach var="customer" items="${customerList}">
+								<c:if test="${reviews.customerId == customer.id}">
+								<p><span>작성자 : </span>${customer.nickName}</p>
 								<p><span>작성 날짜 : </span><fmt:formatDate value="${reviews.date}" pattern="yyyy-MM-dd" /></p>
 								<p><span>댓글 내용 : </span>${reviews.content}</p>
+								<c:if test="${customerId == reviews.customerId}">
+								<a href="<c:url value="/cafe"/>?action=reviewInfoUpdate&id=${reviews.id}" data-id="${reviews.id}">수정 / 삭제</a>
+								</c:if>
+								</c:if>
+								</c:forEach>
 							</div>
 						</li>
 					</c:forEach>
@@ -128,7 +138,7 @@
 
 			<div class="modal">
 				<div class="modalWrap">
-					<form action="<c:url value="/cafe"/>?action=insertReview"  method="post" id="reviewWr">
+					<form action="<c:url value="/cafe"/>?action=insertReview"  method="post" id="reviewWr" enctype="multipart/form-data">
 					<input type="hidden" name="cafeId" value="${cafe.id}" />
 					<input type="hidden" id="" name="customerId" value="${review.customerId}" />
 						<table>
@@ -136,22 +146,23 @@
 								<tr>
 									<td><p>작성자</p></td>
 									<td>
+										<c:forEach items="${reviewsList}" var="reviews">
+											<c:forEach var="customer" items="${customerList}">
+											<c:if test="${reviews.customerId == customer.id}">v
 										<input
 											type="text"
-											name="username"
+											name="customerId"
 											required
-											id="title"
-											value="닉네임"
+											id="${customerId}"
+											value="${customer.nickName}"
 											readonly
 										/>
+										</c:if>
+										</c:forEach>
+										</c:forEach>
 									</td>
 								</tr>
-								<tr>
-									<td><p>제목</p></td>
-									<td>
-										<input type="text" name="title" required id="title" />
-									</td>
-								</tr>
+								
 							</thead>
 							<tbody>
 								<tr>
@@ -206,7 +217,7 @@
 	    var ps = new kakao.maps.services.Places(); 
 
 	    // 키워드로 장소를 검색합니다
-	    ps.keywordSearch('살롱드폼', placesSearchCB); 
+	    ps.keywordSearch('${cafe.address}', placesSearchCB); 
 
 	    // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 	    function placesSearchCB (data, status, pagination) {
@@ -245,10 +256,10 @@
 	    }
     </script>
 <jsp:include page="footer.jsp"/>
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+<%-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
               </tbody>
             </table>
-           	<a href="<c:url value="/cafe"/>?action=cafeInfoUpdate&id=${cafe.id}" data-id="${cafe.id}"><button>수정</button></a>
+           
            
              <!-- 댓글 -->
 <div id="review">
@@ -286,7 +297,6 @@
 			</table>
 		</form>
 
-
+ --%>
 </body>
 </html>
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

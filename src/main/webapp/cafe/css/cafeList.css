@@ -221,4 +221,12 @@ div#cafeListWrap aside,
 div#cafeListWrap article#content {
   opacity: 0;
   transition: transform 1s, opacity 1s;
-}/*# sourceMappingURL=cafeList.css.map */
+}
+#check-btn { display: none; }
+#check-btn:checked ~ .menubars1 { display: block; } 
+.menubars1 { display: none; }
+#check-btn2 { display: none; }
+#check-btn2:checked ~ .menubars2 { display: block; } 
+.menubars2 { display: none; }
+
+/*# sourceMappingURL=cafeList.css.map */
