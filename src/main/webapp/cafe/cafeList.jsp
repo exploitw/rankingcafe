@@ -10,11 +10,25 @@
 				<li>
 					<button class="catebtn1 active" data-cate="li">All</button>
 				</li>
-				<li>
-					<button class="catebtn2" data-cate=".dessert">Dessert</button>
+				<li><input id="check-btn" type="checkbox" />
+    				<label for="check-btn">City</label>
+					<ul class="menubars1">
+						<li><button class="catebtn2" data-cate=".용산구">용산구</button></li>
+						<li><button class="catebtn2" data-cate=".강남구">강남구</button></li>
+						<li><button class="catebtn2" data-cate=".성동구">성동구</button></li>
+						<li><button class="catebtn2" data-cate=".마포구">마포구</button></li>
+						<li><button class="catebtn2" data-cate=".종로구">종로구</button></li>
+						
+					</ul>
 				</li>
-				<li>
-					<button class="catebtn3" data-cate=".mood">Mood</button>
+				<li><input id="check-btn2" type="checkbox" />
+    				<label for="check-btn2">Mood</label>
+					<ul class="menubars2">
+					<li><button class="catebtn3" data-cate=".modern">MODERN</button></li>
+					<li><button class="catebtn3" data-cate=".classic">CLASSIC</button></li>
+					<li><button class="catebtn3" data-cate=".vintage">VINTAGE</button></li>
+					<li><button class="catebtn3" data-cate=".trandy">TRANDY</button></li>
+					</ul>
 				</li>
 				<li>
 					<button class="catebtn4" data-cate=".popularity">
@@ -31,21 +45,20 @@
 			<div id="ListContainer">
 				<ul>
 					<c:forEach var="cafe" items="${cafeList}">
-						<li class="dessert">
+						<li class="${cafe.city} ${cafe.category}">
 							<div class="listBox">
 								<a href="<c:url value="/cafe"/>?action=cafeInfo&id=${cafe.id}"
 									data-id="${cafe.id}" class="thumb"><img
 									class="cafe-img" src="${cafe.img}" alt="" /></a>
 								<div class="contentBox">
 									<div class="textbox">
-										<h3 class="cafe-name">${cafe.name}</h3>
+										<a href="<c:url value="/cafe"/>?action=cafeInfo&id=${cafe.id}"
+									data-id="${cafe.id}" class="thumb"><h3 class="cafe-name">${cafe.name}</h3></a>
 										<p class="heart">
 											<i class="fa-solid fa-heart"></i>
 										</p>
 										<p class="tag"># tag # tag</p>
-										<p class="desc">Lorem ipsum dolor sit amet, consectetur
-											adipiscing elit, sed do eiusmod tempor incididunt ut labore
-											et dolore magna aliqua. Ut enim ad minim veniam,</p>
+										<p class="desc">${cafe.info}</p>
 									</div>
 								</div>
 							</div>
