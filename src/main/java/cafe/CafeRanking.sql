@@ -1,4 +1,3 @@
-
 DROP TABLE comment;
 DROP TABLE community;
 DROP TABLE review;
