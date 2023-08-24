@@ -97,6 +97,12 @@ public class CafeController extends HttpServlet {
 		case "addComment":
 			addComment(request, response);
 			break;
+		case "updateComment":
+			updateComment(request, response);
+			break;
+		case "deleteComment":
+			deleteComment(request, response);
+			break;
 		case "read":
 			read(request, response);
 			break;
@@ -111,6 +117,15 @@ public class CafeController extends HttpServlet {
 			break;
 		case "myPage3_1":
 			view = mypage3_1(request, response);
+			break;
+		case "adminPage1":
+			view = adminPage1(request, response);
+			break;
+		case "adminPage1_1":
+			view = adminPage1_1(request, response);
+			break;
+		case "adminPage1_2":
+			view = adminPage1_2(request, response);
 			break;
 		case "updateCustomer":
 			updateCustomer(request, response);
@@ -152,6 +167,9 @@ public class CafeController extends HttpServlet {
 			updateLike(request, response);
 		case "findLike":
 			findLike(request, response);
+		case "updateAdminCustomer":
+			updateAdminCustomer(request, response);
+			break;
 		}
 
 		if (StringUtils.isNotEmpty(view)) {
@@ -179,9 +197,9 @@ public class CafeController extends HttpServlet {
 
 	void deleteReview(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
-		Review review = new Review();
+		
 		reviewService.remove(id);
-		response.sendRedirect("cafe?action=cafeInfo&id=" + review.getCafeId());
+		response.sendRedirect("cafe?action=cafeList");
 	}
 
 	void updateReview(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -201,7 +219,7 @@ public class CafeController extends HttpServlet {
 				review.setImg("/img/" + review.getImg());
 				reviewService.setNoImg(review);
 			}
-			response.sendRedirect("cafe?action=cafeInfo&id=" + review.getCafeId());
+			response.sendRedirect("cafe?action=cafeList");
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
@@ -234,16 +252,18 @@ public class CafeController extends HttpServlet {
 	String cafeInfo(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 //		int cafeId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("cafeId"), "-1"));
+	
+		
 		List<Cafe> cafeList = cafeService.getCafe();
 		Cafe cafe = cafeService.getCafeById(id);
-		// Review review = reviewService.getReviewBycafeId(cafeId);
-		// List<Review> reviewList = reviewService.getReview(cafeId);
-		
+		List<Customer> customerList = customerService.getCustomer();
 		List<Review> reviewsList = reviewService.getReviewsByCafeId(id);
+		
+	
 		request.setAttribute("cafeList", cafeList);
 		request.setAttribute("reviewsList", reviewsList);
 		request.setAttribute("cafe", cafe);
-		// request.setAttribute("review", review);
+		request.setAttribute("customerList", customerList);
 		List<String> cafejsonStringList = new ArrayList<>();
 		for(Cafe cafes : cafeList) {
 			cafejsonStringList.add(cafes.toJsonString());
@@ -275,7 +295,12 @@ public class CafeController extends HttpServlet {
 	}
 
 	String cafeList(HttpServletRequest request, HttpServletResponse response) {
+
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+
 		String city = request.getParameter("city");
 			
 		List<Cafe> cafeList = cafeService.getCafe();
@@ -381,6 +406,10 @@ public class CafeController extends HttpServlet {
 	}
 
 	String mypage(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		Customer customer = customerService.getCustomerById(id);
@@ -391,6 +420,11 @@ public class CafeController extends HttpServlet {
 		return "/cafe/myPage1.jsp";
 	}
 	String mypage2(HttpServletRequest request, HttpServletResponse response) {
+
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+
 		
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 		String city = request.getParameter("city");
@@ -422,7 +456,12 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/myPage2.jsp";
 	}
+	
 	String mypage3(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		Customer customer = customerService.getCustomerById(id);
@@ -439,6 +478,10 @@ public class CafeController extends HttpServlet {
 	}
 	
 	String mypage3_1(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		Customer customer = customerService.getCustomerById(id);
@@ -453,12 +496,65 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/myPage3-1.jsp";
 	}
+	
+	String adminPage1(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		Customer customer = customerService.getCustomerById(id);
+		
+		request.setAttribute("customer", customer);
+		
+		List<String> customerJson = new ArrayList<>();
+		customerJson.add(customer.toJsonString());
+		
+		String jsonArrayStringCustomer = StringUtils.join(customerJson);
+		request.setAttribute("jsonArrayStringCustomer", jsonArrayStringCustomer);
+
+		return "/cafe/adminPage1.jsp";
+	}
+	
+	String adminPage1_1(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
+		boolean hasOrdering = Boolean
+				.parseBoolean(StringUtils.defaultIfEmpty(request.getParameter("hasOrdering"), "false"));
+		request.setAttribute("hasOrdering", hasOrdering);
+
+		return "/cafe/adminPage1-1.jsp";
+	}
+	
+	String adminPage1_2(HttpServletRequest request, HttpServletResponse response) {
+		/*관리자세션위한코드*/
+		List<Customer> customerList=customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
+		
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+
+		Customer customer = customerService.getCustomerById(id);
+		
+		request.setAttribute("customer", customer);
+		
+		List<String> customerJson = new ArrayList<>();
+		customerJson.add(customer.toJsonString());
+		
+		String jsonArrayStringCustomer = StringUtils.join(customerJson);
+		request.setAttribute("jsonArrayStringCustomer", jsonArrayStringCustomer);
+
+		return "/cafe/adminPage1-2.jsp";
+	}
 
 	void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		customerService.remove(id);
 		response.sendRedirect("cafe?action=logout");
+		
 	}
 
 	void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -470,6 +566,20 @@ public class CafeController extends HttpServlet {
 
 			customerService.set(customer);
 			response.sendRedirect("cafe?action=myPage3&id=" + customer.getId());
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	void updateAdminCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		Customer customer = new Customer();
+
+		try {
+			BeanUtils.populate(customer, request.getParameterMap());
+
+			customerService.set(customer);
+			response.sendRedirect("cafe?action=adminPage1_1&id=" + customer.getId());
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
@@ -501,6 +611,8 @@ public class CafeController extends HttpServlet {
 		List<Customer> customerList = customerService.getCustomer();
 		List<Comment> commentList = commentService.getComment();
 //		Comment commentList = mentDao.selectCommentById(id);
+		
+		
 		request.setAttribute("community", community);
 		request.setAttribute("communityList", communityList);
 		request.setAttribute("customerList", customerList);
@@ -516,6 +628,31 @@ public class CafeController extends HttpServlet {
 
 		return "/cafe/communityInfo.jsp";
 	}
+	
+	String admin(HttpServletRequest request, HttpServletResponse response) {
+		CustomerDAO custDao = new CustomerDAO();
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		Customer customer = custDao.getCustomerById(id);
+		List<Customer> customerList = customerService.getCustomer();
+		request.setAttribute("customer", customer);
+		request.setAttribute("customerList", customerList);
+		
+		return "/cafe/admin.jsp";
+	}
+
+//	void updateAdmin(HttpServletRequest request, HttpServletResponse response) {
+//		
+//		Customer customer = new Customer();
+//
+//		try {
+//			BeanUtils.populate(customer, request.getParameterMap());
+//
+//			customerService.setAdmin(customer);
+//			response.sendRedirect("cafe?action=admin");
+//		} catch (IOException | IllegalAccessException | InvocationTargetException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	String myCommunityInfo(HttpServletRequest request, HttpServletResponse response) {
 		CommunityDAO comuDao = new CommunityDAO();
@@ -620,6 +757,35 @@ public class CafeController extends HttpServlet {
 		}
 	}
 
+	void updateComment(HttpServletRequest request, HttpServletResponse response) {
+		
+		Comment comment = new Comment();
+
+		try {
+			BeanUtils.populate(comment, request.getParameterMap());
+
+			commentService.setComment(comment);
+			response.sendRedirect("cafe?action=communityInfo&id=" + comment.getCommunityId());
+		} catch (IOException | IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+
+	void deleteComment(HttpServletRequest request, HttpServletResponse response)  {		
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		
+		Comment comment = new Comment();
+		try {
+			BeanUtils.populate(comment, request.getParameterMap());
+			commentService.removeComment(id);
+			response.sendRedirect("cafe?action=community" );
+		} catch (IOException | IllegalAccessException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
 	String cafe(HttpServletRequest request, HttpServletResponse response) {
 		return "/cafe/login.jsp";
 	}
@@ -643,7 +809,9 @@ public class CafeController extends HttpServlet {
 	void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String nickName = request.getParameter("nickName");
+		boolean admin = false;
+		List<Customer> customerList = customerService.getCustomer();
+		request.setAttribute("customerList", customerList);
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 
 		Customer customer1 = customerService.getCustomerById(id);
@@ -656,21 +824,21 @@ public class CafeController extends HttpServlet {
 		if (loginResult == 1) {
 			request.setAttribute("loginResult", loginResult);
 			HttpSession session = request.getSession();
-
+			
 			session.setAttribute("sessionEMAIL", email);
-			session.setAttribute("sessionNICKNAME", nickName);
+			session.setAttribute("sessionADMIN", admin);
 
 			Customer customer = customerDao.getCustomerByEmail(email);
 			session.setAttribute("customerId", customer.getId());
-//			Customer customerNickName = customerDao.getCustomerByNickName(nickName);
-//			session.setAttribute("customerId", customerNickName.getId());
+//			Customer customerAdmin = customerDao.getCustomerByAdmin(admin);
+//			session.setAttribute("customerId", customerAdmin.getId());
 
-			RequestDispatcher rd = request.getRequestDispatcher("/cafe/index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/cafe?action=home");
 			rd.forward(request, response);
 
 		} else {
 			request.setAttribute("loginResult", loginResult);
-			RequestDispatcher rd = request.getRequestDispatcher("/cafe/login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/cafe?action=cafe");
 			rd.forward(request, response);
 		}
 	}

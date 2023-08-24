@@ -89,4 +89,105 @@ section#communityInfo div#communityInfoWrap > div.control a {
 section#communityInfo div#communityInfoWrap > div.control a:hover {
   background-color: #fff;
   color: #dab799;
+
+}/*밑에영훈추가*/
+section#communityInfo div#communityInfoWrap > div.commentControl .left {
+  float: left;
+}
+section#communityInfo div#communityInfoWrap > div.commentControl .center {
+  text-align: center;
+}
+section#communityInfo div#communityInfoWrap > div.commentControl .right {
+  float: right;
+  display: flex;
+}
+section#communityInfo div#communityInfoWrap > div.commentControl .right p {
+  margin: 0 10px;
+}
+section#communityInfo div#communityInfoWrap > div.commentControl a {
+  transition: all 0.3s;
+}
+section#communityInfo div#communityInfoWrap > div.commentControl a:hover {
+  background-color: #fff;
+  color: #dab799;
+}
+section#communityInfo div#communityInfoWrap > div.commentInfo .left {
+  float: left;
+}
+section#communityInfo div#communityInfoWrap > div.commentInfo .center {
+  text-align: center;
+}
+section#communityInfo div#communityInfoWrap > div.commentInfo .right {
+  float: right;
+}
+section#communityInfo div#communityInfoWrap > div.commentInfo .right p {
+  margin: 0 10px;
+}
+section#communityInfo div#communityInfoWrap > div.commentInfo a {
+  transition: all 0.3s;
+}
+section#communityInfo div#communityInfoWrap > div.commentInfo a:hover {
+  background-color: #fff;
+  color: #dab799;
+}
+section#communityInfo div#communityInfoWrap div#comment {
+  width: 95%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+@media screen and (min-width: 1000.1px) {
+  section#communityInfo div#communityInfoWrap div#comment {
+    padding: 50px 0;
+  }
+}
+@media screen and (max-width: 1000px) {
+  section#communityInfo div#communityInfoWrap div#comment {
+    padding: 30px 0;
+  }
+}
+section#communityInfo div#communityInfoWrap div#comment li {
+  padding: 30px 20px;
+  border-bottom: 1px solid #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+section#communityInfo div#communityInfoWrap div#comment li .imgbox {
+  overflow: hidden;
+}
+section#communityInfo div#communityInfoWrap div#comment li .imgbox img {
+  display: block;
+  width: 100%;
+}
+section#communityInfo div#communityInfoWrap div#comment li .textbox p {
+  margin: 10px 0;
+}
+section#communityInfo div#communityInfoWrap div#comment li .textbox p span {
+  display: inline-block;
+  width: 120px;
+  margin-right: 20px;
+}
+section#communityInfo div#communityInfoWrap div#comment li .imgbox {
+  width: 15%;
+  max-width: 120px;
+  max-height: 120px;
+}
+section#communityInfo div#communityInfoWrap div#comment li .textbox {
+  width: 80%;
+}
+@media screen and (min-width: 1000.1px) {
+  section#communityInfo div#communityInfoWrap div#comment li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  section#communityInfo div#communityInfoWrap div#comment li .imgbox {
+    width: 15%;
+    max-width: 120px;
+    max-height: 120px;
+  }
+  section#communityInfo div#communityInfoWrap div#comment li .textbox {
+    width: 80%;
+  }
+
 }/*# sourceMappingURL=communityInfo.css.map */

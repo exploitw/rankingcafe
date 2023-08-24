@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html>
+    <jsp:include page="header.jsp" />
+<%-- <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8" />
@@ -18,16 +19,13 @@
  	<div data-role="appbar">
             <ul class="app-bar-menu">
                <li><a href="<c:url value="/cafe/index.jsp"/>">메인</a></li>
-                <li><a href="<c:url value="madang?action=customers"/>">고객</a></li>
-                <li><a href="<c:url value="madang?action=books"/>">도서</a></li>
+                
             </ul>
         </div>
-
-        <br />
-        <br />
-        <br />
+ --%>
+ <section id="cafeInfoUpdate">
         <div class="container">
-            <label>고객 추가/수정/삭제 하기</label>
+            <label>카페 수정/삭제</label>
             <br />
             <br />
       
@@ -71,13 +69,16 @@
 				<tr>
 					<td><input type="text" placeholder="정보" name="info" value="${cafe.info}" required style="height: 30px; width: 495px" /></td>
 				</tr>
+				<tr>
+					<td><input type="text" placeholder="카테고리" name="category" value="${cafe.category}" required style="height: 30px; width: 495px" /></td>
+				</tr>
 				
 			</table>
                 <div class="row">
                     <div class="cell-3"></div>
                     <div class="cell-3">
-                        <button class="button" id="update_button">카페 정보수정</button>
-                        <button class="button" id="delete_button">카페 삭제</button>
+                        <button class="button" id="updatecafe_button">정보수정</button>
+                        <button class="button" id="deletecafe_button">삭제</button>
                     </div>
                     <div class="cell-3"></div>
                     <div class="cell-3"></div>
@@ -85,7 +86,7 @@
          
             </form>
         </div>
-        <script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script>
-        <script src="<c:url value="/cafe/js/cafeUpdate.js"/>"></script>
-</body>
-</html>
+       <!--  <script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script> -->
+       <%--  <script src="<c:url value="/cafe/js/cafeUpdate.js"/>"></script> --%>
+</section>
+<jsp:include page="footer.jsp" />

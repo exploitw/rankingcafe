@@ -20,8 +20,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
-
-
 public class CustomerDAO {
 	final static String QUERY_PATH = "/cafe/cafe_queries.properties";
 	final static Map<String, String> QM;
@@ -61,7 +59,7 @@ public class CustomerDAO {
 		try (Connection c = dataSource.getConnection();) {
 			QueryRunner qr = new QueryRunner();
 			Object[] p = { customer.getName(), customer.getEmail(), customer.getPassword(), customer.getNickName(),
-					customer.getAddress(), customer.getPhone() };
+					customer.getAddress(), customer.getPhone(), customer.isAdmin() };
 			qr.execute(c, QM.get("insertCustomer"), p);
 
 		} catch (SQLException sqle) {
@@ -103,10 +101,10 @@ public class CustomerDAO {
 
 		return rtn;
 	}
-	
+
 	public Customer getCustomerByNickName(String nickName) {
 		Customer rtn = null;
-		
+
 		try {
 			QueryRunner qr = new QueryRunner(dataSource);
 			ResultSetHandler<Customer> h = new BeanHandler<>(Customer.class);
@@ -115,20 +113,15 @@ public class CustomerDAO {
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
-		
+
 		return rtn;
 	}
 
 	public void update(Customer customer) {
 		try (Connection c = dataSource.getConnection();) {
 			QueryRunner qr = new QueryRunner();
-			Object[] p = { customer.getName(),
-					customer.getEmail(),
-					customer.getNickName(),
-					customer.getPassword(),
-					customer.getAddress(),
-					customer.getPhone(),
-					customer.getId()
+			Object[] p = { customer.getName(), customer.getEmail(), customer.getNickName(), customer.getPassword(),
+					customer.getAddress(), customer.getPhone(), customer.isAdmin(), customer.getId()
 
 			};
 			qr.execute(c, QM.get("update"), p);
@@ -137,21 +130,20 @@ public class CustomerDAO {
 		}
 	}
 
-	
-	public List<Customer> getCustomer(){ 
-		  List<Customer> rtn = new ArrayList<>();
-	  
-	  
-	  try { QueryRunner qr = new QueryRunner(dataSource);
-				ResultSetHandler<List<Customer>> h = new BeanListHandler<>(Customer.class);
-	  	rtn = qr.query(QM.get("selectCustomer"),h);
-			  }catch(SQLException sqle) {
-					sqle.printStackTrace();
-				}
-				
-				return rtn;
-	  
-	  }
+	public List<Customer> getCustomer() {
+		List<Customer> rtn = new ArrayList<>();
+
+		try {
+			QueryRunner qr = new QueryRunner(dataSource);
+			ResultSetHandler<List<Customer>> h = new BeanListHandler<>(Customer.class);
+			rtn = qr.query(QM.get("selectCustomer"), h);
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+
+		return rtn;
+
+	}
 
 	public Customer getCustomerById(int id) {
 		Customer rtn = null;

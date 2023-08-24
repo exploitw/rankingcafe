@@ -9,12 +9,12 @@
 		<ul>
         <li><a href="<c:url value="/cafe?action=myPage&id=${customerId}"/>">내가 쓴 글</a></li>
         <li><a href="<c:url value="/cafe?action=myPage2&id=${customerId}"/>">좋아요 한 카페</a></li>
-        <li class="active"><a href="<c:url value="/cafe?action=myPage3&id=${customerId}"/>">내 정보 수정</a></li>
+        <li><a href="<c:url value="/cafe?action=myPage3&id=${customerId}"/>">내 정보 수정</a></li>
         <c:if test="${sessionEMAIL != null }">
 			<c:forEach var="customer" items="${customerList}">
 				<c:if test="${sessionEMAIL == customer.email}">
 					<c:if test="${customer.admin == true}">
-						<li><a href="<c:url value="/cafe"/>?action=adminPage1&id=${customerId}">관리자</a></li>
+						<li class="active"><a href="<c:url value="/cafe"/>?action=adminPage1&id=${customerId}">관리자</a></li>
 					</c:if>
 				</c:if>
 			</c:forEach>
@@ -22,7 +22,7 @@
 		</ul>
 		<hr />
 		<div id="myPage3Wrap">
-			<form id="pwCheckForm" action="<c:url value="/cafe"/>?action=myPage3_1&id=${customerId}" method="post">
+			<form id="pwCheckForm" action="<c:url value="/cafe"/>?action=adminPage1_1&id=${customerId}" method="post">
 				<p>
 					<label class="hidden" for="email">아이디 입력</label>
 					<input id="email" name="email" type="hidden" placeholder="email" value="${customer.email}" readonly/>

@@ -22,8 +22,8 @@
 		</ul>
 		<hr />
 		<div id="editWrap">
-			<form id="editForm" action="<c:url value="/cafe?action=updateCustomer"/>" method="post">
-				<input name="id" type="hidden" value="${customerId}"/>
+			<form id="editForm" action="<c:url value="/cafe?action=updateAdminCustomer"/>" method="post">
+				<input name="id" type="text" value="${customerId}"/>
 				<p>
 					<label class="hidden" for="name">이름</label>
 					<input id="name" name="name" type="text" value="${customer.name}" placeholder="이름" readonly />
@@ -34,11 +34,11 @@
 				</p>
 				<p>
 					<label class="hidden" for="password">현재 비밀번호</label>
-					<input id="password" type="password" placeholder="현재 비밀번호" />
+					<input id="password" type="hidden" value="${customer.password}" />
 				</p>
 				<p>
 					<label class="hidden" for="passwordCheck">비밀번호</label>
-					<input id="passwordCheck" name="password" type="password" placeholder="비밀번호" />
+					<input id="passwordCheck" name="password" type="hidden" value="${customer.password}" />
 					<span class="pwLCheck"></span>
 				</p>
 				<p>
@@ -55,12 +55,11 @@
 				</p>
 				<p>
 					<label class="hidden" for="admin">관리자권한</label>
-					<input id="admin" name="admin" type="hidden" value="${customer.admin}" />
+					<input id="admin" name="admin" type="text" value="${customer.admin}" placeholder="관리자권한" />
 				</p>
 				<p>
 					<a href="<c:url value="/cafe?action=myPage3&id=${customerId}"/>">취소</a>
 					<input type="submit" id="saveBtn" value="저장" />
-					<input type="submit" id="delBtn" value="회원탈퇴" />
 				</p>
 			</form>
 		</div>

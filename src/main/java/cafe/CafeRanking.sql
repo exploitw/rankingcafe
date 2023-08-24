@@ -1,7 +1,20 @@
+
+DROP TABLE comment;
+DROP TABLE community;
+DROP TABLE review;
+DROP TABLE heart;
+DROP TABLE cafe;
+DROP TABLE customer;
+
+CREATE TABLE customer(
+    id IDENTITY,
+    name VARCHAR(12) NOT NULL,
+    email VARCHAR NOT NULL,
     password VARCHAR NOT NULL,
     nickname VARCHAR(24),
     address VARCHAR,
-    phone VARCHAR
+    phone VARCHAR,
+    admin BOOLEAN
 );
 CREATE TABLE cafe(
     id IDENTITY,
@@ -15,19 +28,13 @@ CREATE TABLE cafe(
     parking BOOLEAN NOT NULL,
     webSite VARCHAR,
     info VARCHAR,
-    category VARCHAR
-);
-CREATE TABLE menu(
-    id IDENTITY,
-    cafeId BIGINT NOT NULL REFERENCES cafe(id),
-    name VARCHAR(64) NOT NULL,
-    price INT NOT NULL,
-    content VARCHAR
+    category VARCHAR(12)
 );
 CREATE TABLE HEART(
     id IDENTITY,
-    cafeId BIGINT NOT NULL REFERENCES cafe(id),
-    customerID BIGINT NOT NULL REFERENCES customer(id)
+    cafeId BIGINT NOT NULL REFERENCES cafe(id) ON DELETE CASCADE,
+    customerId BIGINT NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
+    likeCNT INT DEFAULT 0
 );
 CREATE TABLE review(
     id IDENTITY,
@@ -45,6 +52,7 @@ CREATE TABLE community(
     content VARCHAR NOT NULL,
     date TIMESTAMP,
     view BIGINT DEFAULT 0
+
 );
 CREATE TABLE comment(
     id IDENTITY,

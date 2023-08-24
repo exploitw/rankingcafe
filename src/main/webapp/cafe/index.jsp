@@ -116,6 +116,13 @@
       </div>
     </section>
 
+            <c:forEach var="customer" items="${customerList}">
+				<c:if test="${sessionEMAIL == customer.email}">
+					<c:if test="${customer.admin == true}">
+						<a href="<c:url value="/cafe"/>?action=admin">ADMIN</a>
+					</c:if>
+				</c:if>
+			</c:forEach>
 
 	
 <jsp:include page="footer.jsp"/>

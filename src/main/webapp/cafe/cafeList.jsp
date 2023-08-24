@@ -64,9 +64,7 @@
                				</button>
 										</c:if>
 										<p class="tag"># ${cafe.city} # ${cafe.category}</p>
-										<p class="desc">Lorem ipsum dolor sit amet, consectetur
-											adipiscing elit, sed do eiusmod tempor incididunt ut labore
-											et dolore magna aliqua. Ut enim ad minim veniam,</p>
+										<p class="desc">${cafe.info}</p>
 									</div>
 								</div>
 							</div>
@@ -77,7 +75,6 @@
 		</section>
 	</article>
 </div>
-<a href="<c:url value="/cafe"/>/insertcafe.jsp"	>asd</a>
 
 <form id="cafeListLikeSend">
 	<input type="hidden" />
@@ -143,5 +140,12 @@
       
     </script> 
     
+<c:forEach var="customer" items="${customerList}">
+	<c:if test="${sessionEMAIL == customer.email}">
+		<c:if test="${customer.admin == true}">
+			<a href="<c:url value="/cafe"/>/insertcafe.jsp"	>글쓰기</a>
+		</c:if>
+	</c:if>
+</c:forEach>
 <jsp:include page="footer.jsp" />
 

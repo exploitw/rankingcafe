@@ -98,10 +98,13 @@
 		<script src="<c:url value="/cafe/js/cafeInfo.js"/>"></script>
 		<script src="<c:url value="/cafe/js/register.js"/>"></script>
 		<script src="<c:url value="/cafe/js/page3-1.js"/>"></script>
-		<script src="<c:url value="/cafe/js/communityInfo.js"/>"></script>
+		<script src="<c:url value="/cafe/js/communityInfo.js"/>" ></script>
 		<script src="<c:url value="/cafe/js/communityWrite.js"/>"></script>
 		<script src="<c:url value="/cafe/js/customer1.js"/>"></script>
 		<script src="<c:url value="/cafe/js/cafeUpdate.js"/>"></script>
+		<script src="<c:url value="/cafe/js/comment.js"/>" type="module"></script>
+		<script src="<c:url value="/cafe/js/updateAdmin.js"/>"></script>
+		<script src="<c:url value="/cafe/js/reviewUpdate.js"/>"></script>
 
   </head>
   <body>
