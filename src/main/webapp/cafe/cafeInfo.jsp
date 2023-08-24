@@ -23,7 +23,7 @@
 						<span class="material-symbols-outlined icon">edit</span>
 						<span>리뷰쓰기</span>
 					</button>
-					<button>
+					<button class="heartBtn">
 						<span class="material-symbols-outlined icon">favorite</span>
 						<span>좋아요</span>
 					</button>
@@ -41,7 +41,8 @@
 					</tr>
 					<tr>
 						<td>Category</td>
-						<td>#${cafe.category}</td>
+
+						<td># ${cafe.category}</td>
 					</tr>
 					<tr>
 						<td>City</td>
@@ -178,6 +179,9 @@
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b671bd82ed62009fb1cdba553314a7f6&libraries=services"></script>
     <script>
+    	$("section#cafeInfo .heartBtn").on("click", function () {
+        $(this).find(".icon").toggleClass("true");
+      });
     	var mapContainer = document.getElementsByClassName('cafeMap')[0];
 	    var mapOption = { 
 	          center: new kakao.maps.LatLng(37.530383673967731, 126.72254117738918),

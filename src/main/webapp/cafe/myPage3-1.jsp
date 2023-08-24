@@ -60,6 +60,7 @@
 				<p>
 					<a href="<c:url value="/cafe?action=myPage3&id=${customerId}"/>">취소</a>
 					<input type="submit" id="saveBtn" value="저장" />
+					<input type="submit" id="delBtn" value="회원탈퇴" />
 				</p>
 			</form>
 		</div>

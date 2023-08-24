@@ -1,3 +1,4 @@
+
 DROP TABLE comment;
 DROP TABLE community;
 DROP TABLE review;
@@ -29,7 +30,7 @@ CREATE TABLE cafe(
     info VARCHAR,
     category VARCHAR(12)
 );
-CREATE TABLE heart(
+CREATE TABLE HEART(
     id IDENTITY,
     cafeId BIGINT NOT NULL REFERENCES cafe(id) ON DELETE CASCADE,
     customerId BIGINT NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
@@ -37,25 +38,26 @@ CREATE TABLE heart(
 );
 CREATE TABLE review(
     id IDENTITY,
-    cafeId BIGINT NOT NULL REFERENCES cafe(id) ON DELETE CASCADE,
-    customerId BIGINT NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
+    cafeId BIGINT NOT NULL REFERENCES cafe(id),
+    customerId BIGINT NOT NULL REFERENCES customer(id),
     img VARCHAR,
     content VARCHAR NOT NULL,
     date DATE NOT NULL
 );
 CREATE TABLE community(
     id IDENTITY,
-    customerId BIGINT NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
+    customerId BIGINT NOT NULL REFERENCES customer(id),
     title VARCHAR(64) NOT NULL,
     img VARCHAR,
     content VARCHAR NOT NULL,
     date TIMESTAMP,
-    view BIGINT
+    view BIGINT DEFAULT 0
+
 );
 CREATE TABLE comment(
     id IDENTITY,
-    customerId varchar(24) NOT NULL REFERENCES customer(id) ON DELETE CASCADE,
-    communityId BIGINT NOT NULL REFERENCES community(id) ON DELETE CASCADE,
+    customerId BIGINT NOT NULL REFERENCES customer(id),
+    communityId BIGINT NOT NULL REFERENCES community(id),
     content VARCHAR,
     date TIMESTAMP
 );

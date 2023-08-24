@@ -24,17 +24,13 @@
         <img src="<c:url value="/cafe/img/872186_1619014820005463.jpg"/>" alt="" />
         <div class="textbox">
           <h3>
-            Hello<br />
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.<br />
-            Lorem Ipsum has been the industry's standard dummy text ever since
-            the
+            최고의 카페를 찾아보세요!<br />
           </h3>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+            여러분의 특별한 순간을 더욱 풍요롭게 만들어줄 카페를 찾고 계신가요? <br />
+            그렇다면 지금 바로 "카페마스터"라는 인기 카페 순위 사이트를 소개해드릴게요. <br />
+            "카페마스터"는 수많은 카페 중에서 가장 인기 있는 곳들을 선별하여 순위화하여 제공하는 플랫폼으로,
+            당신의 다음 커피 탐방을 더욱 특별하게 만들어줄 것입니다.
           </p>
         </div>
       </div>
@@ -42,17 +38,22 @@
         <img src="<c:url value="cafe/img/872186_1619014820005463.jpg"/>" alt="" />
         <div class="textbox">
           <h3>
-            Hello<br />
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.<br />
-            Lorem Ipsum has been the industry's standard dummy text ever since
-            the
+            리뷰와 평점
           </h3>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
+            다른 카페 맛을 미리 체험해보고 싶다면, "카페마스터"의 리뷰와 평점을 확인해보세요. 다양한 방문자들의 생생한 의견을 통해 카페의 분위기와 맛을 미리 느껴볼 수 있습니다.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <img src="<c:url value="cafe/img/872186_1619014820005463.jpg"/>" alt="" />
+        <div class="textbox">
+          <h3>
+            사용자 참여
+          </h3>
+          <p>
+            당신의 카페 경험도 다른 이용자들과 공유해보세요. <br />
+            리뷰를 작성하고 평점을 매기면, 더 많은 사람들에게 도움이 되는 정보를 제공하게 됩니다.
           </p>
         </div>
       </div>
@@ -64,12 +65,12 @@
           <div class="img">
             <img src="<c:url value="cafe/img/cupcake-svgrepo-com.svg"/>" alt="" />
           </div>
-          <h3># Dessert</h3>
+          <h3># City</h3>
           <p>
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry.
           </p>
-          <button><a href="#">visit</a></button>
+          <button><a href="<c:url value="/cafe"/>?action=cafeList">visit</a></button>
         </li>
         <li>
           <div class="img">
@@ -80,7 +81,7 @@
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry.
           </p>
-          <button><a href="#">visit</a></button>
+          <button><a href="<c:url value="/cafe"/>?action=cafeList">visit</a></button>
         </li>
         <li>
           <div class="img">
@@ -91,7 +92,7 @@
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry.
           </p>
-          <button><a href="#">visit</a></button>
+          <button><a href="<c:url value="/cafe"/>?action=cafeList">visit</a></button>
         </li>
       </ul>
     </section>

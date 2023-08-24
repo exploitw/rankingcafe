@@ -66,7 +66,6 @@ section#cafeInfo div#cafeInfoWrap div.imgContainer div.imgbox::before {
   display: block;
   width: 100%;
   height: 100%;
-  background-image: url(../img/b277993889a3b793af5ed4565a719cb1_w800.jpg);
 }
 section#cafeInfo div#cafeInfoWrap div.imgContainer div.imgbox::after {
   position: absolute;
@@ -89,6 +88,8 @@ section#cafeInfo div#cafeInfoWrap div.imgContainer h3 {
   letter-spacing: 15px;
   text-shadow: 2px 2px 2px #333;
   color: #fff;
+  width: 100%;
+  text-align: center;
 }
 section#cafeInfo div#cafeInfoWrap div.imgContainer img {
   display: block;
@@ -110,6 +111,9 @@ section#cafeInfo div#cafeInfoWrap .desc .desc2 button span.icon {
   display: block;
   font-size: 30px;
   text-align: center;
+}
+section#cafeInfo div#cafeInfoWrap .desc .desc2 button span.icon.true {
+  color: #ff0000;
 }
 section#cafeInfo div#cafeInfoWrap .infoContainer {
   display: flex;
@@ -140,6 +144,12 @@ section#cafeInfo div#cafeInfoWrap .infoContainer table tr:nth-child(8) td:nth-ch
 }
 section#cafeInfo div#cafeInfoWrap .infoContainer table tr td {
   padding: 10px 20px;
+}
+section#cafeInfo div#cafeInfoWrap .infoContainer table tr td a {
+  transition: color 0.3s;
+}
+section#cafeInfo div#cafeInfoWrap .infoContainer table tr td a:hover {
+  color: #dab799;
 }
 section#cafeInfo div#cafeInfoWrap .infoContainer table tr td ul li {
   padding: 10px;

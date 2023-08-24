@@ -67,13 +67,11 @@ section#communityInfo div#communityInfoWrap > div.like {
   justify-content: start;
   align-items: center;
 }
-section#communityInfo div#communityInfoWrap > div.like > div {
-  width: 30px;
-  margin-right: 10px;
+section#communityInfo div#communityInfoWrap > div.like button.heartBtn {
+  margin: 7px 0;
 }
-section#communityInfo div#communityInfoWrap > div.like > div img {
-  display: block;
-  width: 100%;
+section#communityInfo div#communityInfoWrap > div.like button.heartBtn .true {
+  color: #ff0000;
 }
 section#communityInfo div#communityInfoWrap > div.control .left {
   float: left;
@@ -91,6 +89,7 @@ section#communityInfo div#communityInfoWrap > div.control a {
 section#communityInfo div#communityInfoWrap > div.control a:hover {
   background-color: #fff;
   color: #dab799;
+
 }/*밑에영훈추가*/
 section#communityInfo div#communityInfoWrap > div.commentControl .left {
   float: left;
@@ -190,4 +189,5 @@ section#communityInfo div#communityInfoWrap div#comment li .textbox {
   section#communityInfo div#communityInfoWrap div#comment li .textbox {
     width: 80%;
   }
+
 }/*# sourceMappingURL=communityInfo.css.map */
