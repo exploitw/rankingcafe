@@ -20,7 +20,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 @WebServlet("/cafe")
-@MultipartConfig(maxFileSize = 1024 * 1024 * 2, location = "c:/Temp/img")
+@MultipartConfig(maxFileSize = 1024 * 1024 * 2, location = "c:/TMP/img")
 public class CafeController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -179,6 +179,8 @@ public class CafeController extends HttpServlet {
 	
 	
 	String home(HttpServletRequest request, HttpServletResponse response) {
+		List<Object[]> popularityCafe = cafeService.getPopularity();
+		request.setAttribute("popularityCafe", popularityCafe);
 		return "/cafe/index.jsp";
 	}
 
@@ -197,13 +199,14 @@ public class CafeController extends HttpServlet {
 
 	void deleteReview(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+		int reviewCafeId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("reviewCafeId"), "-1"));
 		
 		reviewService.remove(id);
-		response.sendRedirect("cafe?action=cafeList");
+		response.sendRedirect("cafe?action=cafeInfo&id="+reviewCafeId);
 	}
 
 	void updateReview(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+		int reviewCafeId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("reviewCafeId"), "-1"));
 		Review review = new Review();
 
 		try {
@@ -219,11 +222,12 @@ public class CafeController extends HttpServlet {
 				review.setImg("/img/" + review.getImg());
 				reviewService.setNoImg(review);
 			}
-			response.sendRedirect("cafe?action=cafeList");
+			response.sendRedirect("cafe?action=cafeInfo&id="+reviewCafeId);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
 	}
+	//cafe?action=cafeList
 
 	void insertReview(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		Review review = new Review();
@@ -277,7 +281,12 @@ public class CafeController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		long cafeId = cafe.getId();
-		long custId = (Long) session.getAttribute("customerId");
+		long custId = -1;
+		if((Long) session.getAttribute("customerId") != null) {
+			custId = (Long) session.getAttribute("customerId");
+		}
+		
+		request.setAttribute("customerId", custId);
 		
 		long cnt = cafeService.getLike(cafeId, custId);
 		long likeCnt = cafeService.getLikeCnt(cafeId);
@@ -343,7 +352,7 @@ public class CafeController extends HttpServlet {
 	}
 
 	void updateCafe(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
+		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
 		Cafe cafe = new Cafe();
 
 		try {
@@ -359,7 +368,7 @@ public class CafeController extends HttpServlet {
 				cafe.setImg("/img/" + cafe.getImg());
 				cafeService.setNoImg(cafe);
 			}
-			response.sendRedirect("cafe?action=cafeList");
+			response.sendRedirect("cafe?action=cafeInfo&id=" + id);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
@@ -434,23 +443,30 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("cafeList", cafeList);
 		
 		HttpSession session = request.getSession();
-		Long customerId = (Long) session.getAttribute("customerId");
+		Long customerId = (long) -1;
+		if((Long) session.getAttribute("customerId") != null) {
+			customerId = (Long) session.getAttribute("customerId");
+		}
 		
 		request.setAttribute("customerId", customerId);
 		
-		List cntList = new ArrayList();
-		List likeCntList = new ArrayList();
-		List af = new ArrayList();
-		int custId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
-		for(Cafe cafe : cafeList) {
-			long cnt = cafeService.getLike(cafe.getId(), custId);
-			long likeCnt = cafeService.getLikeCnt(cafe.getId());
-			cntList.add(cnt);
-			likeCntList.add(likeCnt);
-			af.add(cafe.getId());
-		}
-		request.setAttribute("cntList", cntList);
-		request.setAttribute("likeCntList", likeCntList);
+		List<Object[]> customerLikeList = customerService.getCustomerLike(id);
+		
+		request.setAttribute("customerLikeList", customerLikeList);
+		
+//		List cntList = new ArrayList();
+//		List likeCntList = new ArrayList();
+//		List af = new ArrayList();
+//		int custId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
+//		for(Cafe cafe : cafeList) {
+//			long cnt = cafeService.getLike(cafe.getId(), custId);
+//			long likeCnt = cafeService.getLikeCnt(cafe.getId());
+//			cntList.add(cnt);
+//			likeCntList.add(likeCnt);
+//			af.add(cafe.getId());
+//		}
+//		request.setAttribute("cntList", cntList);
+//		request.setAttribute("likeCntList", likeCntList);
 
 		
 
@@ -602,6 +618,7 @@ public class CafeController extends HttpServlet {
 	}
 	
 	String communityInfo(HttpServletRequest request, HttpServletResponse response) {
+
 		CommunityDAO comuDao = new CommunityDAO();
 		CommentDAO mentDao = new CommentDAO();
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
@@ -620,14 +637,20 @@ public class CafeController extends HttpServlet {
 		request.setAttribute("comment", comment);
 		
 		HttpSession session = request.getSession();
-		Long customerId = (Long) session.getAttribute("customerId");
+		Long customerId = (long) -1;
+		if((Long) session.getAttribute("customerId") != null) {
+			customerId = (Long) session.getAttribute("customerId");
+		}
 		if(community.getCustomerId() != customerId) {
 			long cnt = community.getCustomerId();
 			communityService.viewCnt(cnt);
 		}
 
+	
+
 		return "/cafe/communityInfo.jsp";
 	}
+	
 	
 	String admin(HttpServletRequest request, HttpServletResponse response) {
 		CustomerDAO custDao = new CustomerDAO();
@@ -773,12 +796,12 @@ public class CafeController extends HttpServlet {
 
 	void deleteComment(HttpServletRequest request, HttpServletResponse response)  {		
 		int id = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("id"), "-1"));
-		
+		int commentId = Integer.parseInt(StringUtils.defaultIfEmpty(request.getParameter("commentId"), "-1"));
 		Comment comment = new Comment();
 		try {
 			BeanUtils.populate(comment, request.getParameterMap());
 			commentService.removeComment(id);
-			response.sendRedirect("cafe?action=community" );
+			response.sendRedirect("cafe?action=communityInfo&id=" + commentId);
 		} catch (IOException | IllegalAccessException | InvocationTargetException e) {
 			e.printStackTrace();
 		}

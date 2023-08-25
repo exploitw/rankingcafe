@@ -22,7 +22,8 @@
 		</ul>
 		<hr />
 		<div id="editWrap">
-			<form id="editForm" action="<c:url value="/cafe?action=updateCustomer"/>" method="post">
+			<form id="editForm" action="<c:url value="/cafe"/>" method="post">
+				<input type="hidden" name="action" value="${customer.id}" id="customer_form_action"/>
 				<input name="id" type="hidden" value="${customerId}"/>
 				<p>
 					<label class="hidden" for="name">이름</label>
@@ -60,7 +61,7 @@
 				<p>
 					<a href="<c:url value="/cafe?action=myPage3&id=${customerId}"/>">취소</a>
 					<input type="submit" id="saveBtn" value="저장" />
-					<input type="submit" id="delBtn" value="회원탈퇴" />
+					<input type="submit" id="delete_button" value="회원탈퇴" />
 				</p>
 			</form>
 		</div>

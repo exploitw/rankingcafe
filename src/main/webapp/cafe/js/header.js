@@ -17,7 +17,7 @@ $(function () {
       frameH = 15;
     }
     $(
-      "article#content, section#community, section#register, section#loginBox, section#myPage1, section#myPage3, section#edit"
+      "article#content, section#community, section#register, section#loginBox, section#myPage1, section#myPage3, section#edit, section#reviewInfoUpdate"
     ).css("min-height", bodyH - headerH - 101 - frameH + "px");
   } // fn end clacminHeight
 

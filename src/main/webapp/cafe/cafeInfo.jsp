@@ -23,7 +23,7 @@
 						<span class="material-symbols-outlined icon">edit</span>
 						<span>리뷰쓰기</span>
 					</button>
-					<button class="heartBtn">
+					<button class="heartBtn heartBtn${cafe.id}" data-id="${cafe.id}">
 						<span class="material-symbols-outlined icon">favorite</span>
 						<span>좋아요</span>
 					</button>
@@ -61,11 +61,8 @@
 						<td><a href="${cafe.website}">식당 홈페이지로 가기</a></td>
 					</tr>
 					<tr>
-						<td>메뉴</td>
-					</tr>
-					<tr>
-						<td>about</td>
-						<td></td>
+						<td>정보</td>
+						<td>${cafe.info}</td>
 					</tr>
 				</table>
 				<div class="cafeMap"></div>
@@ -119,9 +116,9 @@
 								<tr>
 									<td><p>작성자</p></td>
 									<td>
-										<c:forEach items="${reviewsList}" var="reviews">
+										
 											<c:forEach var="customer" items="${customerList}">
-												<c:if test="${reviews.customerId == customer.id}">v
+												<c:if test="${customerId==customer.id}">
 													<input
 														type="text"
 														name="customerId"
@@ -132,7 +129,7 @@
 													/>
 												</c:if>
 											</c:forEach>
-										</c:forEach>
+										
 									</td>
 								</tr>
 							</thead>
@@ -179,9 +176,59 @@
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b671bd82ed62009fb1cdba553314a7f6&libraries=services"></script>
     <script>
-    	$("section#cafeInfo .heartBtn").on("click", function () {
-        $(this).find(".icon").toggleClass("true");
-      });
+    $("section#cafeInfo .heartBtn").each(function(){
+		let selectCafeId = $(this).attr("data-id");
+		let custId = 0;
+		if(${customerId} != null){
+			custId = ${customerId};
+		}
+	  $.ajax("/rankingcafe/cafe?action=findLike",
+			  {
+		  data:  "cafeId=" + selectCafeId + "&custId=" + custId,
+	    method: "GET",
+	    dataType: 'text',
+	    success: function(data){
+	    	if(parseInt(data) == 1){
+	    		$("section#cafeInfo .heartBtn"+selectCafeId).find(".icon").addClass("true");
+	    	} else{
+	    	}
+	    }
+	  })
+  })
+  
+  
+  $("section#cafeInfo .heartBtnNlonin").on("click", function (e) {e.preventDefault();});
+  
+  $("section#cafeInfo .heartBtn").on("click", function (e) {
+		e.preventDefault();
+	    	  
+		if(${sessionEMAIL == null}){
+			alert("로그인을 해주세요.");
+		}else{
+			$(this).find(".icon").toggleClass("true");
+			let selectCafeId = $(this).attr("data-id");
+			let custId = 0;
+			if(${customerId} != null){
+				custId = ${customerId};
+			}
+
+			$.ajax({
+				url: '/rankingcafe/cafe?action=updateLike',
+				type: 'POST',
+				data:  "cafeId=" + selectCafeId + "&custId=" + custId,
+				success: function (data) {
+					$(this).find(".icon").toggleClass("true");
+					//location.reload();
+				}, error: function () {
+					console.log('로그인 후 이용해 주세요.')
+					//location.reload();
+				}
+			});
+					
+		}		
+	});
+  
+  
     	var mapContainer = document.getElementsByClassName('cafeMap')[0];
 	    var mapOption = { 
 	          center: new kakao.maps.LatLng(37.530383673967731, 126.72254117738918),
@@ -192,7 +239,7 @@
 	    var ps = new kakao.maps.services.Places(); 
 
 	    // 키워드로 장소를 검색합니다
-	    ps.keywordSearch('${cafe.address}', placesSearchCB); 
+	    ps.keywordSearch("${cafe.address}", placesSearchCB); 
 
 	    // 키워드 검색 완료 시 호출되는 콜백함수 입니다
 	    function placesSearchCB (data, status, pagination) {

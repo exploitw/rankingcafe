@@ -16,6 +16,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbutils.QueryLoader;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -260,6 +261,23 @@ public class CafeDAO {
 				sqle.printStackTrace();
 		}
 	}
+		
+		public List<Object[]> getPopularity() {
+			List<Object[]> rtn = new ArrayList<>();
+
+			try (Connection c = dataSource.getConnection();) {
+				QueryRunner qr = new QueryRunner();
+				ResultSetHandler<List<Object[]>> h = new ArrayListHandler();
+				rtn = qr.query(c, QM.get("getPopularity"), h);
+			} catch (SQLException sqle) {
+				sqle.printStackTrace();
+			}
+
+			return rtn;
+
+		}
+		
+		
 	
 	/*
 	 * public void insert(Ordering ordering) { List<Object[]> rtn = new

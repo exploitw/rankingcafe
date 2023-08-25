@@ -42,4 +42,8 @@ public class CustomerService {
 		public void remove(int id) {
 			customerDao.delete(id);
 		}
+		
+		public List<Object[]> getCustomerLike(int custId) {
+			return customerDao.getCustomerLike(custId);
+		}
 }

@@ -36,6 +36,7 @@
  	<form id="review_form" action="<c:url value="cafe"/>" method="post" data-id="${review.id}" enctype="multipart/form-data">
 	<input type="hidden" name="action" id="review_form_action"/>
 	<input type="hidden" name="id" value="${review.id}"  />
+	<input type="hidden" name="reviewCafeId" value="${review.cafeId}"  />
 	 			
                 <table>
 				
@@ -63,6 +64,7 @@
          
             </form>
         </div>
+        </section>
         <script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script>
        <%--  <script src="<c:url value="/cafe/js/reviewUpdate.js"/>"></script> --%>
 <jsp:include page="footer.jsp" />

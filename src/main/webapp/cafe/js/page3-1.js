@@ -65,20 +65,28 @@ $(function () {
 	  let nowPw = custEdit[0].password;
 	  
 	  if($pw.val() == ""){
-		  if($pwCheck != ""){
+		  if($pwCheck.val() != ""){
 			  alert("비밀번호가 일치하지 않습니다.");
 			  return false;
+		  }else{
+				$pwCheck.val(nowPw);
+			  $("form#editForm #customer_form_action").val('updateCustomer');
+			  $("form#editForm").submit(); 
 		  }
-		  $pwCheck.val(nowPw);
-		  $("form#editForm").submit();
 	  }else{
 		   if($pw.val() != nowPw){
 			  alert("비밀번호가 일치하지 않습니다.");
 			  return false;
 		   }else{
+			   $("form#editForm #customer_form_action").val('updateCustomer');
 			   $("form#editForm").submit();
 		   }
 	  }
 	  
+  });
+  $("section#edit #delete_button").on("click", function (e) {
+	  e.preventDefault();
+	  $("form#editForm #customer_form_action").val('deleteCustomer');
+	  $("form#editForm").submit();
   });
 });

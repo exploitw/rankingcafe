@@ -11,7 +11,7 @@
 					<button class="catebtn1 active" data-cate="li">All</button>
 				</li>
 				<li>
-          <button class="catebtn2" data-cate=".dessert">City</button>
+          <button class="catebtn2" data-cate=".city">City</button>
           <ul>
             <li><button class="catebtn2" data-cate=".용산구">용산구</button></li>
             <li><button class="catebtn2" data-cate=".강남구">강남구</button></li>
@@ -21,7 +21,7 @@
           </ul>
         </li>
         <li>
-          <button class="catebtn3" data-cate=".mood">Mood</button>
+          <button class="catebtn3" data-cate=".category">Mood</button>
           <ul>
             <li><button class="catebtn3" data-cate=".modern">Modern</button></li>
             <li><button class="catebtn3" data-cate=".classic">Classic</button></li>

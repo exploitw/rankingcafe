@@ -69,4 +69,9 @@ public class CafeService {
 	public void deleteLike(long cafeId, long custId) {
 		cafeDao.deleteLike(cafeId, custId); 
 	}
+	
+	public List<Object[]> getPopularity(){
+		return cafeDao.getPopularity();
+	}
+
 }

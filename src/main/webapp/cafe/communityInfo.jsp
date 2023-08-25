@@ -29,7 +29,7 @@
 			</p>
 			<p>
 				<span>조회수</span>
-				<span>미구현</span>
+				<span>${community.view}</span>
 			</p>
 		</div>
 		<div class="content">
@@ -131,6 +131,7 @@
 			
 				<input type="hidden" name="action" id="comment_form_action" /> 
 				<input type="hidden" name="id" value="" id="comment_value" />
+				<input type="hidden" name="commentId" value="${community.id}" id="comment_value" />
 		
 				<table class="jb-th-1">
 					<c:forEach var="comment" items="${commentList}" varStatus="status">

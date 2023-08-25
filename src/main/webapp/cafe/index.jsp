@@ -100,18 +100,16 @@
 		<section id="home_rankCafe">
       <div class="rankImgbox">
         <div class="dummyBg"></div>
-        <img src="<c:url value="cafe/img/872186_1619014820005463.jpg"/>" alt="" />
+        <img src="${popularityCafe[0][1]}" alt="" />
       </div>
       <div class="textbox">
-        <h3>Cafe Name</h3>
-        <p class="tag"># Dessert # Modern</p>
+        <h3>${popularityCafe[0][0]}</h3>
+        <p class="tag"># ${popularityCafe[0][4]} # ${popularityCafe[0][3]}</p>
         <p class="desc">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.Lorem Ipsum is simply dummy text of the printing and
-          typesetting industry.
+          ${popularityCafe[0][2]}
         </p>
         <button>
-          <a href="#">자세히 보기 &gt;</a>
+          <a href="<c:url value="/cafe"/>?action=cafeInfo&id=${popularityCafe[0][6]}">자세히 보기 &gt;</a>
         </button>
       </div>
     </section>
